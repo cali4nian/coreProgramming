@@ -1,0 +1,52 @@
+main {
+  color: #d1d5db;
+  padding: 2rem 4rem;
+  width: 90%;
+  min-height: 100vh;
+}
+main section {
+  display: flex;
+  flex-direction: column;
+}
+
+main section > *:not(:last-child) {
+  margin-bottom: 3rem;
+}
+main section h1 {
+  font-size: 4rem;
+  color: #fbbf24;
+  font-weight: bold;
+  letter-spacing: normal;
+}
+
+main section p {
+  font-size: 2rem;
+  letter-spacing: 0.05em;
+  width: 100%;
+  line-height: 2.7rem;
+}
+
+main section h2 {
+  font-size: 2.25rem; /* or 36px */
+  color: #3b82f6; /* Tailwind's blue-500 */
+  font-weight: 700; /* Bold */
+  letter-spacing: 0.05em; /* Wide tracking */
+}
+
+/* Responsive Design */
+/* Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 575.98px) {
+  main {
+    padding: 1rem;
+    width: 100%;
+  }
+
+  main section > *:not(:last-child) {
+    margin-bottom: 2rem;
+  }
+
+  main section p {
+    line-height: 3rem;
+  }
+}
+/* END Responsive Design */

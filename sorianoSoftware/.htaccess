@@ -1,0 +1,12 @@
+# Enable Rewrite Engine
+
+RewriteEngine On
+
+# Redirect WWW and Non-WWW HTTP to HTTPS
+
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://sorianosoftware.com%{REQUEST_URI} [L,R=301]
+
+# Prevent Directory Listing
+
+Options -Indexes

@@ -1,0 +1,97 @@
+main {
+  color: #d1d5db;
+  padding: 2rem 4rem;
+  width: 90%;
+  min-height: 100vh;
+}
+
+main section {
+  display: flex;
+  flex-direction: column;
+}
+
+main section > *:not(:last-child) {
+  margin-bottom: 3rem;
+}
+
+main section img {
+  width: 60%;
+}
+
+main section h1 {
+  font-size: 4rem;
+  color: #fbbf24;
+  font-weight: bold;
+  letter-spacing: normal;
+}
+
+main section p {
+  font-size: 2rem;
+  letter-spacing: 0.05em;
+  width: 100%;
+  line-height: 2.7rem;
+}
+
+.callMeLink {
+  text-decoration: none;
+  width: fit-content;
+}
+
+#callMeBtn {
+  font-size: 2rem;
+  color: #000;
+  background-color: #feebc8;
+  border: 2px solid #f7fafc;
+  padding: 0.5rem 1rem;
+  transition: background-color 0.3s;
+  animation: pulse 2s infinite;
+  width: fit-content;
+  cursor: pointer;
+}
+
+main section button:hover {
+  background-color: #fcd34d;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+/* Responsive Design */
+/* Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 575.98px) {
+  main {
+    padding: 1rem;
+    width: 100%;
+  }
+
+  main section > *:not(:last-child) {
+    margin-bottom: 2rem;
+  }
+
+  main section img {
+    width: 100%;
+  }
+
+  main section p {
+    line-height: 3rem;
+  }
+
+  main section button {
+    font-size: 1.7rem;
+  }
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+  main section img {
+    width: 100%;
+  }
+}
+/* END Responsive Design */

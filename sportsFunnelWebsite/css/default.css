@@ -1,0 +1,41 @@
+/* 
+
+YouTube colors:
+### YouTube Red
+#FF0000
+RGB: 255.0.0
+CMYK: 0.95.100.0
+
+### White
+#FFFFFF
+RGB: 255.255.255
+CMYK: 0.0.0.0
+
+### Almost Black
+#282828
+RGB: 40.40.40
+CMYK: 0.0.0.84
+
+Instagram colors:
+The Instagram gradient is made up of the 3 colors. Hex color codes: #f9ce34, #ee2a7b and #6228d7. Gradient inspired by Instagram's app icon.
+
+
+Facebook colors:
+Hex code	#1877F2
+RGB values	(24, 119, 242)
+CMYK values	(83, 52, 0, 0)
+*/
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background: url("../img/sunset-5383040_1280.jpg") no-repeat center center fixed;
+  background-size: cover;
+  margin: 0 auto;
+  min-height: 100vh;
+  width: 80%;
+  background-color: aliceblue;
+}

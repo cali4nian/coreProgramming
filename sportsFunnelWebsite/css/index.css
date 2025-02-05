@@ -1,0 +1,437 @@
+/* About the Coach Section */
+.about-coach {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px;
+  height: auto;
+  background-color: #f5f5f5; /* Light background for contrast */
+  color: #333;
+}
+
+.about-coach .content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  max-width: 1200px;
+  width: 100%;
+}
+
+.about-coach .image-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.about-coach .coach-image {
+  width: 60%;
+  border-radius: 1rem;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.about-coach .text {
+  flex: 1;
+  max-width: 500px;
+}
+
+.about-coach h2 {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.about-coach p {
+  font-size: 18px;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.about-coach .qualities {
+  list-style-type: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.about-coach .qualities li {
+  font-size: 18px;
+  background-color: #1877f2; /* Blue accent color */
+  color: white;
+  padding: 8px 15px;
+  border-radius: 20px;
+  text-align: center;
+  font-weight: bold;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* END About the Coach Section */
+
+/* Player Profiles */
+.player-profiles {
+  text-align: center;
+  padding: 50px 20px;
+  background: linear-gradient(to right, #1e3c72, #2a5298);
+  color: white;
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  opacity: 0.8;
+}
+
+/* Profiles Grid */
+.profiles-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* Player Card */
+.player-card {
+  background: white;
+  color: black;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  width: 220px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s;
+}
+
+.player-card:hover {
+  transform: translateY(-10px);
+}
+
+.player-card img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.player-card h2 {
+  font-size: 1.5rem;
+  margin: 10px 0;
+}
+
+.player-card p {
+  font-size: 1rem;
+  color: #555;
+}
+/* End Player Profiles */
+
+/* Subscribe Section */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap");
+
+.subscribe-section {
+  display: flex;
+  flex-flow: column nowrap;
+  text-align: center;
+  background-color: #f9f9f9;
+  padding: 40px;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+  font-family: "Poppins", sans-serif;
+}
+
+.subscribe-section h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.subscribe-section p {
+  font-size: 16px;
+  margin-bottom: 20px;
+  color: #555;
+}
+
+.subscribe-form {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.subscribe-form input {
+  width: 65%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+}
+
+.subscribe-form button {
+  padding: 10px 15px;
+  font-size: 16px;
+  color: white;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+.subscribe-form button:hover {
+  background-color: #0056b3;
+}
+
+/* END Subscribe Section */
+
+/* Start Here Section */
+.start-here-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 75vh; /* 3/4 screen height */
+  background-color: #f9f9f9;
+  padding: 40px;
+}
+
+.start-here-section .content {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 20px;
+  max-width: 1200px;
+  width: 100%;
+}
+
+.start-here-section .video-container {
+  height: 25rem; /* Increased height (about double the original) */
+  width: 80%; /* Maintain width at 90% */
+  border-radius: 10px;
+  overflow: hidden;
+  min-height: fit-content;
+}
+
+.start-here-section .text {
+  flex: 1;
+  padding: 20px;
+  max-width: 50%;
+}
+
+.start-here-section h2 {
+  margin: 0;
+  font-size: 36px;
+}
+
+.start-here-section p {
+  margin: 15px 0;
+  font-size: 20px;
+}
+/* END Start Here Section */
+
+/* YouTube Section */
+.youtube-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh; /* Adjusted section height */
+  background-color: #ff0000; /* YouTube's signature red color */
+  padding: 40px;
+}
+
+.youtube-section .content {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  max-width: 1200px;
+  width: 100%;
+  flex-direction: row;
+}
+
+.youtube-section .image-container {
+  flex: 1;
+}
+
+.youtube-section .title-image {
+  width: 100%;
+  height: auto;
+  max-width: 600px;
+  border-radius: 8px;
+}
+
+.youtube-section .text {
+  flex: 1;
+  padding: 20px;
+  max-width: 500px;
+  color: #fff; /* White text color to contrast the red background */
+}
+
+.youtube-section h2 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.youtube-section p {
+  margin: 15px 0;
+  font-size: 18px;
+}
+
+.youtube-section .btn {
+  display: inline-block;
+  padding: 12px 25px;
+  background-color: #fff; /* White button to stand out on red */
+  color: #ff0000; /* Red text for YouTube theme */
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.youtube-section .btn:hover {
+  background-color: #f1f1f1; /* Light grey background on hover */
+}
+
+/* END YouTube Section */
+
+/* Instagram Section */
+/* Instagram Section Styling */
+.instagram-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px;
+  height: 80vh;
+  background: linear-gradient(45deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5); /* Instagram gradient */
+  color: #fff; /* White text */
+  text-align: center;
+}
+
+.instagram-section .content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+  max-width: 1200px;
+  width: 100%;
+  flex-direction: row;
+}
+
+.instagram-section .text {
+  flex: 1;
+  max-width: 500px;
+}
+
+.instagram-section h2 {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.instagram-section p {
+  font-size: 18px;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.instagram-section .btn {
+  display: inline-block;
+  padding: 12px 25px;
+  background-color: #fff;
+  color: #d62976; /* Instagram pink */
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 50px;
+  transition: all 0.3s ease-in-out;
+}
+
+.instagram-section .btn:hover {
+  background-color: #d62976;
+  color: #fff;
+}
+
+.instagram-section .image-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.instagram-section .instagram-image {
+  width: 100%;
+  max-width: 500px;
+  border-radius: 20px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* END Instagram Section */
+
+/* FaceBook Section */
+
+/* Facebook Section Styling */
+.facebook-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px;
+  min-height: 80vh;
+  background-color: #1877f2; /* Facebook Blue */
+  color: #fff; /* White text */
+  text-align: center;
+}
+
+.facebook-section .content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; /* Unique stacked layout */
+  gap: 30px;
+  max-width: 800px;
+  width: 100%;
+}
+
+.facebook-section .image-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.facebook-section .facebook-image {
+  width: 100%;
+  max-width: 500px;
+  border-radius: 15px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.facebook-section .text {
+  max-width: 600px;
+}
+
+.facebook-section h2 {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.facebook-section p {
+  font-size: 18px;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.facebook-section .btn {
+  display: inline-block;
+  padding: 12px 25px;
+  background-color: #fff;
+  color: #1877f2; /* Facebook Blue */
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 50px;
+  transition: all 0.3s ease-in-out;
+}
+
+.facebook-section .btn:hover {
+  background-color: #145dbb;
+  color: #fff;
+}
+
+/* END FaceBook Section */

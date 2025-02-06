@@ -50,10 +50,10 @@
 /* About the Coach Section */
 .about-coach {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  /* justify-content: center; */
+  /* align-items: center; */
   width: 100%;
-  height: 500px; /* Adjust height as needed */
+  height: 500px;
   background-color: #f8f9fa;
 }
 
@@ -69,7 +69,7 @@
   background: url("../img/football-coach-1531673_640.jpg") center/cover no-repeat;
 }
 
-.text {
+.about-coach .text {
   flex: 1;
   padding: 40px;
   display: flex;
@@ -78,7 +78,7 @@
   background-color: #fff;
 }
 
-.text h2 {
+.about-coach .text h2 {
   font-family: "Bebas Neue", sans-serif;
   font-size: 3rem;
   text-transform: uppercase;
@@ -86,7 +86,7 @@
   margin-bottom: 15px;
 }
 
-.text p {
+.about-coach .text p {
   font-family: "Lato", sans-serif;
   font-size: 1.2rem;
   color: #555;
@@ -94,19 +94,19 @@
   line-height: 1.5;
 }
 
-.qualities {
+.about-coach .qualities {
   list-style: none;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 items per row */
+  grid-template-columns: repeat(4, 1fr);
   gap: 10px;
   justify-content: center;
   text-align: center;
-  max-width: 500px; /* Adjust as needed */
-  margin: 0 auto; /* Centers the grid */
+  max-width: 500px;
+  margin: 0 auto;
 }
 
-.qualities li {
+.about-coach .qualities li {
   font-family: "Lato", sans-serif;
   font-size: 1rem;
   color: #fff;
@@ -123,29 +123,31 @@
   padding: 50px 20px;
   background: linear-gradient(to right, #1e3c72, #2a5298);
   color: white;
+  font-family: "Lato", sans-serif;
+  font-size: 4rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
-.hero h1 {
+.player-profiles .hero h1 {
   font-size: 2.5rem;
   margin-bottom: 10px;
 }
 
-.hero p {
+.player-profiles .hero p {
   font-size: 1.2rem;
   margin-bottom: 30px;
   opacity: 0.8;
 }
 
-/* Profiles Grid */
-.profiles-container {
+.player-profiles .profiles-container {
   display: flex;
   justify-content: center;
   gap: 20px;
   flex-wrap: wrap;
 }
 
-/* Player Card */
-.player-card {
+.player-profiles .player-card {
   background: white;
   color: black;
   padding: 20px;
@@ -156,21 +158,21 @@
   transition: transform 0.3s;
 }
 
-.player-card:hover {
+.player-profiles .player-card:hover {
   transform: translateY(-10px);
 }
 
-.player-card img {
+.player-profiles .player-card img {
   width: 100%;
   border-radius: 10px;
 }
 
-.player-card h2 {
+.player-profiles .player-card h2 {
   font-size: 1.5rem;
   margin: 10px 0;
 }
 
-.player-card p {
+.player-profiles .player-card p {
   font-size: 1rem;
   color: #555;
 }
@@ -186,12 +188,10 @@
   box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
   font-family: "Poppins", sans-serif;
 }
-.subscribe-section-inner-wrapper {
-  /* width: 400px; */
+.subscribe-section .subscribe-section-inner-wrapper {
   padding: 20px;
-  background: white;
-  /* border-radius: 10px; */
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  background: #f5f5dc;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .subscribe-section h2 {
@@ -206,13 +206,13 @@
   color: #555;
 }
 
-.subscribe-form {
+.subscribe-section .subscribe-form {
   display: flex;
   justify-content: center;
   gap: 10px;
 }
 
-.subscribe-form input {
+.subscribe-section .subscribe-form input {
   width: 65%;
   padding: 10px;
   font-size: 16px;
@@ -221,10 +221,10 @@
   outline: none;
 }
 
-.subscribe-form button {
+.subscribe-section .subscribe-form button {
   padding: 10px 15px;
   font-size: 16px;
-  color: white;
+  color: #fff;
   background-color: #007bff;
   border: none;
   border-radius: 5px;
@@ -232,10 +232,9 @@
   transition: 0.3s ease-in-out;
 }
 
-.subscribe-form button:hover {
+.subscribe-section .subscribe-form button:hover {
   background-color: #0056b3;
 }
-
 /* END Subscribe Section */
 
 /* Start Here Section */
@@ -243,7 +242,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 75vh; /* 3/4 screen height */
+  min-height: 75vh;
   background-color: #f9f9f9;
   padding: 40px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
@@ -259,9 +258,8 @@
 }
 
 .start-here-section .video-container {
-  height: 25rem; /* Increased height (about double the original) */
-  width: 80%; /* Maintain width at 90% */
-  /* border-radius: 10px; */
+  height: 25rem;
+  width: 80%;
   margin: 1rem;
   overflow: hidden;
   min-height: fit-content;
@@ -291,8 +289,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 80vh; /* Adjusted section height */
-  background-color: #ff0000; /* YouTube's signature red color */
+  height: 80vh;
+  background-color: #ff0000;
   padding: 40px;
 }
 
@@ -320,7 +318,8 @@
   flex: 1;
   padding: 20px;
   max-width: 500px;
-  color: #fff; /* White text color to contrast the red background */
+  background-color: #fff;
+  color: black;
 }
 
 .youtube-section h2 {
@@ -337,8 +336,8 @@
 .youtube-section .btn {
   display: inline-block;
   padding: 12px 25px;
-  background-color: #fff; /* White button to stand out on red */
-  color: #ff0000; /* Red text for YouTube theme */
+  color: #fff;
+  background-color: #ff0000;
   text-decoration: none;
   border-radius: 5px;
   font-weight: bold;
@@ -346,21 +345,19 @@
 }
 
 .youtube-section .btn:hover {
-  background-color: #f1f1f1; /* Light grey background on hover */
+  background-color: #e00404;
 }
-
 /* END YouTube Section */
 
 /* Instagram Section */
-/* Instagram Section Styling */
 .instagram-section {
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 60px;
   height: 80vh;
-  background: linear-gradient(45deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5); /* Instagram gradient */
-  color: #fff; /* White text */
+  background: linear-gradient(45deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5);
+  color: #fff;
   text-align: center;
 }
 
@@ -377,6 +374,8 @@
 .instagram-section .text {
   flex: 1;
   max-width: 500px;
+  background-color: #fff;
+  color: black;
 }
 
 .instagram-section h2 {
@@ -394,8 +393,8 @@
 .instagram-section .btn {
   display: inline-block;
   padding: 12px 25px;
-  background-color: #fff;
-  color: #d62976; /* Instagram pink */
+  background-color: #d62976;
+  color: #fff;
   font-weight: bold;
   text-decoration: none;
   border-radius: 50px;
@@ -403,8 +402,7 @@
 }
 
 .instagram-section .btn:hover {
-  background-color: #d62976;
-  color: #fff;
+  background-color: #f64393;
 }
 
 .instagram-section .image-container {
@@ -424,16 +422,14 @@
 /* END Instagram Section */
 
 /* FaceBook Section */
-
-/* Facebook Section Styling */
 .facebook-section {
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 60px;
   min-height: 80vh;
-  background-color: #1877f2; /* Facebook Blue */
-  color: #fff; /* White text */
+  background-color: #1877f2;
+  color: #fff;
   text-align: center;
 }
 
@@ -441,7 +437,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column; /* Unique stacked layout */
+  flex-direction: column;
   gap: 30px;
   max-width: 800px;
   width: 100%;
@@ -479,8 +475,8 @@
 .facebook-section .btn {
   display: inline-block;
   padding: 12px 25px;
-  background-color: #fff;
-  color: #1877f2; /* Facebook Blue */
+  background-color: #1877f2;
+  color: #fff;
   font-weight: bold;
   text-decoration: none;
   border-radius: 50px;
@@ -491,5 +487,4 @@
   background-color: #145dbb;
   color: #fff;
 }
-
 /* END FaceBook Section */

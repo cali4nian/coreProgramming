@@ -12,36 +12,41 @@
   background: url("../img/man-1837119_1280.jpg") no-repeat center center/cover;
   color: white;
   text-align: center;
-  padding: 20px;
+  padding: 2.8rem;
   opacity: 0.9;
   font-family: "Bebas Neue", sans-serif;
   font-size: 4rem;
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: 0.3rem;
 }
+
 .hero-content {
-  max-width: 600px;
+  max-width: 50rem;
 }
+
 .hero-title {
   font-size: 3rem;
-  margin-bottom: 10px;
+  margin-bottom: 0.8rem;
 }
+
 .hero-subtitle {
   font-size: 1.5rem;
-  margin-bottom: 20px;
+  margin-bottom: 1.8rem;
 }
+
 .hero-button {
   display: inline-block;
-  padding: 10px 20px;
-  font-size: 1rem;
+  padding: 0.8rem 1.8rem;
+  font-size: 1.5rem;
   color: white;
   background: #ff6600;
   border: none;
-  border-radius: 5px;
+  border-radius: 0.4rem;
   cursor: pointer;
   text-decoration: none;
   transition: background 0.3s;
 }
+
 .hero-button:hover {
   background: #cc5200;
 }
@@ -50,17 +55,15 @@
 /* About the Coach Section */
 .about-coach {
   display: flex;
-  /* justify-content: center; */
-  /* align-items: center; */
   width: 100%;
-  height: 500px;
+  min-height: 41.7rem;
   background-color: #f8f9fa;
 }
 
 .about-coach .content {
   display: flex;
   width: 100%;
-  max-width: 1200px;
+  max-width: 100rem;
   height: 100%;
 }
 
@@ -71,7 +74,7 @@
 
 .about-coach .text {
   flex: 1;
-  padding: 40px;
+  padding: 3.4rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -83,14 +86,14 @@
   font-size: 3rem;
   text-transform: uppercase;
   color: #333;
-  margin-bottom: 15px;
+  margin-bottom: 1.2rem;
 }
 
 .about-coach .text p {
   font-family: "Lato", sans-serif;
   font-size: 1.2rem;
   color: #555;
-  margin-bottom: 20px;
+  margin-bottom: 1.5rem;
   line-height: 1.5;
 }
 
@@ -99,10 +102,10 @@
   padding: 0;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
+  gap: 0.9rem;
   justify-content: center;
   text-align: center;
-  max-width: 500px;
+  max-width: 41.7rem;
   margin: 0 auto;
 }
 
@@ -111,8 +114,8 @@
   font-size: 1rem;
   color: #fff;
   background-color: #007bff;
-  padding: 10px 15px;
-  border-radius: 5px;
+  padding: 0.9rem 1.1rem;
+  border-radius: 0.5rem;
   text-align: center;
 }
 /* END About the Coach Section */
@@ -120,56 +123,56 @@
 /* Player Profiles */
 .player-profiles {
   text-align: center;
-  padding: 50px 20px;
+  padding: 4.1rem 1.8rem;
   background: linear-gradient(to right, #1e3c72, #2a5298);
   color: white;
   font-family: "Lato", sans-serif;
   font-size: 4rem;
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: 0.1rem;
 }
 
 .player-profiles .hero h1 {
   font-size: 2.5rem;
-  margin-bottom: 10px;
+  margin-bottom: 0.9rem;
 }
 
 .player-profiles .hero p {
   font-size: 1.2rem;
-  margin-bottom: 30px;
+  margin-bottom: 2.4rem;
   opacity: 0.8;
 }
 
 .player-profiles .profiles-container {
   display: flex;
   justify-content: center;
-  gap: 20px;
+  gap: 1.8rem;
   flex-wrap: wrap;
 }
 
 .player-profiles .player-card {
   background: white;
   color: black;
-  padding: 20px;
-  border-radius: 10px;
+  padding: 1.8rem;
+  border-radius: 0.8rem;
   text-align: center;
-  width: 220px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  width: 21.8rem;
+  box-shadow: 0 0.3rem 0.8rem rgba(0, 0, 0, 0.2);
   transition: transform 0.3s;
 }
 
 .player-profiles .player-card:hover {
-  transform: translateY(-10px);
+  transform: translateY(-0.8rem);
 }
 
 .player-profiles .player-card img {
   width: 100%;
-  border-radius: 10px;
+  border-radius: 0.8rem;
 }
 
 .player-profiles .player-card h2 {
   font-size: 1.5rem;
-  margin: 10px 0;
+  margin: 0.8rem 0;
 }
 
 .player-profiles .player-card p {
@@ -184,50 +187,50 @@
   flex-flow: column nowrap;
   text-align: center;
   background-color: #f9f9f9;
-  padding: 40px;
-  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+  padding: 3.4rem;
+  box-shadow: 0.25rem 0.25rem 0.8rem rgba(0, 0, 0, 0.2);
   font-family: "Poppins", sans-serif;
 }
 .subscribe-section .subscribe-section-inner-wrapper {
-  padding: 20px;
+  padding: 1.8rem;
   background: #f5f5dc;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0.3rem 0.8rem rgba(0, 0, 0, 0.1);
 }
 
 .subscribe-section h2 {
-  font-size: 24px;
-  margin-bottom: 10px;
+  font-size: 2.3rem;
+  margin-bottom: 0.8rem;
   font-weight: 600;
 }
 
 .subscribe-section p {
-  font-size: 16px;
-  margin-bottom: 20px;
+  font-size: 1.3rem;
+  margin-bottom: 1.8rem;
   color: #555;
 }
 
 .subscribe-section .subscribe-form {
   display: flex;
   justify-content: center;
-  gap: 10px;
+  gap: 0.8rem;
 }
 
 .subscribe-section .subscribe-form input {
   width: 65%;
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  padding: 0.8rem;
+  font-size: 1.3rem;
+  border: 0.1rem solid #ccc;
+  border-radius: 0.4rem;
   outline: none;
 }
 
 .subscribe-section .subscribe-form button {
-  padding: 10px 15px;
-  font-size: 16px;
+  padding: 0.8rem 1.4rem;
+  font-size: 1.3rem;
   color: #fff;
   background-color: #007bff;
   border: none;
-  border-radius: 5px;
+  border-radius: 0.4rem;
   cursor: pointer;
   transition: 0.3s ease-in-out;
 }
@@ -244,17 +247,17 @@
   align-items: center;
   min-height: 75vh;
   background-color: #f9f9f9;
-  padding: 40px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 3.4rem;
+  box-shadow: 0 0.3rem 0.8rem rgba(0, 0, 0, 0.1);
 }
 
 .start-here-section .content {
   display: flex;
   flex-flow: column nowrap;
-  gap: 20px;
-  max-width: 1200px;
+  gap: 1.8rem;
+  max-width: 1200;
   width: 100%;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0.3rem 0.8rem rgba(0, 0, 0, 0.1);
 }
 
 .start-here-section .video-container {
@@ -267,20 +270,20 @@
 
 .start-here-section .text {
   flex: 1;
-  padding: 20px;
+  padding: 1.8rem;
   margin: 1rem;
   max-width: 50%;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0.3rem 0.8rem rgba(0, 0, 0, 0.1);
 }
 
 .start-here-section h2 {
   margin: 0;
-  font-size: 36px;
+  font-size: 3rem;
 }
 
 .start-here-section p {
-  margin: 15px 0;
-  font-size: 20px;
+  margin: 1.4rem 0;
+  font-size: 1.8rem;
 }
 /* END Start Here Section */
 
@@ -291,14 +294,14 @@
   align-items: center;
   height: 80vh;
   background-color: #ff0000;
-  padding: 40px;
+  padding: 3.4rem;
 }
 
 .youtube-section .content {
   display: flex;
   justify-content: space-between;
-  gap: 20px;
-  max-width: 1200px;
+  gap: 1.8rem;
+  max-width: 1200;
   width: 100%;
   flex-direction: row;
 }
@@ -310,36 +313,38 @@
 .youtube-section .title-image {
   width: 100%;
   height: auto;
-  max-width: 600px;
-  border-radius: 8px;
+  max-width: 600;
+  border-radius: 0.3rem;
 }
 
 .youtube-section .text {
   flex: 1;
-  padding: 20px;
-  max-width: 500px;
+  padding: 2rem;
+  max-width: 500;
   background-color: #fff;
   color: black;
 }
 
 .youtube-section h2 {
   margin: 0;
-  font-size: 28px;
+  font-size: 2.3rem;
   font-weight: bold;
 }
 
 .youtube-section p {
-  margin: 15px 0;
-  font-size: 18px;
+  margin: 1.4rem 0;
+  font-size: 1.3rem;
 }
 
 .youtube-section .btn {
+  font-size: 1.7rem;
+  letter-spacing: 0.3rem;
   display: inline-block;
-  padding: 12px 25px;
+  padding: 1rem 2.4rem;
   color: #fff;
   background-color: #ff0000;
   text-decoration: none;
-  border-radius: 5px;
+  border-radius: 0.4rem;
   font-weight: bold;
   transition: background 0.3s;
 }
@@ -354,7 +359,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 60px;
+  padding: 60;
   height: 80vh;
   background: linear-gradient(45deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5);
   color: #fff;
@@ -365,39 +370,42 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 40px;
-  max-width: 1200px;
+  gap: 3.4rem;
+  max-width: 1200;
   width: 100%;
   flex-direction: row;
 }
 
 .instagram-section .text {
   flex: 1;
-  max-width: 500px;
+  padding: 2rem;
+  max-width: 500;
   background-color: #fff;
   color: black;
 }
 
 .instagram-section h2 {
-  font-size: 32px;
+  font-size: 2.6rem;
   font-weight: bold;
-  margin-bottom: 15px;
+  margin-bottom: 1.4rem;
 }
 
 .instagram-section p {
-  font-size: 18px;
-  margin-bottom: 20px;
+  font-size: 1.3rem;
+  margin-bottom: 1.8rem;
   line-height: 1.5;
 }
 
 .instagram-section .btn {
+  font-size: 1.7rem;
+  letter-spacing: 0.3rem;
   display: inline-block;
-  padding: 12px 25px;
+  padding: 1rem 2.4rem;
   background-color: #d62976;
   color: #fff;
   font-weight: bold;
   text-decoration: none;
-  border-radius: 50px;
+  border-radius: 50;
   transition: all 0.3s ease-in-out;
 }
 
@@ -414,9 +422,9 @@
 
 .instagram-section .instagram-image {
   width: 100%;
-  max-width: 500px;
-  border-radius: 20px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  max-width: 500;
+  border-radius: 1.8rem;
+  box-shadow: 0 0.3rem 0.8rem rgba(0, 0, 0, 0.2);
 }
 
 /* END Instagram Section */
@@ -426,7 +434,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 60px;
+  padding: 60;
   min-height: 80vh;
   background-color: #1877f2;
   color: #fff;
@@ -438,8 +446,8 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  gap: 30px;
-  max-width: 800px;
+  gap: 30;
+  max-width: 800;
   width: 100%;
 }
 
@@ -451,40 +459,78 @@
 
 .facebook-section .facebook-image {
   width: 100%;
-  max-width: 500px;
-  border-radius: 15px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  max-width: 500;
+  border-radius: 1.4rem;
+  box-shadow: 0 0.3rem 0.8rem rgba(0, 0, 0, 0.2);
 }
 
 .facebook-section .text {
-  max-width: 600px;
+  max-width: 600;
 }
 
 .facebook-section h2 {
-  font-size: 32px;
+  font-size: 2.6rem;
   font-weight: bold;
-  margin-bottom: 15px;
+  margin-bottom: 1.4rem;
 }
 
 .facebook-section p {
-  font-size: 18px;
-  margin-bottom: 20px;
+  font-size: 1.3rem;
+  margin-bottom: 1.8rem;
   line-height: 1.5;
 }
 
 .facebook-section .btn {
+  font-size: 1.7rem;
+  letter-spacing: 0.3rem;
   display: inline-block;
-  padding: 12px 25px;
-  background-color: #1877f2;
+  padding: 1rem 2.4rem;
+  background-color: #145dbb;
   color: #fff;
   font-weight: bold;
   text-decoration: none;
-  border-radius: 50px;
+  border-radius: 50;
   transition: all 0.3s ease-in-out;
 }
 
 .facebook-section .btn:hover {
-  background-color: #145dbb;
+  background-color: #054496;
   color: #fff;
 }
 /* END FaceBook Section */
+
+/* For screens 426px or smaller */
+@media (max-width: 35.5rem) {
+  section {
+    width: 100%;
+  }
+
+  .about-coach .content {
+    flex-flow: column-reverse nowrap;
+  }
+
+  .about-coach .qualities {
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.9rem;
+  }
+
+  .about-coach .qualities li {
+    font-size: 1rem;
+  }
+
+  .about-coach .image-container {
+    flex: 1;
+    min-height: 25rem;
+    background: url("../img/football-coach-1531673_640.jpg") center/cover no-repeat;
+  }
+
+  .about-coach .text p {
+    font-family: "Lato", sans-serif;
+    font-size: 1.25rem;
+    color: #555;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+  }
+}

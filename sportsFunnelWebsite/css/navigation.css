@@ -1,9 +1,6 @@
 /* Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap");
 
-body {
-  font-family: Arial, sans-serif;
-}
 /* Navigation */
 .mainNavigation {
   display: flex;
@@ -11,15 +8,17 @@ body {
   align-items: center;
   justify-content: space-between;
   background-color: #333;
-  padding: 10px 0;
+  padding: 0.9rem 0;
 }
+
 .logo {
   color: #fff;
   padding: 1rem;
   font-family: "Great Vibes", cursive;
-  font-size: 28px;
+  font-size: 2.2rem;
   font-weight: bold;
 }
+
 ul {
   list-style: none;
   display: flex;
@@ -28,26 +27,28 @@ ul {
   padding: 0;
   margin: 0;
 }
+
 li {
-  margin: 0 15px;
+  margin: 0 1.1rem;
 }
+
 a {
   color: white;
   text-decoration: none;
-  font-size: 24px;
+  font-size: 2rem;
 }
+
 .icon {
-  width: 50px;
+  width: 2.2rem;
   height: auto;
 }
 /* END Navigation */
 
 /* Footer */
-/* Footer Styling */
 .footer {
   background-color: #333; /* Dark background */
   color: #fff; /* White text */
-  padding: 20px;
+  padding: 1.8rem;
   text-align: center;
   font-family: Arial, sans-serif;
 }
@@ -57,18 +58,12 @@ a {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  gap: 15px;
-}
-
-.logo {
-  font-size: 28px;
-  font-weight: bold;
-  color: #fff; /* Red color for the logo, matching YouTube branding */
+  gap: 1.1rem;
 }
 
 .social-links {
   display: flex;
-  gap: 20px;
+  gap: 1.8rem;
   justify-content: center;
 }
 
@@ -77,8 +72,8 @@ a {
 }
 
 .icon {
-  width: 40px; /* Adjust icon size */
-  height: 40px;
+  width: 3.5rem; /* Adjust icon size */
+  height: 3.5rem;
   transition: transform 0.3s ease;
 }
 
@@ -94,3 +89,24 @@ a {
 }
 
 /* END Footer */
+
+/* For screens 426px or smaller */
+@media (max-width: 35.5rem) {
+  .mainNavigation {
+    flex-flow: column nowrap;
+    padding: 0.9rem 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: #333;
+  }
+
+  .logo {
+    padding: 0.5rem;
+    font-size: 2.2rem;
+  }
+
+  .icon {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+}

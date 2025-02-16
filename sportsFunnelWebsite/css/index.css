@@ -56,7 +56,7 @@
 .about-coach {
   display: flex;
   width: 100%;
-  min-height: 41.7rem;
+  min-height: fit-content;
   background-color: #f8f9fa;
 }
 
@@ -152,7 +152,7 @@
 
 .player-profiles .player-card {
   background: white;
-  color: black;
+  color: #000;
   padding: 1.8rem;
   border-radius: 0.8rem;
   text-align: center;
@@ -245,7 +245,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 75vh;
+  min-height: fit-content;
   background-color: #f9f9f9;
   padding: 3.4rem;
   box-shadow: 0 0.3rem 0.8rem rgba(0, 0, 0, 0.1);
@@ -255,7 +255,7 @@
   display: flex;
   flex-flow: column nowrap;
   gap: 1.8rem;
-  max-width: 1200;
+  max-width: 100rem;
   width: 100%;
   box-shadow: 0 0.3rem 0.8rem rgba(0, 0, 0, 0.1);
 }
@@ -292,7 +292,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 80vh;
+  min-height: fit-content;
   background-color: #ff0000;
   padding: 3.4rem;
 }
@@ -301,7 +301,7 @@
   display: flex;
   justify-content: space-between;
   gap: 1.8rem;
-  max-width: 1200;
+  max-width: 100rem;
   width: 100%;
   flex-direction: row;
 }
@@ -313,16 +313,16 @@
 .youtube-section .title-image {
   width: 100%;
   height: auto;
-  max-width: 600;
+  max-width: 50rem;
   border-radius: 0.3rem;
 }
 
 .youtube-section .text {
   flex: 1;
   padding: 2rem;
-  max-width: 500;
+  max-width: 42rem;
   background-color: #fff;
-  color: black;
+  color: #000;
 }
 
 .youtube-section h2 {
@@ -359,8 +359,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 60;
-  height: 80vh;
+  padding: 5rem;
+  min-height: fit-content;
   background: linear-gradient(45deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5);
   color: #fff;
   text-align: center;
@@ -371,7 +371,7 @@
   justify-content: space-between;
   align-items: center;
   gap: 3.4rem;
-  max-width: 1200;
+  max-width: 100rem;
   width: 100%;
   flex-direction: row;
 }
@@ -379,9 +379,9 @@
 .instagram-section .text {
   flex: 1;
   padding: 2rem;
-  max-width: 500;
+  max-width: 48rem;
   background-color: #fff;
-  color: black;
+  color: #000;
 }
 
 .instagram-section h2 {
@@ -422,7 +422,7 @@
 
 .instagram-section .instagram-image {
   width: 100%;
-  max-width: 500;
+  max-width: 42rem;
   border-radius: 1.8rem;
   box-shadow: 0 0.3rem 0.8rem rgba(0, 0, 0, 0.2);
 }
@@ -434,8 +434,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 60;
-  min-height: 80vh;
+  padding: 5rem;
+  min-height: fit-content;
   background-color: #1877f2;
   color: #fff;
   text-align: center;
@@ -446,8 +446,8 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  gap: 30;
-  max-width: 800;
+  gap: 2.4rem;
+  max-width: 65rem;
   width: 100%;
 }
 
@@ -459,13 +459,13 @@
 
 .facebook-section .facebook-image {
   width: 100%;
-  max-width: 500;
+  max-width: 42rem;
   border-radius: 1.4rem;
   box-shadow: 0 0.3rem 0.8rem rgba(0, 0, 0, 0.2);
 }
 
 .facebook-section .text {
-  max-width: 600;
+  max-width: 50rem;
 }
 
 .facebook-section h2 {
@@ -489,7 +489,7 @@
   color: #fff;
   font-weight: bold;
   text-decoration: none;
-  border-radius: 50;
+  border-radius: 4rem;
   transition: all 0.3s ease-in-out;
 }
 
@@ -500,7 +500,7 @@
 /* END FaceBook Section */
 
 /* For screens 426px or smaller */
-@media (max-width: 35.5rem) {
+@media (max-width: 426px) {
   section {
     width: 100%;
   }
@@ -523,14 +523,146 @@
   .about-coach .image-container {
     flex: 1;
     min-height: 25rem;
-    background: url("../img/football-coach-1531673_640.jpg") center/cover no-repeat;
+    background: url("../img/football-coach-1531673_640.jpg") center/cover no-repeat; /* Thinking of changing image on mobile*/
   }
 
-  .about-coach .text p {
-    font-family: "Lato", sans-serif;
-    font-size: 1.25rem;
-    color: #555;
-    margin-bottom: 1.5rem;
+  /* Start Here Section */
+  .start-here-section .video-container {
+    width: 100%;
+    margin: 1rem auto;
+  }
+
+  .start-here-section .text {
+    flex: 1;
+    padding: 1.8rem;
+    margin: 1rem auto;
+    max-width: 95%;
+  }
+
+  .start-here-section h2 {
+    margin: 0 auto;
+    font-size: 2.5rem;
+  }
+
+  .start-here-section p {
+    margin: 1.4rem 0;
+    font-size: 1.7rem;
+  }
+  /* END Start Here Section */
+
+  /* YouTube Section */
+  .youtube-section {
+    height: 90vh;
+    padding: 3rem;
+  }
+
+  .youtube-section .content {
+    display: flex;
+    flex-flow: column-reverse nowrap;
+    justify-content: space-between;
+    gap: 1.7rem;
+  }
+
+  .youtube-section p {
+    margin: 1.4rem 0;
+    font-size: 1.7rem;
+  }
+
+  .youtube-section .btn {
+    letter-spacing: 0.5rem;
+  }
+  /* END YouTube Section */
+
+  /* Instagram Section */
+  .instagram-section {
+    display: flex;
+    padding: 2rem;
+    min-height: 100vh;
+  }
+
+  .instagram-section .content {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    max-width: 100rem;
+  }
+
+  .instagram-section .text {
+    flex: 1;
+    padding: 2rem;
+    max-width: 42rem;
+    background-color: #fff;
+    color: #000;
+  }
+
+  .instagram-section h2 {
+    font-size: 2.6rem;
+    font-weight: bold;
+    margin-bottom: 1.4rem;
+  }
+
+  .instagram-section p {
+    font-size: 1.3rem;
+    margin-bottom: 1.8rem;
     line-height: 1.5;
   }
+
+  .instagram-section .btn {
+    font-size: 1.7rem;
+    letter-spacing: 0.3rem;
+    display: inline-block;
+    padding: 1rem 2.4rem;
+    background-color: #d62976;
+    color: #fff;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 4.2rem;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .instagram-section .btn:hover {
+    background-color: #f64393;
+  }
+
+  .instagram-section .image-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .instagram-section .instagram-image {
+    width: 100%;
+    max-width: 30rem;
+    border-radius: 1.8rem;
+    box-shadow: 0 0.3rem 0.8rem rgba(0, 0, 0, 0.2);
+  }
+
+  /* END Instagram Section */
+
+  /* FaceBook Section */
+  .facebook-section {
+    padding: 5rem;
+    min-height: 90vh;
+  }
+
+  .facebook-section h2 {
+    font-size: 2.7rem;
+  }
+
+  .facebook-section p {
+    font-size: 1.7rem;
+  }
+
+  .facebook-section .btn {
+    font-size: 1.7rem;
+    padding: 1rem 2rem;
+  }
+  /* END FaceBook Section */
+}
+
+/* For screens 769px or smaller */
+@media (max-width: 769px) {
 }

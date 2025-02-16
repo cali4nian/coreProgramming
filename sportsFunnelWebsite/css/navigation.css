@@ -91,7 +91,7 @@ a {
 /* END Footer */
 
 /* For screens 426px or smaller */
-@media (max-width: 35.5rem) {
+@media (max-width: 426px) {
   .mainNavigation {
     flex-flow: column nowrap;
     padding: 0.9rem 0;
@@ -109,4 +109,8 @@ a {
     width: 2.5rem;
     height: 2.5rem;
   }
+}
+
+/* For screens 769px or smaller */
+@media (max-width: 769px) {
 }

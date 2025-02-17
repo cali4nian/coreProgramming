@@ -1,0 +1,48 @@
+/* Hero Section */
+.hero-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: url("../../img/man-1837119_1280.jpg") no-repeat center center/cover;
+  color: white;
+  text-align: center;
+  padding: 2.8rem;
+  opacity: 0.9;
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.3rem;
+}
+
+.hero-content {
+  max-width: 50rem;
+}
+
+.hero-title {
+  font-size: 3rem;
+  margin-bottom: 0.8rem;
+}
+
+.hero-subtitle {
+  font-size: 1.5rem;
+  margin-bottom: 1.8rem;
+}
+
+.hero-button {
+  display: inline-block;
+  padding: 0.8rem 1.8rem;
+  font-size: 1.5rem;
+  color: white;
+  background: #ff6600;
+  border: none;
+  border-radius: 0.4rem;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+.hero-button:hover {
+  background: #cc5200;
+}
+/* END Hero Section */

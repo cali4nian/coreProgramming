@@ -3,9 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="css/default.css" />
-    <link rel="stylesheet" href="css/navigation.css" />
     <link rel="stylesheet" href="css/index.css" />
+    <script type="module" src="js/index/index.js"></script>
     <title>Sports Funnel Website</title>
   </head>
   <body>
@@ -24,39 +23,39 @@
         </li>
       </ul>
     </nav>
-    <!-- End Navigation -->
+    <!-- END Navigation -->
 
     <!-- Hero Section -->
     <section class="hero-section">
-      <div class="hero-content">
+      <aside class="hero-content">
         <h1 class="hero-title">Welcome to Williams Coaching</h1>
         <p class="hero-subtitle">Discover amazing content and explore the possibilities.</p>
         <a href="#" class="hero-button">Get Started</a>
-      </div>
+      </aside>
     </section>
     <!-- END Hero Section -->
 
-    <!-- About the Coach Section -->
+    <!-- About Coach Section -->
     <section class="about-coach">
-      <div class="content">
-        <div class="image-container"></div>
-        <div class="text">
-          <h2>Meet Coach Williams</h2>
-          <p>Dedicated to helping athletes of all ages reach their full potential, our coach brings years of experience, passion, and expertise to every training session.</p>
-          <ul class="qualities">
-            <li>Motivational</li>
-            <li>Experienced</li>
-            <li>Passionate</li>
-            <li>Supportive</li>
-            <li>Encouraging</li>
-            <li>Knowledgeable</li>
-            <li>Disciplined</li>
-            <li>Empowering</li>
-          </ul>
-        </div>
-      </div>
+      <aside class="content">
+        <h2>Meet Coach Williams</h2>
+        <p>Dedicated to helping athletes of all ages reach their full potential, our coach brings years of experience, passion, and expertise to every training session.</p>
+        <ul class="qualities">
+          <li>Motivational</li>
+          <li>Experienced</li>
+          <li>Passionate</li>
+          <li>Supportive</li>
+          <li>Encouraging</li>
+          <li>Knowledgeable</li>
+          <li>Disciplined</li>
+          <li>Empowering</li>
+        </ul>
+        <aside class="image-container">
+          <img src="img/football-coach-1531673_640.jpg" alt="" class="coach-image" />
+        </aside>
+      </aside>
     </section>
-    <!-- End About the Coach Section -->
+    <!-- END About Coach Section -->
 
     <!-- Player Profiles Section -->
     <section class="player-profiles">
@@ -65,20 +64,36 @@
         <p>Explore the stats and achievements of our elite players.</p>
       </div>
       <div class="profiles-container">
-        <div class="player-card">
-          <img src="img/basketball-6648112_640.jpg" alt="Player 1" />
-          <h2>John Doe</h2>
-          <p>Forward | 25 Goals</p>
-        </div>
+        <a href="player-profile.html"
+          ><div class="player-card">
+            <img src="img/basketball-6648112_640.jpg" alt="Player 1" />
+            <h2>John Doe</h2>
+            <p>Point Guard | 25 Goals</p>
+          </div>
+        </a>
         <div class="player-card">
           <img src="img/basketball-6648112_640.jpg" alt="Player 2" />
           <h2>Jane Smith</h2>
-          <p>Midfielder | 18 Assists</p>
+          <p>Shooting Guard | 18 Assists</p>
         </div>
         <div class="player-card">
           <img src="img/basketball-6648112_640.jpg" alt="Player 3" />
           <h2>Michael Lee</h2>
-          <p>Goalkeeper | 10 Clean Sheets</p>
+          <p>Power Forward | 10 Clean Sheets</p>
+        </div>
+        <div class="player-card">
+          <img src="img/basketball-6648112_640.jpg" alt="Player 3" />
+          <h2>Michael Lee</h2>
+          <p>Small Forward | 10 Clean Sheets</p>
+        </div>
+        <div class="player-card">
+          <img src="img/basketball-6648112_640.jpg" alt="Player 3" />
+          <h2>Michael Lee</h2>
+          <p>Center Guard | 10 Clean Sheets</p>
+        </div>
+        <div class="player-card">
+          <img src="img/basketball-6648112_640.jpg" alt="Player 3" />
+          <h2>Challenge Button</h2>
         </div>
       </div>
     </section>
@@ -89,8 +104,8 @@
       <aside class="subscribe-section-inner-wrapper">
         <h2>Subscribe to Our Newsletter</h2>
         <p>Stay updated with the latest news and updates.</p>
-        <form class="subscribe-form">
-          <input type="email" placeholder="Enter your email" required />
+        <form class="subscribe-form" id="subscriberForm">
+          <input type="email" name="email" placeholder="Enter your email" />
           <button type="submit">Subscribe</button>
         </form>
       </aside>
@@ -105,7 +120,7 @@
           <p>Watch this intro video to see where you can start your personal sports journey and take the first step towards achieving your goals!</p>
         </div>
         <div class="video-container">
-          <iframe width="100%" height="100%" src="https://www.youtube.com/embed/oyjYgmsM00Q" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <iframe width="90%" height="100%" src="https://www.youtube.com/embed/oyjYgmsM00Q" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
       </aside>
     </section>
@@ -114,9 +129,8 @@
     <!-- YouTube Section -->
     <section class="youtube-section">
       <div class="content">
-        <div class="image-container">
-          <!-- Title Image -->
-          <img src="https://placehold.co/600x300" alt="Sports Training" class="title-image" />
+        <div class="video-container">
+          <iframe width="90%" src="https://www.youtube.com/embed/oyjYgmsM00Q" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
         <div class="text">
           <h2>Check Out Our YouTube Channel</h2>
@@ -180,8 +194,8 @@
         </ul>
       </div>
       <nav class="footer-links">
-        <span>&copy; 2025 Sports Funnel Website</span> | <a href="terms-of-use.html">Terms of Use</a> |
-        <a href="privacy-policy.html">Privacy Policy</a>
+        <span>&copy; 2025 Sports Funnel Website</span> | <a href="#">Terms of Use</a> |
+        <a href="#">Privacy Policy</a>
       </nav>
     </footer>
     <!-- End Footer Section -->

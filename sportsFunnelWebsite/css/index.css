@@ -1,11 +1,5 @@
-/* Hero fonts */
-@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lato:wght@400;700&display=swap");
-/* Subscribe Fonts */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap");
-
-/* Default Page Styles */
-@import url("default.css");
-@import url("navigation.css");
+/* Front pages defaults */
+@import url("front-default.css");
 
 /* Section Styles */
 @import url("index/hero.css");
@@ -16,7 +10,6 @@
 @import url("index/youtube.css");
 @import url("index/instagram.css");
 @import url("index/facebook.css");
-@import url("back-to-top-button.css");
 
 /* Media Queries */
 @import url("index/large-screens-mq.css");

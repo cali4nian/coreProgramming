@@ -1,5 +1,9 @@
 // Imports
 import EmailSubscriber from "../EmailSubscriber.js"
+import BackToTopButton from "../BackToTopButton.js"
 
 // Classes
-new EmailSubscriber("subscriberForm", "endpointHere")
+document.addEventListener("DOMContentLoaded", () => {
+  new EmailSubscriber("subscriberForm", "endpointHere")
+  new BackToTopButton("backToTop")
+})

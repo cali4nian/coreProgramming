@@ -1,0 +1,56 @@
+.player-profile-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.player-card {
+  display: flex;
+  background: #fff;
+  box-shadow: 0 0.3rem 0.6rem rgba(0, 0, 0, 0.2);
+  border-radius: 1rem;
+  overflow: hidden;
+  max-width: fit-content;
+  width: 100%;
+}
+
+.player-photo {
+  width: 12rem;
+  height: auto;
+  object-fit: cover;
+  border-right: 0.3rem solid #ff6600;
+}
+
+.player-info {
+  padding: 1.2rem;
+  text-align: left;
+}
+
+.player-name {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 0.4rem;
+  color: #222;
+}
+
+.player-position {
+  font-size: 1.3rem;
+  color: #666;
+}
+
+.player-stats p {
+  font-size: 1.2rem;
+  margin: 0.4rem 0;
+}
+
+.player-stats span {
+  font-weight: bold;
+  color: #ff6600;
+}
+
+.player-bio {
+  font-size: 1.2rem;
+  margin-top: 0.8rem;
+  color: #444;
+}

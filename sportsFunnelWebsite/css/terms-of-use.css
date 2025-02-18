@@ -1,2 +1,49 @@
 /* Front pages defaults */
 @import url("front-default.css");
+
+.terms-of-use-container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background: #fff;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  font-family: Arial, sans-serif;
+}
+
+.terms-of-use h2 {
+  text-align: center;
+  color: #222;
+  font-size: 26px;
+  margin-bottom: 10px;
+}
+
+.terms-of-use h3 {
+  color: #ff6600;
+  font-size: 20px;
+  margin-top: 15px;
+}
+
+.terms-of-use p,
+.terms-of-use ul {
+  font-size: 16px;
+  color: #444;
+  line-height: 1.5;
+}
+
+.terms-of-use ul {
+  padding-left: 20px;
+}
+
+.terms-of-use ul li {
+  margin-bottom: 5px;
+}
+
+.terms-of-use strong {
+  color: #000;
+}
+
+.terms-of-use-container p:last-child {
+  margin-bottom: 0;
+  text-align: center;
+}

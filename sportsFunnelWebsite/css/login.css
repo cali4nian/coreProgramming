@@ -15,6 +15,10 @@
   text-align: center;
 }
 
+.login-box img {
+  width: 5rem;
+}
+
 .login-box h2 {
   margin-bottom: 2rem;
   color: #333;

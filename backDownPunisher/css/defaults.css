@@ -1,0 +1,25 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Anton&family=Mulish:wght@300;400;700&display=swap");
+
+:root {
+  --color-bg: #000;
+  --color-surface: #111;
+  --color-text: #fff;
+  --color-accent: #ffcc00;
+}
+
+body {
+  font-family: "Mulish", sans-serif;
+  margin: 0;
+  padding: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  text-align: center;
+}
+
+h1,
+h2 {
+  font-family: "Anton", sans-serif;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}

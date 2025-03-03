@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="img/basketballLogo.webp" type="image/x-icon" />
     <link rel="stylesheet" href="css/login.css" />
-    <title>Login</title>
+    <title>Register</title>
   </head>
   <body>
-    <!-- Login Section -->
+    <!-- Register Section -->
     <section class="login-container">
       <aside class="login-box">
-        <img src="img/basketballLogo.webp" alt="" />
-        <h2>Login</h2>
+        <a href="/"><img src="img/basketballLogo.webp" alt="" /></a>
+        <h2>Register</h2>
         <form action="/login" method="POST">
           <p class="input-group">
             <label for="email">Email Address</label>
@@ -22,11 +22,12 @@
             <label for="password">Password</label>
             <input type="password" id="password" name="password" placeholder="Enter your password" required />
           </p>
-          <button type="submit">Login</button>
+          <button type="submit">Register</button>
+          <p class="login"><a href="/login.html">Login</a></p>
           <p class="forgot-password"><a href="/forgot-password.html">Forgot your password?</a></p>
         </form>
       </aside>
     </section>
-    <!-- END Admin Login Section -->
+    <!-- END Register Section -->
   </body>
 </html>

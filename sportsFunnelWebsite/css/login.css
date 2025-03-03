@@ -1,14 +1,14 @@
-.admin-login-container {
+.login-container {
+  background: url("../img/loginBgImg.jpg") no-repeat center center fixed;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: #f4f4f4;
 }
 
 .login-box {
   width: fit-content;
-  padding: 2rem 3rem;
+  padding: 1rem 2rem;
   background: #fff;
   box-shadow: 0 0.3rem 0.6rem rgba(0, 0, 0, 0.1);
   border-radius: 0.6rem;
@@ -60,16 +60,22 @@ button:hover {
   background: #e65c00;
 }
 
+.register,
+.login,
 .forgot-password {
   margin-top: 0.8rem;
   font-size: 1.2rem;
 }
 
+.register a,
+.login a,
 .forgot-password a {
   color: #ff6600;
   text-decoration: none;
 }
 
+.register a:hover,
+.login a:hover,
 .forgot-password a:hover {
   text-decoration: underline;
 }

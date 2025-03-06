@@ -1,0 +1,20 @@
+# Redirect to HTTPS
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+
+# Prevent direct access to sensitive files
+<FilesMatch "(^\.|config\.php|database\.php)">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Disable PHP execution in uploads
+<Directory "/home/your-username/corephp_project/public_html/uploads">
+    php_flag engine off
+</Directory>
+
+# Hide PHP file extensions
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^([^\.]+)$ $1.php [NC,L]

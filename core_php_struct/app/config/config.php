@@ -1,8 +1,8 @@
 <?php
-require_once __DIR__ . '/../app/functions/loadEnv.php';
+require_once __DIR__ . '/../functions/loadEnv.php';
 
 // Load the .env file
-loadEnv(__DIR__ . '/../.env');
+loadEnv(__DIR__ . '/../../.env');
 
 // Access environment variables using getenv()
 $dbHost = getenv('DB_HOST');

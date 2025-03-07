@@ -1,4 +1,6 @@
 <?php include 'header.php'; ?>
-<h1>Contact Us</h1>
-<p>Email: contact@example.com</p>
+
+<h1><?php echo $title; ?></h1>
+<p><?php echo $message; ?></p>
+
 <?php include 'footer.php'; ?>

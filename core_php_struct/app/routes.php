@@ -3,13 +3,20 @@ require_once __DIR__ . '/../app/functions/template.php'; // Include helper funct
 
 // Include the controllers
 require_once __DIR__ . '/../app/controllers/HomeController.php';
-// require_once __DIR__ . '/../app/controllers/AboutController.php';
-// require_once __DIR__ . '/../app/controllers/ContactController.php';
+require_once __DIR__ . '/../app/controllers/AboutController.php';
+require_once __DIR__ . '/../app/controllers/ContactController.php';
+
+// Auth Controller
+require_once __DIR__ . '/../app/controllers/auth/AuthController.php';
 
 $routes = [
     '/'         => 'HomeController@index',    // Call the HomeController's index method
-    // '/about'    => 'AboutController@index',  // Call the AboutController's index method
-    // '/contact'  => 'ContactController@index' // Call the ContactController's index method
+    '/about'    => 'AboutController@index',  // Call the AboutController's index method
+    '/contact'  => 'ContactController@index', // Call the ContactController's index method
+    // Auth Routes
+    '/register' => 'AuthController@register',
+    '/login' => 'AuthController@login',
+    '/forgot-password' => 'AuthController@forgot_password'
 ];
 
 // Get the requested URL path

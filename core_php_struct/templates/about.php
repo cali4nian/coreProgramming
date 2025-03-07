@@ -1,4 +1,6 @@
 <?php include 'header.php'; ?>
-<h1>About Us</h1>
-<p>We are a simple PHP project with a basic routing system.</p>
+
+<h1><?php echo $title; ?></h1>
+<p><?php echo $message; ?></p>
+
 <?php include 'footer.php'; ?>

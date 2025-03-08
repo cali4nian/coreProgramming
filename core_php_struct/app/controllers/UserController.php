@@ -7,6 +7,8 @@ class UserController
 {
     public function index()
     {
+        requireAdmin(); // Only admins can access this page
+        
         $userModel = new UserModel();
         $users = $userModel->getAllUsers();
 

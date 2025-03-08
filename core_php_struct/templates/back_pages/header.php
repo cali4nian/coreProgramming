@@ -3,14 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My PHP Site</title>
+    <title>Backend</title>
     <link rel="stylesheet" href="/assets/style.css">
 </head>
 <body>
     <nav>
-        <a href="/">Home</a> |
-        <a href="/about">About</a> |
-        <a href="/contact">Contact</a> |
-        <a href="/login">Login</a> |
-        <a href="/register">Register</a>
+        <a href="/dashboard">Dashboard</a> |
+        <a href="/profile">Profile</a> |
+        <a href="/logout">Logout</a>
     </nav>

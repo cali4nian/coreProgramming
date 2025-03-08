@@ -1,23 +1,24 @@
 <?php
-session_start(); // Ensure session is started
+// Check if a session is already active before starting
+if (session_status() !== PHP_SESSION_ACTIVE) {
+    session_start();
+}
 
 /**
- * Generate and store CSRF token in session
+ * Generate CSRF Token
  */
 function generateCsrfToken()
 {
     if (empty($_SESSION['csrf_token'])) {
-        $_SESSION['csrf_token'] = bin2hex(random_bytes(32)); // Generate secure random token
+        $_SESSION['csrf_token'] = bin2hex(random_bytes(32)); // Generate CSRF token
     }
     return $_SESSION['csrf_token'];
 }
 
 /**
- * Validate CSRF token submitted via form
+ * Validate CSRF Token
  */
 function validateCsrfToken($token)
 {
-    if (!isset($_SESSION['csrf_token']) || $token !== $_SESSION['csrf_token']) {
-        die("CSRF token validation failed.");
-    }
+    return isset($_SESSION['csrf_token']) && hash_equals($_SESSION['csrf_token'], $token);
 }

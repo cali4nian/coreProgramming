@@ -18,3 +18,13 @@ RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}\.php -f
 RewriteRule ^([^\.]+)$ $1.php [NC,L]
+#########################################################################
+# Block direct access to app, config, and private files
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Block access to core directories
+    RewriteRule ^app/ - [F,L]
+    RewriteRule ^config/ - [F,L]
+    RewriteRule ^functions/ - [F,L]
+</IfModule>

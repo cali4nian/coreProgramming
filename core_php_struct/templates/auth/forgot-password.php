@@ -8,4 +8,6 @@
     
     <button type="submit">Request Password Reset</button>
 </form>
+<a href="/login">Login</a> |
+<a href="/register">Register</a>
 <?php include __DIR__ . '/../footer.php'; ?>

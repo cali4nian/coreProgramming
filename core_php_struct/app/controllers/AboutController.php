@@ -1,8 +1,9 @@
 <?php
+namespace App\Controllers;
 class AboutController
 {
     public function index()
-    {
+    {   
         // Prepare data for the home page
         $data = [
             'title'   => 'About Page',

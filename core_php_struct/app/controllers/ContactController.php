@@ -1,8 +1,9 @@
 <?php
+namespace App\Controllers;
 class ContactController
 {
     public function index()
-    {
+    {    
         // Prepare data for the home page
         $data = [
             'title'   => 'Contact Page',

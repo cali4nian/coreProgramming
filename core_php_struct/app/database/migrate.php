@@ -6,6 +6,9 @@ use App\Config\Database;
 // Get database connection
 $db = Database::connect();
 
+// TAKE OUT IN PRODUCTION
+$db->exec("DROP TABLE IF EXISTS migrations");
+
 // Ensure `migrations` table exists
 $db->exec("CREATE TABLE IF NOT EXISTS migrations (
     id INT AUTO_INCREMENT PRIMARY KEY,

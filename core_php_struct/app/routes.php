@@ -16,10 +16,16 @@ $routes = [
     '/logout'            => 'App\Controllers\Auth\LoginController@logout',
     '/forgot-password'   => 'App\Controllers\Auth\ForgotPasswordController@index',
     '/reset-password'    => 'App\Controllers\Auth\ResetPasswordController@index',
+    // Email Verification Route
+    '/verify-email' => 'App\Controllers\Auth\VerifyEmailController@verify',
+
 
     // Backend
     '/dashboard'         => 'App\Controllers\DashboardController@index',
-    '/profile'         => 'App\Controllers\ProfileController@index',
+    '/profile'           => 'App\Controllers\ProfileController@index',
+
+    // Admin
+    '/users'             => 'App\Controllers\UserController@index',
 ];
 
 // Get the requested URL path

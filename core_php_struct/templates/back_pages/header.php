@@ -7,8 +7,4 @@
     <link rel="stylesheet" href="/assets/style.css">
 </head>
 <body>
-    <nav>
-        <a href="/dashboard">Dashboard</a> |
-        <a href="/profile">Profile</a> |
-        <a href="/logout">Logout</a>
-    </nav>
+    <?php require_once "partials/nav.php" ?>

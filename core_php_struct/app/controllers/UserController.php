@@ -3,6 +3,8 @@ namespace App\Controllers;
 
 use App\Models\UserModel;
 
+require_once __DIR__ . '/../functions/auth.php'; // Include auth helper file
+
 class UserController
 {
     public function index()
@@ -13,6 +15,6 @@ class UserController
         $users = $userModel->getAllUsers();
 
         // Pass data to the view
-        renderTemplate('users.php', ['users' => $users]);
+        renderTemplate('back_pages/users.php', ['users' => $users]);
     }
 }

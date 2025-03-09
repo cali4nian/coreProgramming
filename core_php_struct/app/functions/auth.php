@@ -1,8 +1,9 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
-  session_start(); // Start session only if not already started
+if (session_status() !== PHP_SESSION_ACTIVE) {
+    session_start(); // Ensure session is started
 }
-// Protect pages by ensuring the user is logged in
+
+// Function to protect routes that require authentication
 function requireLogin()
 {
     if (!isset($_SESSION['user_id'])) {
@@ -11,11 +12,12 @@ function requireLogin()
     }
 }
 
-// Protect admin-only pages
+// Function to protect admin-only routes
 function requireAdmin()
 {
-    requireLogin();
-    if ($_SESSION['user_role'] !== 'admin') {
-        die("Access denied. Admins only.");
+    requireLogin(); // Ensure user is logged in first
+    if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'admin') {
+        header("Location: /dashboard"); // Redirect unauthorized users to the dashboard
+        exit();
     }
 }

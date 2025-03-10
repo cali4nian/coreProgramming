@@ -49,15 +49,18 @@ class LoginController
             }
 
             $db = Database::connect();
-            $stmt = $db->prepare("SELECT id, name, password, role, is_verified FROM users WHERE email = :email");
+            $stmt = $db->prepare("SELECT id, name, email, password, role, is_verified FROM users WHERE email = :email");
             $stmt->execute(['email' => $email]);
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
             if ($user && password_verify($password, $user['password'])) {
                 if (!$user['is_verified']) {
-                    echo "<a href='/login'>Back to Login</a>";
-                    die("❌ Please verify your email before logging in.");
+                    echo "❌ Please verify your email before logging in.";
+                    echo "<br><a href='/resend-verification?email=" . urlencode($user['email']) . "'>Resend Verification Email</a>";
+                    echo "<br><a href='/login'>Back to Login</a>";
+                    exit();
                 }
+            
                 // Store user data in session
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['user_name'] = $user['name'];
@@ -67,6 +70,7 @@ class LoginController
             } else {
                 die("Invalid email or password.");
             }
+            
         }
     }
 

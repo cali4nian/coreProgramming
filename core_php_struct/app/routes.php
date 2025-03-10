@@ -16,6 +16,12 @@ $routes = [
     '/logout'            => 'App\Controllers\Auth\LoginController@logout',
     '/forgot-password'   => 'App\Controllers\Auth\ForgotPasswordController@index',
     '/reset-password'    => 'App\Controllers\Auth\ResetPasswordController@index',
+    '/forgot-password' => 'App\Controllers\Auth\ForgotPasswordController@index',
+    '/forgot-password/request' => 'App\Controllers\Auth\ForgotPasswordController@requestReset',
+    '/reset-password' => 'App\Controllers\Auth\ResetPasswordController@index',
+    '/reset-password/request' => 'App\Controllers\Auth\ResetPasswordController@reset',
+    '/resend-verification' => 'App\Controllers\Auth\ResendVerificationController@resend',
+
     // Email Verification Route
     '/verify-email' => 'App\Controllers\Auth\VerifyEmailController@verify',
 

@@ -1,12 +1,9 @@
 <?php require_once __DIR__ . '/../../app/functions/csrf.php'; ?>
 <?php include __DIR__ . '/../header.php'; ?>
-<form action="/password-reset" method="POST">
-    <input type="hidden" name="csrf_token" value="<?php echo generateCsrfToken(); ?>">
-
-    <label for="email">Email:</label>
+<form action="/forgot-password/request" method="POST">
+    <label for="email">Enter your email:</label>
     <input type="email" name="email" required>
-    
-    <button type="submit">Request Password Reset</button>
+    <button type="submit">Send Reset Link</button>
 </form>
 <a href="/login">Login</a> |
 <a href="/register">Register</a>

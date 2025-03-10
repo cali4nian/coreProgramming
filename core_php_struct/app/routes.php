@@ -31,10 +31,15 @@ $routes = [
     '/profile/update' => 'App\Controllers\ProfileController@updateProfile',
     '/profile/change-password' => 'App\Controllers\ProfileController@changePassword',
     '/profile/delete' => 'App\Controllers\ProfileController@deleteProfile',
-    // Admin
+    // Admin User Management
     '/users' => 'App\Controllers\UserController@listUsers',
+    // Admin Subscriber Management
     '/admin/subscribers' => 'App\Controllers\SubscriberController@listSubscribers',
     '/admin/delete-subscriber' => 'App\Controllers\SubscriberController@deleteSubscriber',
+    // Download routes for Subscribers
+    '/admin/download-all-subscribers' => 'App\Controllers\SubscriberController@downloadAllSubscribers',
+    '/admin/download-confirmed-subscribers' => 'App\Controllers\SubscriberController@downloadConfirmedSubscribers',
+    '/admin/download-unconfirmed-subscribers' => 'App\Controllers\SubscriberController@downloadUnconfirmedSubscribers',
 ];
 
 // Get the requested URL path

@@ -2,6 +2,10 @@
 
 <h1>Subscribers List</h1>
 
+<a href="/admin/download-all-subscribers" class="btn">⬇ Download All Subscribers</a>
+<a href="/admin/download-confirmed-subscribers" class="btn">⬇ Download Confirmed Subscribers</a>
+<a href="/admin/download-unconfirmed-subscribers" class="btn">⬇ Download Unconfirmed Subscribers</a>
+
 <?php if (isset($_GET['deleted'])): ?>
     <p style="color: red;">Subscriber deleted successfully.</p>
 <?php endif; ?>
@@ -45,5 +49,7 @@
         <a href="?page=<?= $currentPage + 1 ?>">Next ➡</a>
     <?php endif; ?>
 </div>
+
+<a href="/dashboard">⬅ Back to Dashboard</a>
 
 <?php include __DIR__ . '/../footer.php'; ?>

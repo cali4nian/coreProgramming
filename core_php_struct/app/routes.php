@@ -7,7 +7,8 @@ $routes = [
     '/'                  => 'App\Controllers\HomeController@index',  // Handle home route
     '/about'             => 'App\Controllers\AboutController@index',
     '/contact'           => 'App\Controllers\ContactController@index',
-
+    '/subscribe' => 'App\Controllers\SubscriberController@subscribe',
+    '/confirm-subscription' => 'App\Controllers\SubscriberController@confirm',
     // Auth
     '/register'          => 'App\Controllers\Auth\RegisterController@index',
     '/register/request'  => 'App\Controllers\Auth\RegisterController@register',
@@ -21,15 +22,11 @@ $routes = [
     '/reset-password' => 'App\Controllers\Auth\ResetPasswordController@index',
     '/reset-password/request' => 'App\Controllers\Auth\ResetPasswordController@reset',
     '/resend-verification' => 'App\Controllers\Auth\ResendVerificationController@resend',
-
     // Email Verification Route
     '/verify-email' => 'App\Controllers\Auth\VerifyEmailController@verify',
-
-
     // Backend
     '/dashboard'         => 'App\Controllers\DashboardController@index',
     '/profile'           => 'App\Controllers\ProfileController@index',
-
     // Admin
     '/users'             => 'App\Controllers\UserController@index',
 ];

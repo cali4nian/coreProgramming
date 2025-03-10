@@ -26,9 +26,15 @@ $routes = [
     '/verify-email' => 'App\Controllers\Auth\VerifyEmailController@verify',
     // Backend
     '/dashboard'         => 'App\Controllers\DashboardController@index',
-    '/profile'           => 'App\Controllers\ProfileController@index',
+    // User Profile Management
+    '/profile' => 'App\Controllers\ProfileController@profile',
+    '/profile/update' => 'App\Controllers\ProfileController@updateProfile',
+    '/profile/change-password' => 'App\Controllers\ProfileController@changePassword',
+    '/profile/delete' => 'App\Controllers\ProfileController@deleteProfile',
     // Admin
-    '/users'             => 'App\Controllers\UserController@index',
+    '/users' => 'App\Controllers\UserController@listUsers',
+    '/admin/subscribers' => 'App\Controllers\SubscriberController@listSubscribers',
+    '/admin/delete-subscriber' => 'App\Controllers\SubscriberController@deleteSubscriber',
 ];
 
 // Get the requested URL path

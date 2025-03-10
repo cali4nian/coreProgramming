@@ -1,6 +1,6 @@
 <?php require_once __DIR__ . '/../../app/functions/csrf.php'; ?>
 <?php include __DIR__ . '/../header.php'; ?>
-
+<h2>Login</h2>
 <form action="/login/request" method="POST">
     <input type="hidden" name="csrf_token" value="<?php echo generateCsrfToken(); ?>">
     

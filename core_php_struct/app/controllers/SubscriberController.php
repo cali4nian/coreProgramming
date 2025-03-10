@@ -1,6 +1,7 @@
 <?php
 namespace App\Controllers;
 
+require_once __DIR__ . '/../functions/auth.php';
 require_once __DIR__ . '/../config/Database.php';
 require_once __DIR__ . '/../functions/email.php';
 
@@ -86,5 +87,50 @@ class SubscriberController
         $stmt->execute(['id' => $subscriber['id']]);
 
         echo "✅ Your subscription is confirmed! Thank you.";
+    }
+
+    public function listSubscribers()
+    {
+        requireAdmin(); // Ensure only admins can access
+
+        $db = Database::connect();
+        
+        $perPage = 10; // Number of subscribers per page
+        $page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int)$_GET['page'] : 1;
+        $offset = ($page - 1) * $perPage;
+
+        // Fetch subscribers with pagination
+        $stmt = $db->prepare("SELECT id, email, is_confirmed, subscribed_at FROM subscribers LIMIT :limit OFFSET :offset");
+        $stmt->bindValue(':limit', $perPage, PDO::PARAM_INT);
+        $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+        $stmt->execute();
+        $subscribers = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        // Get total number of subscribers for pagination
+        $stmt = $db->query("SELECT COUNT(*) FROM subscribers");
+        $totalSubscribers = $stmt->fetchColumn();
+        $totalPages = ceil($totalSubscribers / $perPage);
+
+        renderTemplate('back_pages/admin/subscribers.php', [
+            'subscribers' => $subscribers,
+            'totalPages' => $totalPages,
+            'currentPage' => $page
+        ]);
+    }
+    
+    public function deleteSubscriber()
+    {
+        requireAdmin(); // Ensure only admins can delete
+
+        if (!isset($_GET['id'])) {
+            die("❌ Invalid subscriber ID.");
+        }
+
+        $db = Database::connect();
+        $stmt = $db->prepare("DELETE FROM subscribers WHERE id = :id");
+        $stmt->execute(['id' => $_GET['id']]);
+
+        header("Location: /admin/subscribers?deleted=true");
+        exit();
     }
 }

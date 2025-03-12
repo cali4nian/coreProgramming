@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/players.css" />
+    <title>Players</title>
+  </head>
+  <body>
+    <div class="sidebar">
+      <h2>Admin Dashboard</h2>
+      <ul>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="settings.html">Settings</a></li>
+        <li><a href="profile.html">Profile</a></li>
+        <li><a href="subscribers.html">Subscribers</a></li>
+        <li><a href="users.html">Users</a></li>
+        <li><a href="players.html">Players</a></li>
+        <li><a href="coaches.html">Coaches</a></li>
+      </ul>
+    </div>
+    <div class="main-content">
+      <h1>Players</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Team</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Example row -->
+          <tr>
+            <td>Jane Doe</td>
+            <td>jane.doe@example.com</td>
+            <td>Team A</td>
+            <td>
+              <button class="edit-btn">Edit</button>
+              <button class="archive-btn">Archive</button>
+            </td>
+          </tr>
+          <!-- Add more rows as needed -->
+        </tbody>
+      </table>
+      <h2>Add Player</h2>
+      <form>
+        <div class="form-group">
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" required />
+        </div>
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required />
+        </div>
+        <div class="form-group">
+          <label for="team">Team:</label>
+          <input type="text" id="team" name="team" required />
+        </div>
+        <button type="submit">Add Player</button>
+      </form>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/users.css" />
+    <title>Users</title>
+  </head>
+  <body>
+    <div class="sidebar">
+      <h2>Admin Dashboard</h2>
+      <ul>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="settings.html">Settings</a></li>
+        <li><a href="profile.html">Profile</a></li>
+        <li><a href="subscribers.html">Subscribers</a></li>
+        <li><a href="users.html">Users</a></li>
+        <li><a href="players.html">Players</a></li>
+        <li><a href="coaches.html">Coaches</a></li>
+      </ul>
+    </div>
+    <div class="main-content">
+      <h1>Users</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Confirmed</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Example row -->
+          <tr>
+            <td>John Doe</td>
+            <td>john.doe@example.com</td>
+            <td>Yes</td>
+            <td>
+              <button class="edit-btn">Edit</button>
+              <button class="pause-btn">Pause</button>
+              <button class="reset-btn">Reset Password</button>
+            </td>
+          </tr>
+          <!-- Add more rows as needed -->
+        </tbody>
+      </table>
+      <h2>Add User</h2>
+      <form>
+        <div class="form-group">
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" required />
+        </div>
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required />
+        </div>
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" required />
+        </div>
+        <button type="submit">Add User</button>
+      </form>
+    </div>
+  </body>
+</html>

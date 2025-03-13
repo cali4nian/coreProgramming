@@ -1,5 +1,5 @@
-/* Front pages defaults */
-@import url("front-default.css");
+/* Frontend Global styles */
+@import url("front-global.css");
 
 .terms-of-use-container {
   max-width: 66.6rem;

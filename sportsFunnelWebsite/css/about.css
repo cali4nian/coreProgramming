@@ -1,0 +1,29 @@
+/* Frontend Global styles */
+@import url("front-global.css");
+
+/* About Section */
+.about-section {
+  padding: 4rem 2rem;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin: 2rem auto;
+  max-width: 800px;
+  border-radius: 8px;
+}
+
+.about-section .content {
+  text-align: center;
+}
+
+.about-section h1 {
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+.about-section p {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #666;
+  text-align: justify;
+}

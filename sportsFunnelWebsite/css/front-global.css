@@ -1,8 +1,8 @@
-/* Fonts */
+/* Frontend Global Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lato:wght@400;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap");
 
-/* Default Page Styles */
-@import url("default.css");
+/* Frontend Global Styles */
+@import url("front-reset.css");
 @import url("navigation.css");
 @import url("back-to-top-button.css");

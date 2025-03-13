@@ -1,5 +1,5 @@
-/* Front pages defaults */
-@import url("front-default.css");
+/* Frontend Global styles */
+@import url("front-global.css");
 
 /* Section Styles */
 @import url("index/hero.css");

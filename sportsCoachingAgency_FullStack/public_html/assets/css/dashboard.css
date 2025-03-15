@@ -1,0 +1,14 @@
+/* Defaults */
+@import url("backend/defaults.css");
+/* Sidebar */
+@import url("backend/sidebar.css");
+
+.main-content {
+  padding: 20px;
+  overflow-y: auto; /* Make main content scrollable */
+  height: 100vh;
+}
+
+.main-content p {
+  font-size: 5rem;
+}

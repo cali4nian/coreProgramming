@@ -146,8 +146,5 @@
 </section>
 <!-- END Facebook Section -->
 
-<?php if (isset($_GET['pending'])): ?>
-    <p>✅ A confirmation email has been sent. Please check your inbox.</p>
-<?php endif; ?>
-
+<?php include 'partials/home/confirmation_messages.php'; ?>
 <?php include 'footer.php'; ?>

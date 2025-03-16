@@ -9,7 +9,7 @@ use PDO;
 
 class UserController
 {
-    public function listUsers()
+    public function index()
     {
         requireAdmin();
 
@@ -20,7 +20,7 @@ class UserController
         $offset = ($page - 1) * $perPage;
 
         // Fetch users with pagination
-        $stmt = $db->prepare("SELECT name, email FROM users LIMIT :limit OFFSET :offset");
+        $stmt = $db->prepare("SELECT name, email, is_verified FROM users LIMIT :limit OFFSET :offset");
         $stmt->bindValue(':limit', $perPage, PDO::PARAM_INT);
         $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
         $stmt->execute();
@@ -31,10 +31,15 @@ class UserController
         $totalUsers = $stmt->fetchColumn();
         $totalPages = ceil($totalUsers / $perPage);
 
-        renderTemplate('back_pages/users.php', [
+        $data = [
             'users' => $users,
             'totalPages' => $totalPages,
-            'currentPage' => $page
-        ]);
+            'currentPage' => $page,
+            'header_title' => 'Users',
+            'page_css_url' => '/assets/css/users.css',
+            'page_js_url' => '/assets/js/backend/users/users.js'
+        ];
+
+        renderTemplate('back_pages/users.php', $data);
     }
 }

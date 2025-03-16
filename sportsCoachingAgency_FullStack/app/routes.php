@@ -34,7 +34,7 @@ $routes = [
     '/profile/change-password' => 'App\Controllers\ProfileController@changePassword',
     '/profile/delete' => 'App\Controllers\ProfileController@deleteProfile',
     // Admin User Management
-    '/users' => 'App\Controllers\UserController@listUsers',
+    '/users' => 'App\Controllers\UserController@index',
     // Admin Subscriber Management
     '/admin/subscribers' => 'App\Controllers\SubscriberController@listSubscribers',
     '/admin/delete-subscriber' => 'App\Controllers\SubscriberController@deleteSubscriber',

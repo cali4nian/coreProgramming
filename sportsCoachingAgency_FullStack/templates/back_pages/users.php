@@ -2,25 +2,66 @@
 
 <h1>All Users</h1>
 
-<ul>
-    <?php foreach ($users as $user): ?>
-        <li><?php echo htmlspecialchars($user['name']); ?> - <?php echo htmlspecialchars($user['email']); ?></li>
-    <?php endforeach; ?>
-</ul>
-
-<!-- Pagination Links -->
 <div>
-    <?php if ($currentPage > 1): ?>
-        <a href="?page=<?= $currentPage - 1 ?>">⬅ Previous</a>
-    <?php endif; ?>
+    
+    <h1>Users</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Confirmed</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($users as $user): ?>
+                <tr>
+                    <td><?php echo htmlspecialchars($user['name']); ?></td>
+                    <td><?php echo htmlspecialchars($user['email']); ?></td>
+                    <td><?php echo $user['is_verified'] ? 'Yes' : 'No'; ?></td>
+                    <td>
+                        <button class="edit-btn">Edit</button>
+                        <button class="pause-btn">Pause</button>
+                        <button class="reset-btn">Reset Password</button>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
 
-    <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-        <a href="?page=<?= $i ?>" <?= $i === $currentPage ? 'style="font-weight: bold;"' : '' ?>><?= $i ?></a>
-    <?php endfor; ?>
+    <!-- Pagination Links -->
+    <div>
+        <?php if ($currentPage > 1): ?>
+            <a href="?page=<?= $currentPage - 1 ?>">⬅ Previous</a>
+        <?php endif; ?>
 
-    <?php if ($currentPage < $totalPages): ?>
-        <a href="?page=<?= $currentPage + 1 ?>">Next ➡</a>
-    <?php endif; ?>
+        <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+            <a href="?page=<?= $i ?>" <?= $i === $currentPage ? 'style="font-weight: bold;"' : '' ?>><?= $i ?></a>
+        <?php endfor; ?>
+
+        <?php if ($currentPage < $totalPages): ?>
+            <a href="?page=<?= $currentPage + 1 ?>">Next ➡</a>
+        <?php endif; ?>
+    </div>
+
+    <h2>Add User</h2>
+    <form action="/users/add" method="POST">
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required />
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required />
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required />
+        </div>
+        <button type="submit">Add User</button>
+    </form>
+
 </div>
 
 <?php include 'footer.php'; ?>

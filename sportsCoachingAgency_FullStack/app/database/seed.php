@@ -25,6 +25,51 @@ function getRandomRole()
     return $roles[array_rand($roles)];
 }
 
+// ✅ Seed Static Admin User
+echo "Seeding static admin user...\n";
+$adminEmail = 'admin@example.com';
+$adminPassword = password_hash('password123', PASSWORD_DEFAULT);
+$adminRole = 'admin';
+
+$stmt = $db->prepare("INSERT INTO users (name, email, password, role) VALUES (:name, :email, :password, :role)");
+$stmt->execute([
+    'name' => 'Admin User',
+    'email' => $adminEmail,
+    'password' => $adminPassword,
+    'role' => $adminRole,
+]);
+echo "✅ Static Admin User Inserted Successfully!\n";
+
+// ✅ Seed Static Coach User
+echo "Seeding static coach user...\n";
+$coachEmail = 'coach@example.com';
+$coachPassword = password_hash('password123', PASSWORD_DEFAULT);
+$coachRole = 'coach';
+
+$stmt = $db->prepare("INSERT INTO users (name, email, password, role) VALUES (:name, :email, :password, :role)");
+$stmt->execute([
+    'name' => 'Coach User',
+    'email' => $coachEmail,
+    'password' => $coachPassword,
+    'role' => $coachRole,
+]);
+echo "✅ Static Coach User Inserted Successfully!\n";
+
+// ✅ Seed Static Client User
+echo "Seeding static client user...\n";
+$clientEmail = 'client@example.com';
+$clientPassword = password_hash('password123', PASSWORD_DEFAULT);
+$clientRole = 'client';
+
+$stmt = $db->prepare("INSERT INTO users (name, email, password, role) VALUES (:name, :email, :password, :role)");
+$stmt->execute([
+    'name' => 'Client User',
+    'email' => $clientEmail,
+    'password' => $clientPassword,
+    'role' => $clientRole,
+]);
+echo "✅ Static Client User Inserted Successfully!\n";
+
 // ✅ Seed 100 Users
 echo "Seeding users...\n";
 $usedEmails = []; // Store generated emails to prevent duplicates

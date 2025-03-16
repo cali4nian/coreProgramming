@@ -3,12 +3,72 @@ namespace App\Controllers;
 
 require_once __DIR__ . '/../functions/auth.php';
 require_once __DIR__ . '/../config/Database.php';
+require_once __DIR__ . '/../functions/email.php';
 
 use App\Config\Database;
 use PDO;
 
-class SubscriberController
+class SubscriberController extends BaseController
 {
+    public function subscribe()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email'])) {
+            $email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
+
+            if ($email) {
+                $db = Database::connect();
+                $stmt = $db->prepare("INSERT INTO subscribers (email, is_confirmed, subscribed_at) VALUES (:email, 0, NOW())");
+                $stmt->execute(['email' => $email]);
+                // Send confirmation email
+                $subject = "Confirm your subscription";
+                $message = "
+                    <html>
+                    <head>
+                        <title>Confirm your subscription</title>
+                    </head>
+                    <body>
+                        <p>Please click the link below to confirm your subscription:</p>
+                        <p><a href='http://localhost:8000/confirm-subscription?email=" . urlencode($email) . "'>Confirm Subscription</a></p>
+                    </body>
+                    </html>
+                ";
+                $headers = "MIME-Version: 1.0" . "\r\n";
+                $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+
+                sendEmail($email, $subject, $message);
+                $this->redirect('/?pending=true'); // Redirect to home with a pending message
+            
+            } else {
+                $this->redirect('/?error=invalid_email'); // Redirect to home with an error message
+            }
+        } else {
+            $this->redirect('/'); // Redirect to home if accessed directly
+        }
+    }
+
+    public function confirm()
+    {
+        if (isset($_GET['email'])) {
+            $email = filter_var($_GET['email'], FILTER_VALIDATE_EMAIL);
+
+            if ($email) {
+                $db = Database::connect();
+                $stmt = $db->prepare("UPDATE subscribers SET is_confirmed = 1 WHERE email = :email");
+                $stmt->execute(['email' => $email]);
+
+                if ($stmt->rowCount() > 0) {
+                    $this->redirect('/?confirmed=true'); // Redirect to home with a confirmation message
+                } else {
+                    $this->redirect('/?error=not_found'); // Redirect to home with an error message
+                }
+            } else {
+                $this->redirect('/?error=invalid_email'); // Redirect to home with an error message
+            }
+        } else {
+            $this->redirect('/'); // Redirect to home if accessed directly
+        }
+    }
+
     public function listSubscribers()
     {
         requireAdmin(); // Ensure only admins can access

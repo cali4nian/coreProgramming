@@ -18,7 +18,14 @@ class ProfileController
         $stmt->execute(['id' => $_SESSION['user_id']]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        renderTemplate('back_pages/profile.php', ['user' => $user]);
+        $data = [
+            'user' => $user,
+            'header_title' => 'Profile',
+            'page_css_url' => '/assets/css/profile.css',
+            'page_js_url' => '/assets/js/backend/profile/profile.js'
+        ];
+
+        renderTemplate('back_pages/profile.php', $data);
     }
 
     public function updateProfile()

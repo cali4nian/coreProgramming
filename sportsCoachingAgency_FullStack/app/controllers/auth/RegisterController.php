@@ -11,7 +11,16 @@ class RegisterController
 {
     public function index()
     {
-        renderTemplate('auth/register.php');
+        // Prepare data for the register page
+        $data = [
+            // CSS file URL
+            'page_css_url' => '/assets/css/register.css',
+            // JS file URL
+            'page_js_url' => '/assets/js/auth/register.js',
+            // Header title for the page
+            'header_title' => 'Create a New Account',
+        ];
+        renderTemplate('auth/register.php', $data);
     }
 
     public function register()

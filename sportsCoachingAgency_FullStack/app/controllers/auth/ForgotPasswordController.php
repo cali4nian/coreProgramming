@@ -15,8 +15,17 @@ class ForgotPasswordController
             header("Location: /dashboard");
             exit();
         }
+        // Prepare data for the forgot password page
+        $data = [
+            // CSS file URL
+            'page_css_url' => '/assets/css/forgot-password.css',
+            // JS file URL
+            'page_js_url' => '/assets/js/auth/forgot-password.js',
+            // Header title for the page
+            'header_title' => 'Forgot Your Password?',
+        ];
 
-        renderTemplate('auth/forgot-password.php');
+        renderTemplate('auth/forgot-password.php', $data);
     }
 
     public function requestReset()

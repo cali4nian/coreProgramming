@@ -20,8 +20,18 @@ class LoginController
         exit();
     }
 
+    // Prepare data for the login page
+    $data = [
+        // CSS file URL
+        'page_css_url' => '/assets/css/login.css',
+        // JS file URL
+        'page_js_url' => '/assets/js/auth/login.js',
+        // Header title for the page
+        'header_title' => 'Login to Your Account',
+    ];
+
     // Render the template and pass data
-    renderTemplate('auth/login.php');
+    renderTemplate('auth/login.php', $data);
   }
   
   public function login()

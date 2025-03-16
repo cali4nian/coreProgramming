@@ -4,7 +4,9 @@ require_once __DIR__ . '/../app/functions/template.php'; // Include helper funct
 
 $routes = [
     // Frontend
-    '/'                  => 'App\Controllers\HomeController@index',  // Handle home route
+    '/'                  => 'App\Controllers\HomeController@index',
+    '/privacy-policy'    => 'App\Controllers\LegalPagesController@privacy_policy',
+    '/terms-of-use'      => 'App\Controllers\LegalPagesController@terms_of_use',
     '/about'             => 'App\Controllers\AboutController@index',
     '/contact'           => 'App\Controllers\ContactController@index',
     '/subscribe' => 'App\Controllers\SubscriberController@subscribe',

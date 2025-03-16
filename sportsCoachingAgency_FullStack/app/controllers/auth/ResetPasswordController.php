@@ -26,8 +26,19 @@ class ResetPasswordController
             die("❌ Invalid or expired reset token.");
         }
 
+        // Prepare data for the reset password page
+        $data = [
+            'token' => $token,
+            // CSS file URL
+            'page_css_url' => '/assets/css/reset-password.css',
+            // JS file URL
+            'page_js_url' => '/assets/js/auth/reset-password.js',
+            // Header title for the page
+            'header_title' => 'Reset Your Password',
+        ];
+
         // Show the password reset form
-        renderTemplate('auth/reset-password.php', ['token' => $token]);
+        renderTemplate('auth/reset-password.php', $data);
     }
 
     public function reset()

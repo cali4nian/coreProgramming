@@ -10,6 +10,39 @@ use PDO;
 
 class SubscriberController extends BaseController
 {
+    public function index()
+    {
+        requireAdmin(); // Ensure only admins can access
+
+        $db = Database::connect();
+        
+        $perPage = 10; // Number of subscribers per page
+        $page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int)$_GET['page'] : 1;
+        $offset = ($page - 1) * $perPage;
+
+        // Fetch subscribers with pagination
+        $stmt = $db->prepare("SELECT id, email, is_confirmed, subscribed_at FROM subscribers LIMIT :limit OFFSET :offset");
+        $stmt->bindValue(':limit', $perPage, PDO::PARAM_INT);
+        $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+        $stmt->execute();
+        $subscribers = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        // Get total number of subscribers for pagination
+        $stmt = $db->query("SELECT COUNT(*) FROM subscribers");
+        $totalSubscribers = $stmt->fetchColumn();
+        $totalPages = ceil($totalSubscribers / $perPage);
+
+        $data = [
+            'subscribers' => $subscribers,
+            'totalPages' => $totalPages,
+            'currentPage' => $page,
+            'header_title' => 'Subscribers List',
+            'page_css_url' => '/assets/css/subscribers.css',
+            'page_js_url' => '/assets/js/backend/subscribers/subscribers.js'
+        ];
+
+        renderTemplate('back_pages/admin/subscribers.php', $data);
+    }
     public function subscribe()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email'])) {
@@ -67,35 +100,6 @@ class SubscriberController extends BaseController
         } else {
             $this->redirect('/'); // Redirect to home if accessed directly
         }
-    }
-
-    public function listSubscribers()
-    {
-        requireAdmin(); // Ensure only admins can access
-
-        $db = Database::connect();
-        
-        $perPage = 10; // Number of subscribers per page
-        $page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int)$_GET['page'] : 1;
-        $offset = ($page - 1) * $perPage;
-
-        // Fetch subscribers with pagination
-        $stmt = $db->prepare("SELECT id, email, is_confirmed, subscribed_at FROM subscribers LIMIT :limit OFFSET :offset");
-        $stmt->bindValue(':limit', $perPage, PDO::PARAM_INT);
-        $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
-        $stmt->execute();
-        $subscribers = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        // Get total number of subscribers for pagination
-        $stmt = $db->query("SELECT COUNT(*) FROM subscribers");
-        $totalSubscribers = $stmt->fetchColumn();
-        $totalPages = ceil($totalSubscribers / $perPage);
-
-        renderTemplate('back_pages/admin/subscribers.php', [
-            'subscribers' => $subscribers,
-            'totalPages' => $totalPages,
-            'currentPage' => $page
-        ]);
     }
 
     public function deleteSubscriber()

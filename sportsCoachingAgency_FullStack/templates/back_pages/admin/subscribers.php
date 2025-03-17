@@ -50,6 +50,4 @@
     <?php endif; ?>
 </div>
 
-<a href="/dashboard">⬅ Back to Dashboard</a>
-
 <?php include __DIR__ . '/../footer.php'; ?>

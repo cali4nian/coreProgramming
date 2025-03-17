@@ -9,8 +9,7 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 require_once __DIR__ . '/../../app/functions/loadEnv.php'; // ✅ Ensure this is loaded before calling loadEnv()
 loadEnv(__DIR__ . '/../../.env'); // ✅ Now, load the .env variables
 
-
-function sendEmail($to, $subject, $body)
+function sendEmail($to, $subject, $body, $headers = [])
 {
     $mail = new PHPMailer(true);
     
@@ -25,6 +24,13 @@ function sendEmail($to, $subject, $body)
 
         $mail->setFrom(getenv('MAIL_FROM_ADDRESS'), getenv('MAIL_FROM_NAME'));
         $mail->addAddress($to);
+
+        // Add optional headers
+        if (!empty($headers)) {
+            foreach ($headers as $header => $value) {
+                $mail->addCustomHeader($header, $value);
+            }
+        }
 
         $mail->isHTML(true);
         $mail->Subject = $subject;

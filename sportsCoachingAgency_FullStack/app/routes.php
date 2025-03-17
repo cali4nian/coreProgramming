@@ -33,10 +33,16 @@ $routes = [
     '/profile/update' => 'App\Controllers\ProfileController@updateProfile',
     '/profile/change-password' => 'App\Controllers\ProfileController@changePassword',
     '/profile/delete' => 'App\Controllers\ProfileController@deleteProfile',
+    '/add/user' => 'App\Controllers\UserController@add',
     // Admin User Management
     '/users' => 'App\Controllers\UserController@index',
+    '/users/edit' => 'App\Controllers\UserController@edit',
+    '/users/pause' => 'App\Controllers\UserController@pause',
+    '/users/unpause' => 'App\Controllers\UserController@unpause',
+    '/users/update' => 'App\Controllers\UserController@update',
+    '/users/reset_password' => 'App\Controllers\UserController@reset_password',
     // Admin Subscriber Management
-    '/admin/subscribers' => 'App\Controllers\SubscriberController@listSubscribers',
+    '/admin/subscribers' => 'App\Controllers\SubscriberController@index',
     '/admin/delete-subscriber' => 'App\Controllers\SubscriberController@deleteSubscriber',
     // Download routes for Subscribers
     '/admin/download-all-subscribers' => 'App\Controllers\SubscriberController@downloadAllSubscribers',

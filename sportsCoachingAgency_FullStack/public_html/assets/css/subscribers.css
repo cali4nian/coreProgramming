@@ -1,7 +1,9 @@
+/* General Table Styling */
 table {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 20px;
+  text-align: left;
 }
 
 table,
@@ -20,6 +22,7 @@ th {
   background-color: #f2f2f2;
 }
 
+/* Form Styling */
 form {
   max-width: 600px;
   margin: 0 auto;
@@ -32,14 +35,18 @@ form {
 .form-group label {
   display: block;
   margin-bottom: 5px;
+  font-weight: bold;
 }
 
 .form-group input {
   width: 100%;
   padding: 8px;
   box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
+/* Button Styling */
 button {
   display: block;
   width: 100%;
@@ -54,4 +61,161 @@ button {
 
 button:hover {
   background-color: #575757;
+}
+
+/* Specific Button Styles */
+.edit-btn,
+.delete-btn {
+  padding: 5px 10px;
+  margin-right: 5px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.edit-btn {
+  background-color: #4caf50;
+  color: white;
+}
+
+.edit-btn:hover {
+  background-color: #45a049;
+}
+
+.delete-btn {
+  background-color: #dc3545;
+  color: white;
+}
+
+.delete-btn:hover {
+  background-color: #c82333;
+}
+
+/* Add Subscriber Form Styling */
+.add-subscriber-form-container {
+  margin: 3rem 0;
+}
+
+.add-subscriber-form-container h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+/* Button Styling */
+a.btn {
+  display: inline-block;
+  padding: 10px 15px;
+  margin: 10px 5px;
+  background-color: #007bff;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 14px;
+  text-align: center;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+a.btn:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+a.btn:active {
+  transform: scale(0.95);
+}
+
+/* Delete Button Styling */
+a.delete-btn {
+  display: inline-block;
+  padding: 5px 10px;
+  background-color: #dc3545;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 14px;
+  text-align: center;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+a.delete-btn:hover {
+  background-color: #c82333;
+  transform: scale(1.05);
+}
+
+a.delete-btn:active {
+  transform: scale(0.95);
+}
+
+/* Pagination Links */
+div.pagination a {
+  display: inline-block;
+  padding: 8px 12px;
+  margin: 5px;
+  background-color: #f2f2f2;
+  color: #333;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+div.pagination a:hover {
+  background-color: #ddd;
+}
+
+div.pagination a[style="font-weight: bold;"] {
+  background-color: #007bff;
+  color: #fff;
+}
+
+/* Page Header Styling */
+h1 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #333;
+}
+
+/* Success/Error Messages */
+p {
+  padding: 10px;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+p[style="color: red;"] {
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  color: #721c24;
+}
+
+/* Pagination Links Styling */
+.pagination-links {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.pagination-links a {
+  display: inline-block;
+  padding: 8px 12px;
+  margin: 5px;
+  background-color: #f2f2f2;
+  color: #333;
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.pagination-links a:hover {
+  background-color: #ddd;
+  transform: scale(1.05);
+}
+
+.pagination-links a[style="font-weight: bold;"] {
+  background-color: #007bff;
+  color: #fff;
+  font-weight: bold;
+  pointer-events: none; /* Disable clicking on the current page */
 }

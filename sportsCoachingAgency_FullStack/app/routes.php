@@ -35,12 +35,12 @@ $routes = [
     '/profile/delete' => 'App\Controllers\ProfileController@deleteProfile',
     '/add/user' => 'App\Controllers\UserController@add',
     // Admin User Management
-    '/users' => 'App\Controllers\UserController@index',
-    '/users/edit' => 'App\Controllers\UserController@edit',
-    '/users/pause' => 'App\Controllers\UserController@pause',
-    '/users/unpause' => 'App\Controllers\UserController@unpause',
-    '/users/update' => 'App\Controllers\UserController@update',
-    '/users/reset_password' => 'App\Controllers\UserController@reset_password',
+    '/admin/users' => 'App\Controllers\UserController@index',
+    '/admin/users/edit' => 'App\Controllers\UserController@edit',
+    '/admin/users/pause' => 'App\Controllers\UserController@pause',
+    '/admin/users/unpause' => 'App\Controllers\UserController@unpause',
+    '/admin/users/update' => 'App\Controllers\UserController@update',
+    '/admin/users/reset_password' => 'App\Controllers\UserController@reset_password',
     // Admin Subscriber Management
     '/admin/subscribers' => 'App\Controllers\SubscriberController@index',
     '/admin/delete-subscriber' => 'App\Controllers\SubscriberController@deleteSubscriber',
@@ -48,6 +48,10 @@ $routes = [
     '/admin/download-all-subscribers' => 'App\Controllers\SubscriberController@downloadAllSubscribers',
     '/admin/download-confirmed-subscribers' => 'App\Controllers\SubscriberController@downloadConfirmedSubscribers',
     '/admin/download-unconfirmed-subscribers' => 'App\Controllers\SubscriberController@downloadUnconfirmedSubscribers',
+    // Settings Management
+    '/admin/settings' => 'App\Controllers\SettingsController@index',
+    '/admin/update-settings' => 'App\Controllers\SettingsController@update',
+
 ];
 
 // Get the requested URL path

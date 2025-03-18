@@ -121,3 +121,36 @@ for ($i = 0; $i < 100; $i++) {
     ]);
 }
 echo "✅ 100 Unique Subscribers Inserted Successfully!\n";
+
+// ✅ Seed Default Settings
+echo "Seeding default settings...\n";
+
+$defaultSettings = [
+    ['key_name' => 'site_name', 'value' => 'Sports Coaching Agency'],
+    ['key_name' => 'customer_service_email', 'value' => 'support@sportscoachingagency.com'],
+    ['key_name' => 'facebook_url', 'value' => 'https://facebook.com/sportscoachingagency'],
+    ['key_name' => 'twitter_url', 'value' => 'https://twitter.com/sportscoachingagency'],
+    ['key_name' => 'instagram_url', 'value' => 'https://instagram.com/sportscoachingagency'],
+    ['key_name' => 'linkedin_url', 'value' => 'https://linkedin.com/company/sportscoachingagency'],
+    ['key_name' => 'tiktok_url', 'value' => 'https://tiktok.com/@sportscoachingagency'],
+    ['key_name' => 'youtube_url', 'value' => 'https://youtube.com/sportscoachingagency'],
+    ['key_name' => 'snapchat_url', 'value' => 'https://snapchat.com/add/sportscoachingagency'],
+    ['key_name' => 'call_now_phone', 'value' => '+1234567890'],
+    ['key_name' => 'background_image', 'value' => '/uploads/default_background.jpg'],
+    ['key_name' => 'hero_image', 'value' => '/uploads/default_hero.jpg'],
+    ['key_name' => 'where_to_start_video', 'value' => 'https://youtube.com/watch?v=example1'],
+    ['key_name' => 'main_youtube_video', 'value' => 'https://youtube.com/watch?v=example2'],
+    ['key_name' => 'main_instagram_photo', 'value' => '/uploads/default_instagram.jpg'],
+    ['key_name' => 'main_facebook_photo', 'value' => '/uploads/default_facebook.jpg'],
+];
+
+foreach ($defaultSettings as $setting) {
+    $stmt = $db->prepare("INSERT INTO settings (key_name, value) VALUES (:key_name, :value)
+                          ON DUPLICATE KEY UPDATE value = :value");
+    $stmt->execute([
+        'key_name' => $setting['key_name'],
+        'value' => $setting['value'],
+    ]);
+}
+
+echo "✅ Default Settings Inserted Successfully!\n";

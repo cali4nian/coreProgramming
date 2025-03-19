@@ -5,8 +5,8 @@ require_once __DIR__ . '/../app/functions/template.php'; // Include helper funct
 $routes = [
     // Frontend
     '/'                  => 'App\Controllers\HomeController@index',
-    '/privacy-policy'    => 'App\Controllers\LegalPagesController@privacy_policy',
-    '/terms-of-use'      => 'App\Controllers\LegalPagesController@terms_of_use',
+    '/privacy-policy'    => 'App\Controllers\LegalPageController@privacy_policy',
+    '/terms-of-use'      => 'App\Controllers\LegalPageController@terms_of_use',
     '/about'             => 'App\Controllers\AboutController@index',
     '/contact'           => 'App\Controllers\ContactController@index',
     '/subscribe' => 'App\Controllers\SubscriberController@subscribe',
@@ -49,9 +49,14 @@ $routes = [
     '/admin/download-confirmed-subscribers' => 'App\Controllers\SubscriberController@downloadConfirmedSubscribers',
     '/admin/download-unconfirmed-subscribers' => 'App\Controllers\SubscriberController@downloadUnconfirmedSubscribers',
     // Settings Management
-    '/admin/settings' => 'App\Controllers\SettingsController@index',
-    '/admin/update-settings' => 'App\Controllers\SettingsController@update',
-
+    '/admin/settings' => 'App\Controllers\SettingController@index',
+    '/admin/update-site-settings' => 'App\Controllers\SettingController@updateSiteSettings',
+    '/admin/update-social-media-settings' => 'App\Controllers\SettingController@updateSocialMediaSettings',
+    '/admin/update-home-page-settings' => 'App\Controllers\SettingController@updateHomePageSettings',
+    // Athletes Management
+    '/athletes' => 'App\Controllers\AthleteController@index',
+    // Coaches Management
+    '/coaches' => 'App\Controllers\CoachController@index',
 ];
 
 // Get the requested URL path

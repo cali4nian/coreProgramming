@@ -1,7 +1,7 @@
 <?php
 namespace App\Controllers;
 
-class LegalPagesController extends BaseController
+class LegalPageController extends BaseController
 {
   public function privacy_policy()
   {    

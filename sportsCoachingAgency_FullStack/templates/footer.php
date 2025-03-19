@@ -1,7 +1,7 @@
 <!-- Footer Section -->
 <footer class="footer">
       <div class="footer-content">
-        <span class="logo">Sports Funnel Website</span>
+        <span class="logo"><?= htmlspecialchars($settings['site_name'] ?? 'Welcome to Our Website') ?></span>
         <ul class="social-links">
           <li>
             <a href="https://www.youtube.com" target="_blank">
@@ -21,7 +21,7 @@
         </ul>
       </div>
       <nav class="footer-links">
-        <span>&copy; 2025 Sports Funnel Website</span> | <a href="/about">About</a> | <a href="/contact">Contact</a> | <a href="/terms-of-use">Terms of Use</a> |
+        <span>&copy; 2025 <?= htmlspecialchars($settings['site_name'] ?? 'Welcome to Our Website') ?></span> | <a href="/about">About</a> | <a href="/contact">Contact</a> | <a href="/terms-of-use">Terms of Use</a> |
         <a href="/privacy-policy">Privacy Policy</a>
       </nav>
     </footer>

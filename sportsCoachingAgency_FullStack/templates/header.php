@@ -8,12 +8,12 @@
     <link rel="stylesheet" href="<?php echo $page_css_url; ?>" />
     <script type="module" src="/assets/js/frontend/global.js"></script>
     <script type="module" src="<?php echo $page_js_url; ?>"></script>
-    <title><?php echo $header_title; ?> | Sports Coaching Agency</title>
+    <title><?php echo $header_title; ?> | <?= htmlspecialchars($settings['site_name'] ?? 'Welcome to Our Website') ?></title>
   </head>
   <body>
     <!-- Navigation -->
     <nav class="mainNavigation">
-      <span class="logo">Sports Funnel Website</span>
+      <span class="logo"><?= htmlspecialchars($settings['site_name'] ?? 'Welcome to Our Website') ?></span>
       <div class="hamburger">
         <div></div>
         <div></div>

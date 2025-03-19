@@ -3,7 +3,7 @@
 <!-- Hero Section -->
 <section class="hero-section" style="background-image: url('<?= htmlspecialchars($settings['hero_image'] ?? '/assets/img/default-hero.jpg') ?>');">
     <aside class="hero-content">
-        <h1 class="hero-title"><?= htmlspecialchars($settings['site_name'] ?? 'Welcome to Williams Coaching') ?></h1>
+        <h1 class="hero-title"><?= htmlspecialchars($settings['site_name'] ?? 'Welcome to Our Website') ?></h1>
         <p class="hero-subtitle">Discover amazing content and explore the possibilities.</p>
         <a href="tel:<?= htmlspecialchars($settings['call_now_phone'] ?? '559-777-9705') ?>" class="hero-button">Call Now</a>
     </aside>
@@ -26,7 +26,7 @@
             <li>Empowering</li>
         </ul>
         <aside class="image-container">
-            <img src="<?= htmlspecialchars($settings['hero_image'] ?? '/assets/img/default-hero.jpg') ?>" alt="Coach Image" class="coach-image" />
+            <img src="<?= htmlspecialchars($settings['head_coach_image'] ?? '/assets/img/default-head-coach.jpg') ?>" alt="Coach Image" class="coach-image" />
         </aside>
     </aside>
 </section>
@@ -75,7 +75,7 @@
             <p>Watch this intro video to see where you can start your personal sports journey and take the first step towards achieving your goals!</p>
         </div>
         <div class="video-container">
-            <iframe width="90%" height="100%" src="<?= htmlspecialchars($settings['where_to_start_video'] ?? 'https://www.youtube.com/embed/default') ?>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe width="90%" height="100%" src="<?= htmlspecialchars($settings['where_to_start_video'] ?? 'https://www.youtube.com/embed/oyjYgmsM00Q?si=hAyWSswVvDuyRZrl') ?>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
     </aside>
 </section>
@@ -85,7 +85,7 @@
 <section class="youtube-section">
     <div class="content">
         <div class="video-container">
-            <iframe width="90%" src="<?= htmlspecialchars($settings['main_youtube_video'] ?? 'https://www.youtube.com/embed/default') ?>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe width="90%" src="<?= htmlspecialchars($settings['main_youtube_video'] ?? 'https://www.youtube.com/embed/oyjYgmsM00Q?si=hAyWSswVvDuyRZrl') ?>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
         <div class="text">
             <h2>Check Out Our YouTube Channel</h2>

@@ -21,3 +21,9 @@ body {
   min-height: 100vh;
   width: 100%;
 }
+
+@media (max-width: 768px) {
+  .main-grid-container {
+    grid-template-columns: 1fr; /* Make the grid a single column */
+  }
+}

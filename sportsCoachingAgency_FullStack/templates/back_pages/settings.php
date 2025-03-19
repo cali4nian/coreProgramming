@@ -1,12 +1,21 @@
 <?php include 'header.php'; ?>
 
+<?php if (isset($_GET['success'])): ?>
+    <div class="banner-message success-banner">
+        <p>
+            <?= htmlspecialchars(ucwords(str_replace('-', ' ', $_GET['success']))) ?> successfully updated!
+        </p>
+        <button class="close-banner" onclick="this.parentElement.style.display='none';">Close</button>
+    </div>
+<?php endif; ?>
+
 <h1>Settings</h1>
 
 <p>Welcome to the settings page. Configure your application settings here.</p>
 
 <!-- Site Name and Customer Service Email Address -->
 <section class="settings-form-container">
-  <form action="/admin/update-settings" method="POST" enctype="multipart/form-data">
+  <form action="/admin/update-site-settings" method="POST" enctype="multipart/form-data">
       <div class="form-group">
           <label for="site_name">Site Name:</label>
           <input type="text" id="site_name" name="site_name" value="<?= htmlspecialchars($settings['site_name'] ?? '') ?>" placeholder="Enter site name" required>
@@ -24,7 +33,7 @@
 
 <!-- Social Media URLs -->
 <section class="settings-form-container">
-  <form action="/admin/update-social-media" method="POST">
+  <form action="/admin/update-social-media-settings" method="POST">
       <h2>Social Media URLs</h2>
       <div class="form-group">
           <label for="facebook_url">Facebook URL:</label>
@@ -89,6 +98,14 @@
           <input type="file" id="hero_image" name="hero_image" accept="image/*">
           <?php if (!empty($settings['hero_image'])): ?>
               <p>Current: <a href="<?= htmlspecialchars($settings['hero_image']) ?>" target="_blank">View Image</a></p>
+          <?php endif; ?>
+      </div>
+
+      <div class="form-group">
+          <label for="head_coach_image">Head Coach Image:</label>
+          <input type="file" id="head_coach_image" name="head_coach_image" accept="image/*">
+          <?php if (!empty($settings['head_coach_image'])): ?>
+              <p>Current: <a href="<?= htmlspecialchars($settings['head_coach_image']) ?>" target="_blank">View Image</a></p>
           <?php endif; ?>
       </div>
 

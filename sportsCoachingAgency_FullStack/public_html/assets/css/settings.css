@@ -128,3 +128,49 @@ button.btn:active {
     padding: 10px;
   }
 }
+
+/* Banner Message Styling */
+.banner-message {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  background-color: #28a745; /* Green for success */
+  color: #fff;
+  padding: 15px 20px;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-size: 16px;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column; /* Flex column layout */
+  align-items: center;
+  justify-content: center;
+  min-width: 300px;
+  max-width: 600px;
+  text-align: center;
+  gap: 10px; /* Space between text and button */
+}
+
+.banner-message p {
+  margin: 0;
+  word-wrap: break-word; /* Ensure long text wraps */
+}
+
+.banner-message .close-banner {
+  background-color: #fff;
+  color: #28a745;
+  border: 1px solid #28a745;
+  padding: 5px 10px;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.banner-message .close-banner:hover {
+  background-color: #28a745;
+  color: #fff;
+}

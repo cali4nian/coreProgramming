@@ -4,3 +4,9 @@
   min-height: 100vh;
   margin-bottom: 25rem;
 }
+
+@media (max-width: 768px) {
+  .main-content {
+    width: 100%; /* Ensure the main content takes up the full width */
+  }
+}

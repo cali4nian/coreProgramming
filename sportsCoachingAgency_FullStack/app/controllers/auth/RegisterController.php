@@ -51,6 +51,16 @@ class RegisterController
                 'token' => $verificationToken
             ]);
 
+            // Get the ID of the newly created user
+            $userId = $db->lastInsertId();
+
+            // Assign the default 'athlete' role to the user
+            $roleStmt = $db->prepare("INSERT INTO user_roles (user_id, role_id) VALUES (:user_id, :role_id)");
+            $roleStmt->execute([
+                'user_id' => $userId,
+                'role_id' => 3 // Assuming 'athlete' has an ID of 3 in the roles table
+            ]);
+
             // Send verification email
             $verificationLink = "http://localhost:8000/verify-email?token=$verificationToken";
             $subject = "Verify Your Email";

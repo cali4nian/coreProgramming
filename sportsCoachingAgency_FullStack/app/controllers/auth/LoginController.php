@@ -9,32 +9,32 @@ use Exception;
 
 class LoginController
 {
-  public function index() {
-    if (session_status() === PHP_SESSION_NONE) {
-        session_start(); // Start session only if not already started
+    public function index() {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start(); // Start session only if not already started
+        }
+
+        // Redirect to dashboard if already logged in
+        if (isset($_SESSION['user_id'])) {
+            header("Location: /dashboard"); // Redirect to dashboard if logged in
+            exit();
+        }
+
+        // Prepare data for the login page
+        $data = [
+            // CSS file URL
+            'page_css_url' => '/assets/css/login.css',
+            // JS file URL
+            'page_js_url' => '/assets/js/auth/login.js',
+            // Header title for the page
+            'header_title' => 'Login to Your Account',
+        ];
+
+        // Render the template and pass data
+        renderTemplate('auth/login.php', $data);
     }
-
-    // Redirect to dashboard if already logged in
-    if (isset($_SESSION['user_id'])) {
-        header("Location: /dashboard"); // Redirect to dashboard if logged in
-        exit();
-    }
-
-    // Prepare data for the login page
-    $data = [
-        // CSS file URL
-        'page_css_url' => '/assets/css/login.css',
-        // JS file URL
-        'page_js_url' => '/assets/js/auth/login.js',
-        // Header title for the page
-        'header_title' => 'Login to Your Account',
-    ];
-
-    // Render the template and pass data
-    renderTemplate('auth/login.php', $data);
-  }
   
-  public function login()
+    public function login()
     {
         // Redirect to dashboard if already logged in
         if (isset($_SESSION['user_id'])) {
@@ -59,7 +59,22 @@ class LoginController
             }
 
             $db = Database::connect();
-            $stmt = $db->prepare("SELECT id, name, email, password, role, is_verified FROM users WHERE email = :email");
+
+            // Fetch user and their first role
+            $stmt = $db->prepare("
+                SELECT 
+                    users.id, 
+                    users.name, 
+                    users.email, 
+                    users.password, 
+                    users.is_verified, 
+                    roles.name AS role 
+                FROM users
+                LEFT JOIN user_roles ON users.id = user_roles.user_id
+                LEFT JOIN roles ON user_roles.role_id = roles.id
+                WHERE users.email = :email
+                LIMIT 1
+            ");
             $stmt->execute(['email' => $email]);
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -74,17 +89,16 @@ class LoginController
                 // Store user data in session
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['user_name'] = $user['name'];
-                $_SESSION['user_role'] = $user['role']; // Store role for access control
+                $_SESSION['user_role'] = $user['role']; // Store the first role for access control
                 header("Location: /dashboard");
                 exit();
             } else {
                 die("Invalid email or password.");
             }
-            
         }
     }
 
-  public function logout()
+    public function logout()
     {
         session_start();
         session_destroy(); // Destroy session

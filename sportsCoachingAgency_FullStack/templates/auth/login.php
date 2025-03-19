@@ -10,7 +10,7 @@
     <input type="hidden" name="csrf_token" value="<?php echo generateCsrfToken(); ?>">
         <p class="input-group">
         <label for="email">Email Address</label>
-        <input type="email" id="email" name="email" placeholder="Enter your email" value="admin@example.com" required />
+        <input type="email" id="email" name="email" placeholder="Enter your email" value="athlete@example.com" required />
         </p>
         <p class="input-group">
         <label for="password">Password</label>

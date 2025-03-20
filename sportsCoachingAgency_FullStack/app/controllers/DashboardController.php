@@ -27,6 +27,8 @@ class DashboardController
             'page_css_url' => '/assets/css/dashboard.css',
             'page_js_url' => '/assets/js/dashboard/dashboard.js',
             'header_title' => 'Dashboard',
+            'pageName' => 'Dashboard Overview', // Added pageName
+            'pageDescription' => 'Welcome to your dashboard, ' . htmlspecialchars($_SESSION['user_name']) . '. Here you can view your activities and manage your account.', // Added pageDescription
         ];
 
         switch ($currentRole) {

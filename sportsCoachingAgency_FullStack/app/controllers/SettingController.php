@@ -24,7 +24,9 @@ class SettingController extends BaseController
             'header_title' => 'Settings',
             'page_css_url' => '/assets/css/settings.css',
             'page_js_url' => '/assets/js/backend/settings/settings.js',
-            'settings' => $settings
+            'settings' => $settings,
+            'pageName' => 'Settings', // Added pageName
+            'pageDescription' => 'Manage your application settings, including site details, social media links, and homepage configurations.', // Added pageDescription
         ];
 
         renderTemplate('back_pages/settings.php', $data);

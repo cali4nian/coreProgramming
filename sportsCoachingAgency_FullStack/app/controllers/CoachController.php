@@ -56,6 +56,8 @@ class CoachController extends BaseController
             'page_css_url' => '/assets/css/coaches.css',
             'page_js_url' => '/assets/js/coaches.js',
             'coaches' => array_values($groupedCoaches), // Pass grouped coaches data to the template
+            'pageName' => 'Coach Management', // Added pageName
+            'pageDescription' => 'View and manage all coaches, including their contact details and roles.', // Added pageDescription
         ];
 
         renderTemplate('back_pages/coaches.php', $data);

@@ -38,7 +38,9 @@ class UserController extends BaseController
             'currentPage' => $page,
             'header_title' => 'Users',
             'page_css_url' => '/assets/css/users.css',
-            'page_js_url' => '/assets/js/backend/users/users.js'
+            'page_js_url' => '/assets/js/backend/users/users.js',
+            'pageName' => 'User Management', // Added pageName
+            'pageDescription' => 'Manage all users, including their roles, statuses, and account details.', // Added pageDescription
         ];
 
         renderTemplate('back_pages/users.php', $data);
@@ -61,7 +63,9 @@ class UserController extends BaseController
                     'user' => $user,
                     'header_title' => 'Edit User',
                     'page_css_url' => '/assets/css/edit-user.css',
-                    'page_js_url' => '/assets/js/backend/edit_user/edit_user.js'
+                    'page_js_url' => '/assets/js/backend/edit_user/edit_user.js',
+                    'pageName' => 'Edit User', // Added pageName
+                    'pageDescription' => 'Update the details of the selected user, including their name, email, and role.', // Added pageDescription
                 ];
                 renderTemplate('back_pages/edit_user.php', $data);
             } else {
@@ -166,16 +170,45 @@ class UserController extends BaseController
     {
         requireAdmin();
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'], $_POST['name'], $_POST['email'], $_POST['role'])) {
             $id = $_POST['id'];
             $name = $_POST['name'];
             $email = $_POST['email'];
+            $role = $_POST['role'];
 
             $db = Database::connect();
-            $stmt = $db->prepare("UPDATE users SET name = :name, email = :email WHERE id = :id");
-            $stmt->execute(['name' => $name, 'email' => $email, 'id' => $id]);
 
-            $this->redirect('/admin/users?success=update');
+            try {
+                // Start a transaction
+                $db->beginTransaction();
+
+                // Update the user's details in the `users` table
+                $stmt = $db->prepare("UPDATE users SET name = :name, email = :email, current_role = :role WHERE id = :id");
+                $stmt->execute([
+                    'name' => $name,
+                    'email' => $email,
+                    'role' => $role,
+                    'id' => $id,
+                ]);
+
+                // Update the user's role in the `user_roles` table
+                $stmt = $db->prepare("UPDATE user_roles SET role_id = (SELECT id FROM roles WHERE name = :role) WHERE user_id = :id");
+                $stmt->execute([
+                    'role' => $role,
+                    'id' => $id,
+                ]);
+
+                // Commit the transaction
+                $db->commit();
+
+                $this->redirect('/admin/users?success=update');
+            } catch (\Exception $e) {
+                // Rollback the transaction in case of an error
+                $db->rollBack();
+                $this->redirect('/admin/users?error=update_failed');
+            }
+        } else {
+            $this->redirect('/admin/users?error=invalid_request');
         }
     }
 

@@ -38,7 +38,9 @@ class SubscriberController extends BaseController
             'currentPage' => $page,
             'header_title' => 'Subscribers List',
             'page_css_url' => '/assets/css/subscribers.css',
-            'page_js_url' => '/assets/js/backend/subscribers/subscribers.js'
+            'page_js_url' => '/assets/js/backend/subscribers/subscribers.js',
+            'pageName' => 'Subscriber Management', // Added pageName
+            'pageDescription' => 'View and manage all subscribers, including their subscription status and details.', // Added pageDescription
         ];
 
         renderTemplate('back_pages/admin/subscribers.php', $data);

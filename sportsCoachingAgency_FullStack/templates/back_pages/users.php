@@ -1,9 +1,6 @@
 <?php include 'header.php'; ?>
 
-<h1>All Users</h1>
-
 <div>
-    <h1>Users</h1>
     <table>
         <thead>
             <tr>

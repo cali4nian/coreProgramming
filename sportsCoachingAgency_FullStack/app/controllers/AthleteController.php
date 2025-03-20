@@ -56,6 +56,8 @@ class AthleteController extends BaseController
             'page_css_url' => '/assets/css/athletes.css',
             'page_js_url' => '/assets/js/backend/athletes/athletes.js',
             'athletes' => array_values($groupedAthletes), // Pass grouped athletes data to the template
+            'pageName' => 'Athlete Management', // Added pageName
+            'pageDescription' => 'View and manage all athletes, including their contact details and roles.', // Added pageDescription
         ];
 
         renderTemplate('back_pages/athletes.php', $data);

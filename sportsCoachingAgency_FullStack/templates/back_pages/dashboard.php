@@ -1,8 +1,6 @@
 <?php include 'header.php'; ?>
-<section class="container">
 
-    <h1 class="page-title">Dashboard</h1>
-    <p class="page-description">Welcome to the Dashboard.</p>
+<section class="container">
 
     <!-- Admin-Specific Section -->
     <?php if (isset($currentRole) && $currentRole === 'admin') require_once 'partials/dashboard/admin.php'; ?>

@@ -2,7 +2,6 @@
 
 <!-- Update Profile -->
 <section class="container">
-    <h1><?php echo $_SESSION['user_name']; ?>'s Profile Page</h1>
 
     <h1>Update Profile</h1>
     <p>Here you can update your name or email.</p>

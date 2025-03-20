@@ -9,10 +9,6 @@
     </div>
 <?php endif; ?>
 
-<h1>Settings</h1>
-
-<p>Welcome to the settings page. Configure your application settings here.</p>
-
 <!-- Site Name and Customer Service Email Address -->
 <section class="settings-form-container">
   <form action="/admin/update-site-settings" method="POST" enctype="multipart/form-data">

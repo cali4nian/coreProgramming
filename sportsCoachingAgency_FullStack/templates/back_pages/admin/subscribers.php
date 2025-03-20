@@ -1,7 +1,5 @@
 <?php include __DIR__ . '/../header.php'; ?>
 
-<h1>Subscribers List</h1>
-
 <a href="/admin/download-all-subscribers" class="btn">⬇ Download All Subscribers</a>
 <a href="/admin/download-confirmed-subscribers" class="btn">⬇ Download Confirmed Subscribers</a>
 <a href="/admin/download-unconfirmed-subscribers" class="btn">⬇ Download Unconfirmed Subscribers</a>

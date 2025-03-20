@@ -22,7 +22,9 @@ class ProfileController
             'user' => $user,
             'header_title' => 'Profile',
             'page_css_url' => '/assets/css/profile.css',
-            'page_js_url' => '/assets/js/backend/profile/profile.js'
+            'page_js_url' => '/assets/js/backend/profile/profile.js',
+            'pageName' => 'Profile Information', // Added pageName
+            'pageDescription' => 'Welcome ' . htmlspecialchars($_SESSION['user_name']) . '. Here you can update your personal information.', // Added pageDescription
         ];
 
         renderTemplate('back_pages/profile.php', $data);

@@ -1,9 +1,6 @@
 <?php include 'header.php'; ?>
 
 <div class="container">
-    <h1 class="page-title">Athletes</h1>
-    <p class="page-description">Below is a list of all athletes in the system, including their contact information.</p>
-
     <table class="table table-striped table-bordered athletes-table">
         <thead class="table-header">
             <tr>

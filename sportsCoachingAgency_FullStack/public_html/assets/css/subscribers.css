@@ -169,17 +169,8 @@ div.pagination a[style="font-weight: bold;"] {
   color: #fff;
 }
 
-/* Page Header Styling */
-h1 {
-  font-size: 2rem;
-  margin-bottom: 20px;
-  text-align: center;
-  color: #333;
-}
-
 /* Success/Error Messages */
 p {
-  padding: 10px;
   border-radius: 4px;
   font-size: 14px;
 }

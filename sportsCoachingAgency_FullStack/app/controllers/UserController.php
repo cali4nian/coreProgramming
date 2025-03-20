@@ -65,7 +65,7 @@ class UserController extends BaseController
                 ];
                 renderTemplate('back_pages/edit_user.php', $data);
             } else {
-                $this->redirect('/users?error=user_not_found');
+                $this->redirect('/admin/users?error=user_not_found');
             }
         }
     }
@@ -77,11 +77,25 @@ class UserController extends BaseController
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
             $id = $_POST['id'];
 
+            // Debug: Check if the ID is being sent
+            if (empty($id)) {
+                $this->redirect('/admin/users?error=missing_id');
+                return;
+            }
+
             $db = Database::connect();
             $stmt = $db->prepare("UPDATE users SET is_active = 0 WHERE id = :id");
-            $stmt->execute(['id' => $id]);
+            $result = $stmt->execute(['id' => $id]);
 
-            $this->redirect('/users?success=pause');
+            // Debug: Check if the query executed successfully
+            if (!$result) {
+                $this->redirect('/admin/users?error=query_failed');
+                return;
+            }
+
+            $this->redirect('/admin/users?success=pause');
+        } else {
+            $this->redirect('/admin/users?error=invalid_request');
         }
     }
 
@@ -92,11 +106,25 @@ class UserController extends BaseController
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
             $id = $_POST['id'];
 
+            // Debug: Check if the ID is being sent
+            if (empty($id)) {
+                $this->redirect('/admin/users?error=missing_id');
+                return;
+            }
+
             $db = Database::connect();
             $stmt = $db->prepare("UPDATE users SET is_active = 1 WHERE id = :id");
-            $stmt->execute(['id' => $id]);
+            $result = $stmt->execute(['id' => $id]);
 
-            $this->redirect('/users?success=unpaused');
+            // Debug: Check if the query executed successfully
+            if (!$result) {
+                $this->redirect('/admin/users?error=query_failed');
+                return;
+            }
+
+            $this->redirect('/admin/users?success=unpaused');
+        } else {
+            $this->redirect('/admin/users?error=invalid_request');
         }
     }
 
@@ -130,7 +158,7 @@ class UserController extends BaseController
                 sendEmail($to, $subject, $message, $headers);
             }
 
-            $this->redirect('/users?success=reset_password');
+            $this->redirect('/admin/users?success=reset_password');
         }
     }
 
@@ -147,7 +175,7 @@ class UserController extends BaseController
             $stmt = $db->prepare("UPDATE users SET name = :name, email = :email WHERE id = :id");
             $stmt->execute(['name' => $name, 'email' => $email, 'id' => $id]);
 
-            $this->redirect('/users?success=update');
+            $this->redirect('/admin/users?success=update');
         }
     }
 
@@ -155,26 +183,54 @@ class UserController extends BaseController
     {
         requireAdmin();
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['name'], $_POST['email'], $_POST['password'])) {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['name'], $_POST['email'], $_POST['password'], $_POST['role'])) {
             $name = $_POST['name'];
             $email = $_POST['email'];
             $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+            $role = $_POST['role']; // Role selected by the admin (e.g., 'admin', 'coach', 'athlete')
 
             $db = Database::connect();
-            $stmt = $db->prepare("INSERT INTO users (name, email, password, is_verified, is_active) VALUES (:name, :email, :password, 1, 1)");
-            $stmt->execute(['name' => $name, 'email' => $email, 'password' => $password]);
 
-            // Send confirmation email to the user
-            $to = $email;
-            $subject = "Welcome to Sports Coaching Agency";
-            $message = "Dear $name,\n\nYour account has been created successfully. You can log in with the following credentials:\n\nEmail: $email\nPassword: {$_POST['password']}\n\nPlease change your password after logging in.\n\nBest regards,\nSports Coaching Agency";
-            $headers = "From: no-reply@sportscoachingagency.com";
+            try {
+                // Start a transaction
+                $db->beginTransaction();
 
-            sendEmail($to, $subject, $message, $headers);
+                // Insert the user into the `users` table
+                $stmt = $db->prepare("INSERT INTO users (name, email, password, current_role, is_verified, is_active) VALUES (:name, :email, :password, :current_role, 1, 1)");
+                $stmt->execute([
+                    'name' => $name,
+                    'email' => $email,
+                    'password' => $password,
+                    'current_role' => $role, // Set the current_role
+                ]);
+                $userId = $db->lastInsertId();
 
-            $this->redirect('/users?success=add');
+                // Assign the role to the user in the `user_roles` table
+                $stmt = $db->prepare("INSERT INTO user_roles (user_id, role_id) VALUES (:user_id, (SELECT id FROM roles WHERE name = :role))");
+                $stmt->execute([
+                    'user_id' => $userId,
+                    'role' => $role,
+                ]);
+
+                // Commit the transaction
+                $db->commit();
+
+                // Send confirmation email to the user
+                $to = $email;
+                $subject = "Welcome to Sports Coaching Agency";
+                $message = "Dear $name,\n\nYour account has been created successfully. You can log in with the following credentials:\n\nEmail: $email\nPassword: {$_POST['password']}\n\nPlease change your password after logging in.\n\nBest regards,\nSports Coaching Agency";
+                $headers = "From: no-reply@sportscoachingagency.com";
+
+                sendEmail($to, $subject, $message, $headers);
+
+                $this->redirect('/admin/users?success=add');
+            } catch (\Exception $e) {
+                // Rollback the transaction in case of an error
+                $db->rollBack();
+                $this->redirect('/admin/users?error=add_failed');
+            }
+        } else {
+            $this->redirect('/admin/users?error=invalid_request');
         }
     }
-
-    
 }

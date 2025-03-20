@@ -33,7 +33,6 @@ $routes = [
     '/profile/update' => 'App\Controllers\ProfileController@updateProfile',
     '/profile/change-password' => 'App\Controllers\ProfileController@changePassword',
     '/profile/delete' => 'App\Controllers\ProfileController@deleteProfile',
-    '/add/user' => 'App\Controllers\UserController@add',
     // Admin User Management
     '/admin/users' => 'App\Controllers\UserController@index',
     '/admin/users/edit' => 'App\Controllers\UserController@edit',
@@ -41,6 +40,7 @@ $routes = [
     '/admin/users/unpause' => 'App\Controllers\UserController@unpause',
     '/admin/users/update' => 'App\Controllers\UserController@update',
     '/admin/users/reset_password' => 'App\Controllers\UserController@reset_password',
+    '/admin/users/add' => 'App\Controllers\UserController@add',
     // Admin Subscriber Management
     '/admin/subscribers' => 'App\Controllers\SubscriberController@index',
     '/admin/delete-subscriber' => 'App\Controllers\SubscriberController@deleteSubscriber',

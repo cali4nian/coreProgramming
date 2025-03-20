@@ -68,18 +68,26 @@
     <!-- Add User Form -->
     <aside class="add-user-form-container">
         <h2>Add User</h2>
-        <form action="/admin/add/user" method="POST">
+        <form action="/admin/users/add" method="POST">
             <div class="form-group">
                 <label for="name">Name:</label>
-                <input type="text" id="name" name="name" placeholder="Enter User Name" required />
+                <input type="text" id="name" name="name" required />
             </div>
             <div class="form-group">
                 <label for="email">Email:</label>
-                <input type="email" id="email" name="email" placeholder="Enter User Email" required />
+                <input type="email" id="email" name="email" required />
             </div>
             <div class="form-group">
                 <label for="password">Password:</label>
-                <input type="password" id="password" name="password" placeholder="Enter User Password" required />
+                <input type="password" id="password" name="password" required />
+            </div>
+            <div class="form-group">
+                <label for="role">Role:</label>
+                <select id="role" name="role" required>
+                    <option value="athlete">Athlete</option>
+                    <option value="coach">Coach</option>
+                    <option value="admin">Admin</option>
+                </select>
             </div>
             <button type="submit">Add User</button>
         </form>

@@ -50,11 +50,12 @@ echo "Seeding static admin user...\n";
 $adminEmail = 'admin@example.com';
 $adminPassword = password_hash('password123', PASSWORD_DEFAULT);
 
-$stmt = $db->prepare("INSERT INTO users (name, email, password) VALUES (:name, :email, :password)");
+$stmt = $db->prepare("INSERT INTO users (name, email, password, current_role) VALUES (:name, :email, :password, :current_role)");
 $stmt->execute([
     'name' => 'Admin User',
     'email' => $adminEmail,
     'password' => $adminPassword,
+    'current_role' => 'admin', // Set current_role to admin
 ]);
 $adminId = $db->lastInsertId();
 
@@ -80,11 +81,12 @@ echo "Seeding static coach user...\n";
 $coachEmail = 'coach@example.com';
 $coachPassword = password_hash('password123', PASSWORD_DEFAULT);
 
-$stmt = $db->prepare("INSERT INTO users (name, email, password) VALUES (:name, :email, :password)");
+$stmt = $db->prepare("INSERT INTO users (name, email, password, current_role) VALUES (:name, :email, :password, :current_role)");
 $stmt->execute([
     'name' => 'Coach User',
     'email' => $coachEmail,
     'password' => $coachPassword,
+    'current_role' => 'coach', // Set current_role to coach
 ]);
 $coachId = $db->lastInsertId();
 
@@ -110,11 +112,12 @@ echo "Seeding static athlete user...\n";
 $athleteEmail = 'athlete@example.com';
 $athletePassword = password_hash('password123', PASSWORD_DEFAULT);
 
-$stmt = $db->prepare("INSERT INTO users (name, email, password) VALUES (:name, :email, :password)");
+$stmt = $db->prepare("INSERT INTO users (name, email, password, current_role) VALUES (:name, :email, :password, :current_role)");
 $stmt->execute([
     'name' => 'Athlete User',
     'email' => $athleteEmail,
     'password' => $athletePassword,
+    'current_role' => 'athlete', // Set current_role to athlete
 ]);
 $athleteId = $db->lastInsertId();
 
@@ -178,16 +181,19 @@ for ($i = 0; $i < 100; $i++) {
     $usedEmails[] = $email;
     $password = password_hash('password123', PASSWORD_DEFAULT);
 
-    $stmt = $db->prepare("INSERT INTO users (name, email, password) VALUES (:name, :email, :password)");
+    // Assign a random role to the user
+    $randomRole = array_rand($roleIds); // Randomly select a role
+    $currentRole = $randomRole; // Set current_role to match the assigned role
+
+    $stmt = $db->prepare("INSERT INTO users (name, email, password, current_role) VALUES (:name, :email, :password, :current_role)");
     $stmt->execute([
         'name' => $name,
         'email' => $email,
         'password' => $password,
+        'current_role' => $currentRole, // Set current_role dynamically
     ]);
     $userId = $db->lastInsertId();
 
-    // Assign a random role to the user
-    $randomRole = array_rand($roleIds); // Randomly select a role
     $stmt = $db->prepare("INSERT INTO user_roles (user_id, role_id) VALUES (:user_id, :role_id)");
     $stmt->execute([
         'user_id' => $userId,

@@ -4,7 +4,7 @@
     <h1>Edit User</h1>
 
     <?php if ($user): ?>
-        <form action="/users/update" method="POST">
+        <form action="/admin/users/update" method="POST">
             <input type="hidden" name="id" value="<?php echo $user['id']; ?>">
             
             <div class="form-group">

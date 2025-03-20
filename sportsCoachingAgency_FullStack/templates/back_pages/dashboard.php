@@ -1,53 +1,25 @@
 <?php include 'header.php'; ?>
+<section class="container">
 
-<div class="container">
-    <h1 class="page-title">Admin Dashboard</h1>
-    <p class="page-description">Welcome to the Admin Dashboard. Below is an overview of the system's key statistics.</p>
+    <h1 class="page-title">Dashboard</h1>
+    <p class="page-description">Welcome to the Dashboard.</p>
 
-    <div class="dashboard-stats">
-        <div class="stat-card">
-            <h2>Total Users</h2>
-            <p><?= htmlspecialchars($totalUsers) ?></p>
-        </div>
-        <div class="stat-card">
-            <h2>Total Athletes</h2>
-            <p><?= htmlspecialchars($totalAthletes) ?></p>
-        </div>
-        <div class="stat-card">
-            <h2>Total Coaches</h2>
-            <p><?= htmlspecialchars($totalCoaches) ?></p>
-        </div>
-    </div>
+    <!-- Admin-Specific Section -->
+    <?php if (isset($currentRole) && $currentRole === 'admin') require_once 'partials/dashboard/admin.php'; ?>
 
-    <h2>Recent Users</h2>
-    <table class="table table-striped table-bordered">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Role</th>
-                <th>Created At</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php if (!empty($recentUsers)): ?>
-                <?php foreach ($recentUsers as $user): ?>
-                    <tr>
-                        <td><?= htmlspecialchars($user['id']) ?></td>
-                        <td><?= htmlspecialchars($user['name']) ?></td>
-                        <td><?= htmlspecialchars($user['email']) ?></td>
-                        <td><?= htmlspecialchars($user['role']) ?></td>
-                        <td><?= htmlspecialchars($user['created_at']) ?></td>
-                    </tr>
-                <?php endforeach; ?>
-            <?php else: ?>
-                <tr>
-                    <td colspan="5" class="text-center">No recent users found.</td>
-                </tr>
-            <?php endif; ?>
-        </tbody>
-    </table>
-</div>
+    <!-- Coach-Specific Section -->
+    <?php if (isset($currentRole) && $currentRole === 'coach') require_once 'partials/dashboard/coach.php' ?>
+
+    <!-- Athlete-Specific Section -->
+    <?php if (isset($currentRole) && $currentRole === 'athlete') require_once 'partials/dashboard/athlete.php' ?>
+
+    <!-- Error Handling -->
+    <?php if (isset($error)): ?>
+        <div class="alert alert-danger">
+            <?= htmlspecialchars($error) ?>
+        </div>
+    <?php endif; ?>
+
+</section>
 
 <?php include 'footer.php'; ?>

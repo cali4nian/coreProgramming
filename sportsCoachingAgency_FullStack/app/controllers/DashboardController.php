@@ -3,24 +3,29 @@ namespace App\Controllers;
 
 require_once __DIR__ . '/../functions/auth.php';
 require_once __DIR__ . '/../config/Database.php';
+require_once __DIR__ . '/../models/DashboardModel.php';
 
 use App\Config\Database;
+use App\Models\DashboardModel;
 
 class DashboardController
 {
+    private DashboardModel $dashboardModel;
+
+    public function __construct()
+    {
+        // Initialize the DashboardModel with the database connection
+        $this->dashboardModel = new DashboardModel(Database::connect());
+    }
+
     public function index()
     {
         // Ensure the user is logged in
         requireLogin();
 
-        // Connect to the database
-        $db = Database::connect();
-
         // Fetch the current user's role
         $userId = $_SESSION['user_id']; // Assuming user ID is stored in the session
-        $stmt = $db->prepare("SELECT current_role FROM users WHERE id = :id");
-        $stmt->execute(['id' => $userId]);
-        $currentRole = $stmt->fetchColumn();
+        $currentRole = $this->dashboardModel->getUserRoleById($userId);
 
         // Prepare data for the dashboard
         $data = [
@@ -33,25 +38,10 @@ class DashboardController
         ];
 
         // Fetch total count of subscribers
-        $data['totalSubscribers'] = $db->query("SELECT COUNT(*) AS count FROM subscribers")->fetchColumn();
+        $data['totalSubscribers'] = $this->dashboardModel->getTotalSubscribers();
 
-        // Fetch all fields for recent subscribers
-        $stmt = $db->prepare("
-            SELECT 
-                id, 
-                email, 
-                is_confirmed, 
-                is_active, 
-                name, 
-                subscribed_at, 
-                unsubscribed_at, 
-                updated_at
-            FROM subscribers
-            ORDER BY subscribed_at DESC
-            LIMIT 10
-        ");
-        $stmt->execute();
-        $data['recentSubscribers'] = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        // Fetch recent subscribers
+        $data['recentSubscribers'] = $this->dashboardModel->getRecentSubscribers();
 
         // Render the dashboard template with the prepared data
         renderTemplate('back_pages/dashboard.php', $data);

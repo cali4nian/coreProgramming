@@ -39,8 +39,8 @@ class UserController extends BaseController
             'header_title' => 'Users',
             'page_css_url' => '/assets/css/users.css',
             'page_js_url' => '/assets/js/backend/users/users.js',
-            'pageName' => 'User Management', // Added pageName
-            'pageDescription' => 'Manage all users, including their roles, statuses, and account details.', // Added pageDescription
+            'pageName' => 'User Management',
+            'pageDescription' => 'Manage all users, including their roles, statuses, and account details.',
         ];
 
         renderTemplate('back_pages/users.php', $data);
@@ -220,8 +220,7 @@ class UserController extends BaseController
             $name = $_POST['name'];
             $email = $_POST['email'];
             $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-            $role = $_POST['role']; // Role selected by the admin (e.g., 'admin', 'coach', 'athlete')
-
+            $role = $_POST['role'];
             $db = Database::connect();
 
             try {

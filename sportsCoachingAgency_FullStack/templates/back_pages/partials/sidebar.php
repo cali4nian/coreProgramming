@@ -20,10 +20,7 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
             <li><a href="/admin/settings">Settings</a></li>
             <li><a href="/admin/users">Manage Users</a></li>
             <li><a href="/admin/subscribers">Subscribers</a></li>
-            <!-- <li><a href="/admin/reports">Reports</a></li> -->
-        <?php endif; ?>
-        <li><a href="/athletes">Athletes</a></li>
-        <li><a href="/coaches">Coaches</a></li>
+        <?php endif; ?>  
         <li><a href="/logout">Logout</a></li>
     </ul>
 </aside>

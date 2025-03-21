@@ -24,7 +24,6 @@
         <li><a href="/about">About</a></li>
         <li><a href="/contact">Contact</a></li>
         <li><a href="/login">Login</a></li>
-        <li><a href="/register">Register</a></li>
         <div class="social-links-container">
           <li>
             <a href="https://www.youtube.com" target="_blank"><img src="/assets/img/youtube_social_squircle_red.png" class="icon" alt="YouTube" /></a>

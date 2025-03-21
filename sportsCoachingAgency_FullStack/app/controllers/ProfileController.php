@@ -9,25 +9,45 @@ use PDO;
 
 class ProfileController
 {
-    public function profile()
+    public function index()
     {
         requireLogin();
 
         $db = Database::connect();
-        $stmt = $db->prepare("SELECT id, name, email FROM users WHERE id = :id");
+        $stmt = $db->prepare("SELECT id, name, email, current_role FROM users WHERE id = :id");
         $stmt->execute(['id' => $_SESSION['user_id']]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (!$user) {
+            die("❌ User not found.");
+        }
+
+        // Determine the template path based on the user's role
+        $templatePath = 'back_pages/profile.php'; // Default template
+        switch ($user['current_role']) {
+            case 'athlete':
+                $templatePath = 'back_pages/athlete/profile.php';
+                break;
+            case 'coach':
+                $templatePath = 'back_pages/coach/profile.php';
+                break;
+            case 'admin':
+                $templatePath = 'back_pages/profile.php'; // Admin uses the default profile template
+                break;
+            default:
+                die("❌ Invalid role.");
+        }
 
         $data = [
             'user' => $user,
             'header_title' => 'Profile',
             'page_css_url' => '/assets/css/profile.css',
             'page_js_url' => '/assets/js/backend/profile/profile.js',
-            'pageName' => 'Profile Information', // Added pageName
-            'pageDescription' => 'Welcome ' . htmlspecialchars($_SESSION['user_name']) . '. Here you can update your personal information.', // Added pageDescription
+            'pageName' => 'Profile Information',
+            'pageDescription' => 'Welcome ' . htmlspecialchars($_SESSION['user_name']) . '. Here you can update your personal information.',
         ];
 
-        renderTemplate('back_pages/profile.php', $data);
+        renderTemplate($templatePath, $data);
     }
 
     public function updateProfile()

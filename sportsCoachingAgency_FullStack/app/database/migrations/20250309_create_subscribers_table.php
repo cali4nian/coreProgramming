@@ -10,7 +10,11 @@ return function (PDO $db) {
         email VARCHAR(150) UNIQUE NOT NULL,
         confirmation_token VARCHAR(64) DEFAULT NULL,
         is_confirmed TINYINT(1) DEFAULT 0,
-        subscribed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        is_active TINYINT(1) DEFAULT 1,
+        name VARCHAR(100) DEFAULT NULL,
+        subscribed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        unsubscribed_at TIMESTAMP NULL,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
     ) ENGINE=InnoDB;";
 
     $db->exec($sql);

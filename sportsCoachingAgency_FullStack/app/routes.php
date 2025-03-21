@@ -12,14 +12,10 @@ $routes = [
     '/subscribe' => 'App\Controllers\SubscriberController@subscribe',
     '/confirm-subscription' => 'App\Controllers\SubscriberController@confirm',
     // Auth
-    '/register'          => 'App\Controllers\Auth\RegisterController@index',
-    '/register/request'  => 'App\Controllers\Auth\RegisterController@register',
     '/login'             => 'App\Controllers\Auth\LoginController@index',
     '/login/request'     => 'App\Controllers\Auth\LoginController@login',
     '/logout'            => 'App\Controllers\Auth\LoginController@logout',
     '/forgot-password'   => 'App\Controllers\Auth\ForgotPasswordController@index',
-    '/reset-password'    => 'App\Controllers\Auth\ResetPasswordController@index',
-    '/forgot-password' => 'App\Controllers\Auth\ForgotPasswordController@index',
     '/forgot-password/request' => 'App\Controllers\Auth\ForgotPasswordController@requestReset',
     '/reset-password' => 'App\Controllers\Auth\ResetPasswordController@index',
     '/reset-password/request' => 'App\Controllers\Auth\ResetPasswordController@reset',
@@ -29,7 +25,7 @@ $routes = [
     // Backend
     '/dashboard'         => 'App\Controllers\DashboardController@index',
     // User Profile Management
-    '/profile' => 'App\Controllers\ProfileController@profile',
+    '/profile' => 'App\Controllers\ProfileController@index',
     '/profile/update' => 'App\Controllers\ProfileController@updateProfile',
     '/profile/change-password' => 'App\Controllers\ProfileController@changePassword',
     '/profile/delete' => 'App\Controllers\ProfileController@deleteProfile',
@@ -53,10 +49,6 @@ $routes = [
     '/admin/update-site-settings' => 'App\Controllers\SettingController@updateSiteSettings',
     '/admin/update-social-media-settings' => 'App\Controllers\SettingController@updateSocialMediaSettings',
     '/admin/update-home-page-settings' => 'App\Controllers\SettingController@updateHomePageSettings',
-    // Athletes Management
-    '/athletes' => 'App\Controllers\AthleteController@index',
-    // Coaches Management
-    '/coaches' => 'App\Controllers\CoachController@index',
 ];
 
 // Get the requested URL path

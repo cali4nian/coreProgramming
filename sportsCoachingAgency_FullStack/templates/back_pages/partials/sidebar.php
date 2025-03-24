@@ -16,7 +16,7 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
     <ul>
         <li><a href="/dashboard">Dashboard</a></li>
         <li><a href="/profile">Profile</a></li>
-        <?php if (isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin'): ?>
+        <?php if (isset($_SESSION['current_role']) && $_SESSION['current_role'] === 'admin'): ?>
             <li><a href="/admin/settings">Settings</a></li>
             <li><a href="/admin/users">Manage Users</a></li>
             <li><a href="/admin/subscribers">Subscribers</a></li>

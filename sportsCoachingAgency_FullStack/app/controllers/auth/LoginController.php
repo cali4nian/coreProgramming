@@ -60,19 +60,17 @@ class LoginController
 
             $db = Database::connect();
 
-            // Fetch user and their first role
+            // Fetch user and their current role
             $stmt = $db->prepare("
                 SELECT 
-                    users.id, 
-                    users.name, 
-                    users.email, 
-                    users.password, 
-                    users.is_verified, 
-                    roles.name AS role 
+                    id, 
+                    name, 
+                    email, 
+                    password, 
+                    is_verified, 
+                    current_role 
                 FROM users
-                LEFT JOIN user_roles ON users.id = user_roles.user_id
-                LEFT JOIN roles ON user_roles.role_id = roles.id
-                WHERE users.email = :email
+                WHERE email = :email
                 LIMIT 1
             ");
             $stmt->execute(['email' => $email]);
@@ -89,7 +87,7 @@ class LoginController
                 // Store user data in session
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['user_name'] = $user['name'];
-                $_SESSION['user_role'] = $user['role']; // Store the first role for access control
+                $_SESSION['current_role'] = $user['current_role']; // Store the current role for access control
                 header("Location: /dashboard");
                 exit();
             } else {

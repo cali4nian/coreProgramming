@@ -1,7 +1,7 @@
 <?php include 'header.php'; ?>
 
 <!-- Hero Section -->
-<section class="hero-section" style="background-image: url('<?= htmlspecialchars($settings['hero_image'] ?? '/assets/img/default-hero.jpg') ?>');">
+<section class="hero-section" style="background-image: url('<?= htmlspecialchars($settings['hero_image'] ?? '/assets/img/default_hero.jpg') ?>');">
     <aside class="hero-content">
         <h1 class="hero-title"><?= htmlspecialchars($settings['site_name'] ?? 'Welcome to Our Website') ?></h1>
         <p class="hero-subtitle">Discover amazing content and explore the possibilities.</p>
@@ -26,7 +26,7 @@
             <li>Empowering</li>
         </ul>
         <aside class="image-container">
-            <img src="<?= htmlspecialchars($settings['head_coach_image'] ?? '/assets/img/default-head-coach.jpg') ?>" alt="Coach Image" class="coach-image" />
+            <img src="<?= htmlspecialchars($settings['head_coach_image'] ?? '/assets/img/default_head_coach.jpg') ?>" alt="Coach Image" class="coach-image" />
         </aside>
     </aside>
 </section>
@@ -41,12 +41,12 @@
     <div class="profiles-container">
         <!-- Example Player Cards -->
         <div class="player-card">
-            <img src="/assets/img/basketball-6648112_640.jpg" alt="Player 1" />
+            <img src="/assets/img/default_athlete_image.jpg" alt="Player 1" />
             <h2>John Doe</h2>
             <p>Point Guard | 25 Goals</p>
         </div>
         <div class="player-card">
-            <img src="/assets/img/basketball-6648112_640.jpg" alt="Player 2" />
+            <img src="/assets/img/default_athlete_image.jpg" alt="Player 2" />
             <h2>Jane Smith</h2>
             <p>Shooting Guard | 18 Assists</p>
         </div>
@@ -105,7 +105,7 @@
             <a href="<?= htmlspecialchars($settings['instagram_url'] ?? 'https://www.instagram.com') ?>" class="btn" target="_blank">Follow on Instagram</a>
         </div>
         <div class="image-container">
-            <img src="<?= htmlspecialchars($settings['main_instagram_photo'] ?? '/assets/img/default-instagram.jpg') ?>" alt="Instagram Sports Highlights" class="instagram-image" />
+            <img src="<?= htmlspecialchars($settings['main_instagram_photo'] ?? '/assets/img/default_instagram.jpg') ?>" alt="Instagram Sports Highlights" class="instagram-image" />
         </div>
     </div>
 </section>
@@ -115,7 +115,7 @@
 <section class="facebook-section">
     <div class="content">
         <div class="image-container">
-            <img src="<?= htmlspecialchars($settings['main_facebook_photo'] ?? '/assets/img/default-facebook.jpg') ?>" alt="Facebook Community" class="facebook-image" />
+            <img src="<?= htmlspecialchars($settings['main_facebook_photo'] ?? '/assets/img/default_facebook.jpg') ?>" alt="Facebook Community" class="facebook-image" />
         </div>
         <div class="text">
             <h2>Join Our Community on Facebook</h2>

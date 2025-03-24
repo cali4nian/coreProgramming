@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" href="/assets/img/basketballLogo.webp" type="image/x-icon" />
+    <link rel="shortcut icon" href="/assets/img/default_logo.webp" type="image/x-icon" />
     <link rel="stylesheet" href="/assets/css/front-global.css" />
     <link rel="stylesheet" href="<?php echo $page_css_url; ?>" />
     <script type="module" src="/assets/js/frontend/global.js"></script>

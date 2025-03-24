@@ -36,12 +36,13 @@ echo "Seeding static admin user...\n";
 $adminEmail = 'admin@example.com';
 $adminPassword = password_hash('password123', PASSWORD_DEFAULT);
 
-$stmt = $db->prepare("INSERT INTO users (name, email, password, current_role) VALUES (:name, :email, :password, :current_role)");
+$stmt = $db->prepare("INSERT INTO users (name, email, password, current_role, is_verified) VALUES (:name, :email, :password, :current_role, :is_verified)");
 $stmt->execute([
     'name' => 'Admin User',
     'email' => $adminEmail,
     'password' => $adminPassword,
     'current_role' => 'admin', // Set current_role to admin
+    'is_verified' => 1, // Mark as verified
 ]);
 $adminId = $db->lastInsertId();
 
@@ -52,12 +53,13 @@ echo "Seeding static super user...\n";
 $superUserEmail = 'superuser@example.com';
 $superUserPassword = password_hash('password123', PASSWORD_DEFAULT);
 
-$stmt = $db->prepare("INSERT INTO users (name, email, password, current_role) VALUES (:name, :email, :password, :current_role)");
+$stmt = $db->prepare("INSERT INTO users (name, email, password, current_role, is_verified) VALUES (:name, :email, :password, :current_role, :is_verified)");
 $stmt->execute([
     'name' => 'Super User',
     'email' => $superUserEmail,
     'password' => $superUserPassword,
     'current_role' => 'super user', // Set current_role to super user
+    'is_verified' => 1, // Mark as verified
 ]);
 $superUserId = $db->lastInsertId();
 
@@ -68,12 +70,13 @@ echo "Seeding static subscriber user...\n";
 $subscriberEmail = 'subscriber@example.com';
 $subscriberPassword = password_hash('password123', PASSWORD_DEFAULT);
 
-$stmt = $db->prepare("INSERT INTO users (name, email, password, current_role) VALUES (:name, :email, :password, :current_role)");
+$stmt = $db->prepare("INSERT INTO users (name, email, password, current_role, is_verified) VALUES (:name, :email, :password, :current_role, :is_verified)");
 $stmt->execute([
     'name' => 'Subscriber User',
     'email' => $subscriberEmail,
     'password' => $subscriberPassword,
     'current_role' => 'subscriber', // Set current_role to subscriber
+    'is_verified' => 1, // Mark as verified
 ]);
 $subscriberId = $db->lastInsertId();
 
@@ -96,12 +99,13 @@ for ($i = 0; $i < 100; $i++) {
     $randomRole = array_rand($roles); // Randomly select a role
     $currentRole = $roles[$randomRole]; // Set current_role to match the assigned role
 
-    $stmt = $db->prepare("INSERT INTO users (name, email, password, current_role) VALUES (:name, :email, :password, :current_role)");
+    $stmt = $db->prepare("INSERT INTO users (name, email, password, current_role, is_verified) VALUES (:name, :email, :password, :current_role, :is_verified)");
     $stmt->execute([
         'name' => $name,
         'email' => $email,
         'password' => $password,
         'current_role' => $currentRole, // Set current_role dynamically
+        'is_verified' => rand(0, 1), // Randomly mark as verified or not
     ]);
 }
 echo "✅ 100 Random Users Inserted Successfully!\n";

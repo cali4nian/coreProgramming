@@ -3,39 +3,32 @@ namespace App\Controllers;
 
 require_once __DIR__ . '/../functions/auth.php';
 require_once __DIR__ . '/../config/Database.php';
+require_once __DIR__ . '/../models/ProfileModel.php';
 
 use App\Config\Database;
-use PDO;
+use App\Models\ProfileModel;
 
 class ProfileController
 {
+    private ProfileModel $profileModel;
+
+    public function __construct()
+    {
+        $this->profileModel = new ProfileModel(Database::connect());
+    }
+
+    /**
+     * Display the profile page.
+     */
     public function index()
     {
         requireLogin();
 
-        $db = Database::connect();
-        $stmt = $db->prepare("SELECT id, name, email, current_role FROM users WHERE id = :id");
-        $stmt->execute(['id' => $_SESSION['user_id']]);
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        $user = $this->profileModel->getUserById($_SESSION['user_id']);
 
         if (!$user) {
-            die("❌ User not found.");
-        }
-
-        // Determine the template path based on the user's role
-        $templatePath = 'back_pages/profile.php'; // Default template
-        switch ($user['current_role']) {
-            case 'athlete':
-                $templatePath = 'back_pages/athlete/profile.php';
-                break;
-            case 'coach':
-                $templatePath = 'back_pages/coach/profile.php';
-                break;
-            case 'admin':
-                $templatePath = 'back_pages/profile.php'; // Admin uses the default profile template
-                break;
-            default:
-                die("❌ Invalid role.");
+            header("Location: /errors/404.php");
+            exit();
         }
 
         $data = [
@@ -47,9 +40,12 @@ class ProfileController
             'pageDescription' => 'Welcome ' . htmlspecialchars($_SESSION['user_name']) . '. Here you can update your personal information.',
         ];
 
-        renderTemplate($templatePath, $data);
+        renderTemplate('back_pages/profile.php', $data);
     }
 
+    /**
+     * Update the user's profile information.
+     */
     public function updateProfile()
     {
         requireLogin();
@@ -57,31 +53,70 @@ class ProfileController
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $name = trim($_POST['name']);
             $email = trim($_POST['email']);
+            $phoneNumber = trim($_POST['phone_number'] ?? '');
+            $address = trim($_POST['address'] ?? '');
+            $profileImage = $_FILES['profile_image']['name'] ?? null;
 
+            // Validate inputs
             if (empty($name) || empty($email)) {
-                die("❌ Name and email cannot be empty.");
+                header("Location: /profile?error=Name and email cannot be empty.");
+                exit();
             }
 
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                die("❌ Invalid email format.");
+                header("Location: /profile?error=Invalid email format.");
+                exit();
             }
 
-            $db = Database::connect();
-
-            // Check if email is already taken by another user
-            $stmt = $db->prepare("SELECT id FROM users WHERE email = :email AND id != :id");
-            $stmt->execute(['email' => $email, 'id' => $_SESSION['user_id']]);
-            if ($stmt->fetch(PDO::FETCH_ASSOC)) {
-                die("❌ Email is already in use.");
+            if ($this->profileModel->isEmailTaken($email, $_SESSION['user_id'])) {
+                header("Location: /profile?error=Email is already in use.");
+                exit();
             }
 
-            // Update user details
-            $stmt = $db->prepare("UPDATE users SET name = :name, email = :email WHERE id = :id");
-            $stmt->execute([
-                'name' => $name,
-                'email' => $email,
-                'id' => $_SESSION['user_id']
-            ]);
+            // Handle profile image upload
+            if ($profileImage) {
+                $targetDir = __DIR__ . "/../../public_html/uploads/profile_images/";
+                $targetFile = $targetDir . basename($profileImage);
+                $fileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+
+                // Validate file type
+                $allowedTypes = ['jpg', 'jpeg', 'png', 'gif'];
+                if (!in_array($fileType, $allowedTypes)) {
+                    header("Location: /profile?error=Invalid file type. Only JPG, JPEG, PNG, and GIF are allowed.");
+                    exit();
+                }
+
+                // Validate file size (e.g., max 2MB)
+                if ($_FILES['profile_image']['size'] > 2 * 1024 * 1024) {
+                    header("Location: /profile?error=File size exceeds the 2MB limit.");
+                    exit();
+                }
+
+                // Delete the existing profile image if it exists
+                $currentUser = $this->profileModel->getUserById($_SESSION['user_id']);
+                if (!empty($currentUser['profile_image'])) {
+                    $existingFile = $targetDir . $currentUser['profile_image'];
+                    if (file_exists($existingFile)) {
+                        unlink($existingFile); // Delete the existing file
+                    }
+                }
+
+                // Move the uploaded file
+                if (!move_uploaded_file($_FILES['profile_image']['tmp_name'], $targetFile)) {
+                    header("Location: /profile?error=Failed to upload the profile image.");
+                    exit();
+                }
+            }
+
+            // Update user in the database
+            $this->profileModel->updateUser(
+                $_SESSION['user_id'],
+                $name,
+                $email,
+                $profileImage,
+                $phoneNumber,
+                $address
+            );
 
             // Update session
             $_SESSION['user_name'] = $name;
@@ -91,6 +126,9 @@ class ProfileController
         }
     }
 
+    /**
+     * Change the user's password.
+     */
     public function changePassword()
     {
         requireLogin();
@@ -100,55 +138,50 @@ class ProfileController
             $newPassword = $_POST['new_password'];
             $confirmPassword = $_POST['confirm_password'];
 
+            // Validate inputs
             if (empty($currentPassword) || empty($newPassword) || empty($confirmPassword)) {
-                die("❌ All fields are required.");
+                header("Location: /profile?error=All fields are required.");
+                exit();
             }
 
             if ($newPassword !== $confirmPassword) {
-                die("❌ New passwords do not match.");
+                header("Location: /profile?error=New passwords do not match.");
+                exit();
             }
 
             if (strlen($newPassword) < 6) {
-                die("❌ Password must be at least 6 characters.");
+                header("Location: /profile?error=Password must be at least 6 characters.");
+                exit();
             }
 
-            $db = Database::connect();
-            $stmt = $db->prepare("SELECT password FROM users WHERE id = :id");
-            $stmt->execute(['id' => $_SESSION['user_id']]);
-            $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-            if (!password_verify($currentPassword, $user['password'])) {
-                die("❌ Current password is incorrect.");
+            // Verify current password
+            $hashedPassword = $this->profileModel->getPasswordById($_SESSION['user_id']);
+            if (!password_verify($currentPassword, $hashedPassword)) {
+                header("Location: /profile?error=Current password is incorrect.");
+                exit();
             }
 
-            $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
-            $stmt = $db->prepare("UPDATE users SET password = :password WHERE id = :id");
-            $stmt->execute([
-                'password' => $hashedPassword,
-                'id' => $_SESSION['user_id']
-            ]);
+            // Update password
+            $this->profileModel->updatePassword($_SESSION['user_id'], password_hash($newPassword, PASSWORD_DEFAULT));
 
-            echo "✅ Password updated successfully!";
             header("Location: /profile?password_changed=1");
             exit();
         }
     }
 
+    /**
+     * Delete the user's profile.
+     */
     public function deleteProfile()
     {
         requireLogin();
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $db = Database::connect();
-
-            // Delete user from database
-            $stmt = $db->prepare("DELETE FROM users WHERE id = :id");
-            $stmt->execute(['id' => $_SESSION['user_id']]);
+            $this->profileModel->deleteUser($_SESSION['user_id']);
 
             // Destroy session
             session_destroy();
 
-            echo "✅ Account deleted successfully.";
             header("Location: /logout");
             exit();
         }

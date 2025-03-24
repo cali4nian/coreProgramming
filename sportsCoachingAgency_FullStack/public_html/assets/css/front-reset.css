@@ -36,7 +36,7 @@ CMYK values	(83, 52, 0, 0)
 
 html,
 body {
-  background: url("../img/sunset-5383040_1280.jpg") no-repeat center center fixed;
+  background: url("../img/default_main_background.jpg") no-repeat center center fixed;
   background-size: cover;
   margin: 0 auto;
   min-height: 100vh;

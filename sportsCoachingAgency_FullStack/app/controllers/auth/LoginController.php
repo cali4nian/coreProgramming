@@ -1,24 +1,29 @@
 <?php
 namespace App\Controllers\Auth;
+
 require_once __DIR__ . '/../../functions/csrf.php';
 require_once __DIR__ . '/../../config/Database.php';
 
 use App\Config\Database;
+use App\Controllers\BaseController; // Extend BaseController
 use PDO;
 use Exception;
 
-class LoginController
+class LoginController extends BaseController
 {
-    public function index() {
+    public function index()
+    {
         if (session_status() === PHP_SESSION_NONE) {
             session_start(); // Start session only if not already started
         }
 
         // Redirect to dashboard if already logged in
         if (isset($_SESSION['user_id'])) {
-            header("Location: /dashboard"); // Redirect to dashboard if logged in
-            exit();
+            $this->redirect('/dashboard'); // Use BaseController's redirect method
         }
+
+        // Fetch settings using the BaseController method
+        $settings = $this->fetchSettings();
 
         // Prepare data for the login page
         $data = [
@@ -28,18 +33,19 @@ class LoginController
             'page_js_url' => '/assets/js/auth/login.js',
             // Header title for the page
             'header_title' => 'Login to Your Account',
+            // Settings data
+            'settings' => $settings,
         ];
 
         // Render the template and pass data
         renderTemplate('auth/login.php', $data);
     }
-  
+
     public function login()
     {
         // Redirect to dashboard if already logged in
         if (isset($_SESSION['user_id'])) {
-            header("Location: /dashboard"); // Redirect to dashboard if logged in
-            exit();
+            $this->redirect('/dashboard'); // Use BaseController's redirect method
         }
 
         if (session_status() !== PHP_SESSION_ACTIVE) {
@@ -88,8 +94,7 @@ class LoginController
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['user_name'] = $user['name'];
                 $_SESSION['current_role'] = $user['current_role']; // Store the current role for access control
-                header("Location: /dashboard");
-                exit();
+                $this->redirect('/dashboard'); // Use BaseController's redirect method
             } else {
                 die("Invalid email or password.");
             }
@@ -100,7 +105,6 @@ class LoginController
     {
         session_start();
         session_destroy(); // Destroy session
-        header("Location: /login");
-        exit();
+        $this->redirect('/login'); // Use BaseController's redirect method
     }
 }

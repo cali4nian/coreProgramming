@@ -1,10 +1,14 @@
 <?php
 namespace App\Controllers;
-class ContactController
+
+class ContactController extends BaseController
 {
     public function index()
     {    
-        // Prepare data for the home page
+        // Fetch settings using the BaseController method
+        $settings = $this->fetchSettings();
+
+        // Prepare data for the contact page
         $data = [
             // CSS file URL
             'page_css_url' => '/assets/css/contact.css',
@@ -12,6 +16,8 @@ class ContactController
             'page_js_url' => '/assets/js/contact/contact.js',
             // Header title for the page
             'header_title' => 'Contact Williams Coaching',
+            // Settings data
+            'settings' => $settings,
         ];
 
         // Render the template and pass data

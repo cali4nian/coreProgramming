@@ -4,32 +4,33 @@ require_once __DIR__ . '/../app/functions/template.php'; // Include helper funct
 
 $routes = [
     // Frontend
-    '/'                  => 'App\Controllers\HomeController@index',
-    '/privacy-policy'    => 'App\Controllers\LegalPageController@privacy_policy',
-    '/terms-of-use'      => 'App\Controllers\LegalPageController@terms_of_use',
-    '/about'             => 'App\Controllers\AboutController@index',
-    '/contact'           => 'App\Controllers\ContactController@index',
-    '/subscribe' => 'App\Controllers\SubscriberController@subscribe',
-    '/confirm-subscription' => 'App\Controllers\SubscriberController@confirm',
+    '/'                                => 'App\Controllers\HomeController@index',
+    '/about'                           => 'App\Controllers\AboutController@index',
+    '/contact'                         => 'App\Controllers\ContactController@index',
+    '/privacy-policy'                  => 'App\Controllers\LegalPageController@privacy_policy',
+    '/terms-of-use'                    => 'App\Controllers\LegalPageController@terms_of_use',
+    '/subscribe'                       => 'App\Controllers\SubscriberController@subscribe',
+    '/confirm-subscription'            => 'App\Controllers\SubscriberController@confirm',
+    'resend-subscription-verification' => 'App\Controllers\auth\SubscriberController@resendToSubscriber',
     // Auth
-    '/login'             => 'App\Controllers\Auth\LoginController@index',
-    '/login/request'     => 'App\Controllers\Auth\LoginController@login',
-    '/logout'            => 'App\Controllers\Auth\LoginController@logout',
-    '/forgot-password'   => 'App\Controllers\Auth\ForgotPasswordController@index',
-    '/forgot-password/request' => 'App\Controllers\Auth\ForgotPasswordController@requestReset',
-    '/reset-password' => 'App\Controllers\Auth\ResetPasswordController@index',
-    '/reset-password/request' => 'App\Controllers\Auth\ResetPasswordController@reset',
-    '/resend-verification' => 'App\Controllers\Auth\ResendVerificationController@resend',
-    // Email Verification Route
-    '/verify-email' => 'App\Controllers\Auth\VerifyEmailController@verify',
-    // Backend
+    '/login'                           => 'App\Controllers\Auth\LoginController@index',
+    '/login/request'                   => 'App\Controllers\Auth\LoginController@login',
+    '/logout'                          => 'App\Controllers\Auth\LoginController@logout',
+    '/forgot-password'                 => 'App\Controllers\Auth\ForgotPasswordController@index',
+    '/forgot-password/request'         => 'App\Controllers\Auth\ForgotPasswordController@requestReset',
+    '/reset-password'                  => 'App\Controllers\Auth\ResetPasswordController@index',
+    '/reset-password/request'          => 'App\Controllers\Auth\ResetPasswordController@reset',
+    '/resend-verification'             => 'App\Controllers\Auth\ResendVerificationController@resend',
+    '/verify-email'                    => 'App\Controllers\Auth\VerifyEmailController@verify',
+    #########################################################################################################################
+    // Backend Routes
     '/dashboard'         => 'App\Controllers\DashboardController@index',
-    // User Profile Management
+    // Profile Management
     '/profile' => 'App\Controllers\ProfileController@index',
     '/profile/update' => 'App\Controllers\ProfileController@updateProfile',
     '/profile/change-password' => 'App\Controllers\ProfileController@changePassword',
     '/profile/delete' => 'App\Controllers\ProfileController@deleteProfile',
-    // Admin User Management
+    // User Management
     '/admin/users' => 'App\Controllers\UserController@index',
     '/admin/users/edit' => 'App\Controllers\UserController@edit',
     '/admin/users/pause' => 'App\Controllers\UserController@pause',
@@ -37,7 +38,8 @@ $routes = [
     '/admin/users/update' => 'App\Controllers\UserController@update',
     '/admin/users/reset_password' => 'App\Controllers\UserController@reset_password',
     '/admin/users/add' => 'App\Controllers\UserController@add',
-    // Admin Subscriber Management
+    '/admin/users/delete' => 'App\Controllers\UserController@delete',
+    // Subscriber Management
     '/admin/subscribers' => 'App\Controllers\SubscriberController@index',
     '/admin/delete-subscriber' => 'App\Controllers\SubscriberController@deleteSubscriber',
     // Download routes for Subscribers

@@ -2,34 +2,29 @@
 namespace App\Controllers;
 
 require_once __DIR__ . '/../functions/auth.php';
-require_once __DIR__ . '/../config/Database.php';
-require_once __DIR__ . '/../functions/email.php';
+require_once __DIR__ . '/../models/UserModel.php';
 
-use App\Config\Database;
-use PDO;
+use App\Models\UserModel;
 
 class UserController extends BaseController
 {
+    private UserModel $userModel;
+
+    public function __construct()
+    {
+        $this->userModel = new UserModel();
+    }
+
     public function index()
     {
         requireAdmin();
 
-        $db = Database::connect();
-
-        $perPage = 10; // Number of users per page
+        $perPage = 10;
         $page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int)$_GET['page'] : 1;
         $offset = ($page - 1) * $perPage;
 
-        // Fetch users with pagination
-        $stmt = $db->prepare("SELECT id, name, email, is_verified, is_active FROM users LIMIT :limit OFFSET :offset");
-        $stmt->bindValue(':limit', $perPage, PDO::PARAM_INT);
-        $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
-        $stmt->execute();
-        $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        // Get total number of users for pagination
-        $stmt = $db->query("SELECT COUNT(*) FROM users");
-        $totalUsers = $stmt->fetchColumn();
+        $users = $this->userModel->getAllUsers($perPage, $offset);
+        $totalUsers = $this->userModel->getTotalUsers();
         $totalPages = ceil($totalUsers / $perPage);
 
         $data = [
@@ -46,169 +41,58 @@ class UserController extends BaseController
         renderTemplate('back_pages/users.php', $data);
     }
 
-    public function edit()
+    public function delete(int $id)
     {
         requireAdmin();
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
-            $id = $_POST['id'];
-
-            $db = Database::connect();
-            $stmt = $db->prepare("SELECT * FROM users WHERE id = :id");
-            $stmt->execute(['id' => $id]);
-            $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-            if ($user) {
-                $data = [
-                    'user' => $user,
-                    'header_title' => 'Edit User',
-                    'page_css_url' => '/assets/css/edit-user.css',
-                    'page_js_url' => '/assets/js/backend/edit_user/edit_user.js',
-                    'pageName' => 'Edit User', // Added pageName
-                    'pageDescription' => 'Update the details of the selected user, including their name, email, and role.', // Added pageDescription
-                ];
-                renderTemplate('back_pages/edit_user.php', $data);
-            } else {
-                $this->redirect('/admin/users?error=user_not_found');
-            }
+        if ($this->userModel->deleteUser($id)) {
+            $this->redirect('/admin/users?success=delete');
+        } else {
+            $this->redirect('/admin/users?error=cannot_delete_admin');
         }
     }
 
-    public function pause()
+    public function pause(int $id)
     {
         requireAdmin();
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
-            $id = $_POST['id'];
-
-            // Debug: Check if the ID is being sent
-            if (empty($id)) {
-                $this->redirect('/admin/users?error=missing_id');
-                return;
-            }
-
-            $db = Database::connect();
-            $stmt = $db->prepare("UPDATE users SET is_active = 0 WHERE id = :id");
-            $result = $stmt->execute(['id' => $id]);
-
-            // Debug: Check if the query executed successfully
-            if (!$result) {
-                $this->redirect('/admin/users?error=query_failed');
-                return;
-            }
-
+        if ($this->userModel->toggleUserStatus($id, false)) {
             $this->redirect('/admin/users?success=pause');
         } else {
-            $this->redirect('/admin/users?error=invalid_request');
+            $this->redirect('/admin/users?error=action_failed');
         }
     }
 
-    public function unpause()
+    public function unpause(int $id)
     {
         requireAdmin();
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
-            $id = $_POST['id'];
-
-            // Debug: Check if the ID is being sent
-            if (empty($id)) {
-                $this->redirect('/admin/users?error=missing_id');
-                return;
-            }
-
-            $db = Database::connect();
-            $stmt = $db->prepare("UPDATE users SET is_active = 1 WHERE id = :id");
-            $result = $stmt->execute(['id' => $id]);
-
-            // Debug: Check if the query executed successfully
-            if (!$result) {
-                $this->redirect('/admin/users?error=query_failed');
-                return;
-            }
-
-            $this->redirect('/admin/users?success=unpaused');
+        if ($this->userModel->toggleUserStatus($id, true)) {
+            $this->redirect('/admin/users?success=unpause');
         } else {
-            $this->redirect('/admin/users?error=invalid_request');
+            $this->redirect('/admin/users?error=action_failed');
         }
     }
 
-    public function reset_password()
+    public function resetPassword(int $id)
     {
         requireAdmin();
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
-            $id = $_POST['id'];
+        $tempPassword = bin2hex(random_bytes(4)); // 8 characters long
+        $hashedPassword = password_hash($tempPassword, PASSWORD_DEFAULT);
 
-            // Generate a temporary password
-            $tempPassword = bin2hex(random_bytes(4)); // 8 characters long
-            $hashedPassword = password_hash($tempPassword, PASSWORD_DEFAULT);
-
-            $db = Database::connect();
-            $stmt = $db->prepare("UPDATE users SET password = :password WHERE id = :id");
-            $stmt->execute(['password' => $hashedPassword, 'id' => $id]);
-
-            // Fetch the user's email
-            $stmt = $db->prepare("SELECT email FROM users WHERE id = :id");
-            $stmt->execute(['id' => $id]);
-            $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
+        if ($this->userModel->resetPassword($id, $hashedPassword)) {
+            $user = $this->userModel->getUserById($id);
             if ($user) {
-                // Send the temporary password to the user's email
-                $to = $user['email'];
-                $subject = "Your Temporary Password";
-                $message = "Your temporary password is: $tempPassword, we strongly recommend you to change it after logging in.";
-                $headers = "From: no-reply@sportscoachingagency.com";
-
-                sendEmail($to, $subject, $message, $headers);
+                sendEmail(
+                    $user['email'],
+                    "Your Temporary Password",
+                    "Your temporary password is: $tempPassword. Please change it after logging in."
+                );
             }
-
             $this->redirect('/admin/users?success=reset_password');
-        }
-    }
-
-    public function update()
-    {
-        requireAdmin();
-
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'], $_POST['name'], $_POST['email'], $_POST['role'])) {
-            $id = $_POST['id'];
-            $name = $_POST['name'];
-            $email = $_POST['email'];
-            $role = $_POST['role'];
-
-            $db = Database::connect();
-
-            try {
-                // Start a transaction
-                $db->beginTransaction();
-
-                // Update the user's details in the `users` table
-                $stmt = $db->prepare("UPDATE users SET name = :name, email = :email, current_role = :role WHERE id = :id");
-                $stmt->execute([
-                    'name' => $name,
-                    'email' => $email,
-                    'role' => $role,
-                    'id' => $id,
-                ]);
-
-                // Update the user's role in the `user_roles` table
-                $stmt = $db->prepare("UPDATE user_roles SET role_id = (SELECT id FROM roles WHERE name = :role) WHERE user_id = :id");
-                $stmt->execute([
-                    'role' => $role,
-                    'id' => $id,
-                ]);
-
-                // Commit the transaction
-                $db->commit();
-
-                $this->redirect('/admin/users?success=update');
-            } catch (\Exception $e) {
-                // Rollback the transaction in case of an error
-                $db->rollBack();
-                $this->redirect('/admin/users?error=update_failed');
-            }
         } else {
-            $this->redirect('/admin/users?error=invalid_request');
+            $this->redirect('/admin/users?error=reset_failed');
         }
     }
 
@@ -216,49 +100,24 @@ class UserController extends BaseController
     {
         requireAdmin();
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['name'], $_POST['email'], $_POST['password'], $_POST['role'])) {
-            $name = $_POST['name'];
-            $email = $_POST['email'];
-            $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-            $role = $_POST['role'];
-            $db = Database::connect();
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['name'], $_POST['email'], $_POST['password'])) {
+            $name = trim($_POST['name']);
+            $email = trim($_POST['email']);
+            $password = password_hash(trim($_POST['password']), PASSWORD_DEFAULT);
+            $role = 'super user'; // Hardcoded role as 'super user'
 
-            try {
-                // Start a transaction
-                $db->beginTransaction();
+            // Use UserModel to add the super user
+            $userId = $this->userModel->addUser($name, $email, $password, $role);
 
-                // Insert the user into the `users` table
-                $stmt = $db->prepare("INSERT INTO users (name, email, password, current_role, is_verified, is_active) VALUES (:name, :email, :password, :current_role, 1, 1)");
-                $stmt->execute([
-                    'name' => $name,
-                    'email' => $email,
-                    'password' => $password,
-                    'current_role' => $role, // Set the current_role
-                ]);
-                $userId = $db->lastInsertId();
-
-                // Assign the role to the user in the `user_roles` table
-                $stmt = $db->prepare("INSERT INTO user_roles (user_id, role_id) VALUES (:user_id, (SELECT id FROM roles WHERE name = :role))");
-                $stmt->execute([
-                    'user_id' => $userId,
-                    'role' => $role,
-                ]);
-
-                // Commit the transaction
-                $db->commit();
-
-                // Send confirmation email to the user
-                $to = $email;
-                $subject = "Welcome to Sports Coaching Agency";
-                $message = "Dear $name,\n\nYour account has been created successfully. You can log in with the following credentials:\n\nEmail: $email\nPassword: {$_POST['password']}\n\nPlease change your password after logging in.\n\nBest regards,\nSports Coaching Agency";
-                $headers = "From: no-reply@sportscoachingagency.com";
-
-                sendEmail($to, $subject, $message, $headers);
-
-                $this->redirect('/admin/users?success=add');
-            } catch (\Exception $e) {
-                // Rollback the transaction in case of an error
-                $db->rollBack();
+            if ($userId) {
+                // Send a welcome email to the new super user
+                sendEmail(
+                    $email,
+                    "Welcome to Sports Coaching Agency",
+                    "Dear $name,\n\nYour super user account has been created successfully. You can log in with the following credentials:\n\nEmail: $email\nPassword: {$_POST['password']}\n\nPlease change your password after logging in."
+                );
+                $this->redirect('/admin/users?success=add_super_user');
+            } else {
                 $this->redirect('/admin/users?error=add_failed');
             }
         } else {

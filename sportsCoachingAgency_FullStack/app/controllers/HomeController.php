@@ -1,19 +1,14 @@
 <?php
 namespace App\Controllers;
 
-use App\Config\Database;
 use PDO;
 
-class HomeController
+class HomeController extends BaseController
 {
     public function index()
     {   
-        // Connect to the database
-        $db = Database::connect();
-
-        // Fetch all settings
-        $stmt = $db->query("SELECT key_name, value FROM settings");
-        $settings = $stmt->fetchAll(PDO::FETCH_KEY_PAIR);
+        // Fetch settings using the BaseController method
+        $settings = $this->fetchSettings();
 
         // Prepare data for the home page
         $data = [

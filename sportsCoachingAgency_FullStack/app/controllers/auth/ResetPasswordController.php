@@ -4,9 +4,10 @@ namespace App\Controllers\Auth;
 require_once __DIR__ . '/../../config/Database.php';
 
 use App\Config\Database;
+use App\Controllers\BaseController; // Extend BaseController
 use PDO;
 
-class ResetPasswordController
+class ResetPasswordController extends BaseController
 {
     public function index()
     {
@@ -26,6 +27,9 @@ class ResetPasswordController
             die("❌ Invalid or expired reset token.");
         }
 
+        // Fetch settings using the BaseController method
+        $settings = $this->fetchSettings();
+
         // Prepare data for the reset password page
         $data = [
             'token' => $token,
@@ -35,6 +39,8 @@ class ResetPasswordController
             'page_js_url' => '/assets/js/auth/reset-password.js',
             // Header title for the page
             'header_title' => 'Reset Your Password',
+            // Settings data
+            'settings' => $settings,
         ];
 
         // Show the password reset form

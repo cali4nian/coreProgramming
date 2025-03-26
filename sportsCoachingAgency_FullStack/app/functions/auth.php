@@ -16,7 +16,7 @@ function requireLogin()
 function requireAdmin()
 {
     requireLogin(); // Ensure user is logged in first
-    if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'admin') {
+    if (!isset($_SESSION['current_role']) || $_SESSION['current_role'] !== 'admin') {
         header("Location: /dashboard"); // Redirect unauthorized users to the dashboard
         exit();
     }

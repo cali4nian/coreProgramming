@@ -13,7 +13,6 @@
         <button type="submit">Update Password</button>
     </form>
     <p>Remembered your password? <a href="/login">Login</a></p>
-    <p>Don't have an account? <a href="/register">Register</a></p>
     </aside>
 </section>
 <!-- END Admin Login Section -->

@@ -4,9 +4,10 @@ namespace App\Controllers\Auth;
 require_once __DIR__ . '/../../config/Database.php';
 
 use App\Config\Database;
+use App\Controllers\BaseController;
 use PDO;
 
-class VerifyEmailController
+class VerifyEmailController extends BaseController
 {
     public function verify()
     {
@@ -38,14 +39,15 @@ class VerifyEmailController
                 // Insert the user into the subscribers table if not already present
                 $stmt = $db->prepare("INSERT INTO subscribers (email, confirmation_token, is_confirmed) VALUES (:email, NULL, 1)");
                 $stmt->execute(['email' => $user['email']]);
-
-                echo "✅ Your email is verified, and you have been successfully added to the subscribers list!";
-            } else {
-                echo "✅ Your email is already in the subscribers list and verified!";
             }
 
+            // Redirect to login page with a success message
+            $this->redirect('/login?success=Your account has been verified. Please log in.');
+            exit();
         } else {
-            die("❌ Invalid or expired verification token.");
+            // Redirect to login page with an error message
+            $this->redirect('/login?error=Invalid or expired verification token.');
+            exit();
         }
     }
 }

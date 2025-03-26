@@ -40,6 +40,11 @@
                             <input type="hidden" name="id" value="<?php echo $user['id']; ?>">
                             <button type="submit" class="reset-btn">Reset Password</button>
                         </form>
+                        <!-- Delete Button -->
+                        <form action="/admin/users/delete" method="POST" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this user?');">
+                            <input type="hidden" name="id" value="<?php echo $user['id']; ?>">
+                            <button type="submit" class="delete-btn" style="background-color: red; color: white;">Delete</button>
+                        </form>
                     </td>
                 </tr>
             <?php endforeach; ?>
@@ -47,7 +52,7 @@
     </table>
 
     <!-- Pagination Links -->
-    <div>
+    <div class="pagination">
         <?php if ($currentPage > 1): ?>
             <a href="?page=<?= $currentPage - 1 ?>">⬅ Previous</a>
         <?php endif; ?>
@@ -90,6 +95,51 @@
         </form>
     </aside>
     <!-- END Add User Form -->
+    
+    <!-- Add Admin Form -->
+    <aside class="add-user-form-container">
+        <h2>Add Admin</h2>
+        <form action="/admin/users/add" method="POST">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required />
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required />
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required />
+            </div>
+            <!-- Role is hardcoded as 'admin' in the backend -->
+            <button type="submit">Add Admin</button>
+        </form>
+    </aside>
+    <!-- END Add Admin Form -->
+    
+    <!-- Add Super User Form -->
+    <aside class="add-user-form-container">
+        <h2>Add Super User</h2>
+        <form action="/admin/users/add" method="POST">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required />
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required />
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required />
+            </div>
+            <!-- Role is hardcoded as 'super user' in the backend -->
+            <button type="submit">Add Super User</button>
+        </form>
+    </aside>
+    <!-- END Add Super User Form -->
+     
 </div>
 
 <?php include 'footer.php'; ?>

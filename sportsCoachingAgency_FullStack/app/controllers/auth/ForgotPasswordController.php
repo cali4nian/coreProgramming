@@ -5,16 +5,20 @@ require_once __DIR__ . '/../../functions/email.php';
 require_once __DIR__ . '/../../config/Database.php';
 
 use App\Config\Database;
+use App\Controllers\BaseController; // Extend BaseController
 use PDO;
 
-class ForgotPasswordController
+class ForgotPasswordController extends BaseController
 {
     public function index()
     {
         if (isset($_SESSION['user_id'])) {
-            header("Location: /dashboard");
-            exit();
+            $this->redirect('/dashboard'); // Use BaseController's redirect method
         }
+
+        // Fetch settings using the BaseController method
+        $settings = $this->fetchSettings();
+
         // Prepare data for the forgot password page
         $data = [
             // CSS file URL
@@ -23,6 +27,8 @@ class ForgotPasswordController
             'page_js_url' => '/assets/js/auth/forgot-password.js',
             // Header title for the page
             'header_title' => 'Forgot Your Password?',
+            // Settings data
+            'settings' => $settings,
         ];
 
         renderTemplate('auth/forgot-password.php', $data);

@@ -6,7 +6,6 @@
     <a href="/"><img src="img/basketballLogo.webp" alt="" /></a>
     <aside id="email-form-content">
         <h2>Forgot Password</h2>
-        <p>Enter your email.</p>
         <!-- Email Submission Form -->
         <form action="/forgot-password/request" method="POST">
         <p class="input-group">
@@ -16,7 +15,6 @@
         <button type="submit">Send Reset Link</button>
         </form>
     </aside>
-    <p class="register"><a href="/register">Register</a></p>
     <p class="login"><a href="/login">Login</a></p>
     </aside>
 </section>

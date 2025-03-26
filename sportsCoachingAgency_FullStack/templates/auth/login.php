@@ -6,6 +6,13 @@
     <aside class="login-box">
     <a href="/"><img src="/assets/img/basketballLogo.webp" alt="" /></a>
     <h2>Login</h2>
+    <?php if (isset($_GET['success'])): ?>
+        <p style="color: green;"><?= htmlspecialchars($_GET['success']) ?></p>
+    <?php endif; ?>
+
+    <?php if (isset($_GET['error'])): ?>
+        <p style="color: red;"><?= htmlspecialchars($_GET['error']) ?></p>
+    <?php endif; ?>
     <form action="/login/request" method="POST">
     <input type="hidden" name="csrf_token" value="<?php echo generateCsrfToken(); ?>">
         <p class="input-group">
@@ -17,8 +24,7 @@
         <input type="password" id="password" name="password" placeholder="Enter your password" value="password123" required />
         </p>
         <button type="submit">Login</button>
-        <p class="forgot-password"><a href="/forgot-password">Forgot Password?</a> |
-        <a href="/register">Register</a></p>
+        <p class="forgot-password"><a href="/forgot-password">Forgot Password?</a></p>
     </form>
     </aside>
 </section>

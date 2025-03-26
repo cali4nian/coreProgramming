@@ -92,15 +92,113 @@ class SubscriberController extends BaseController
                 $stmt->execute(['email' => $email]);
 
                 if ($stmt->rowCount() > 0) {
-                    $this->redirect('/?confirmed=true'); // Redirect to home with a confirmation message
+                    // Redirect to home with a confirmation message
+                    $this->redirect('/?confirmed=true');
                 } else {
-                    $this->redirect('/?error=not_found'); // Redirect to home with an error message
+                    // Email not found, show a resend verification button
+                    $this->showResendVerificationPage($email, 'not_found');
                 }
             } else {
-                $this->redirect('/?error=invalid_email'); // Redirect to home with an error message
+                // Invalid email, show a resend verification button
+                $this->showResendVerificationPage(null, 'invalid_email');
             }
         } else {
-            $this->redirect('/'); // Redirect to home if accessed directly
+            // Redirect to home if accessed directly
+            $this->redirect('/');
+        }
+    }
+
+    /**
+     * Show a page with a resend verification button.
+     *
+     * @param string|null $email
+     * @param string $errorType
+     */
+    private function showResendVerificationPage(?string $email, string $errorType)
+    {
+        $errorMessage = '';
+        $resendLink = '';
+
+        if ($errorType === 'not_found') {
+            $errorMessage = "❌ We couldn't find a subscription with this email.";
+            if ($email) {
+                // Updated URL for resending subscription verification
+                $resendLink = "/resend-subscription-verification?email=" . urlencode($email);
+            }
+        } elseif ($errorType === 'invalid_email') {
+            $errorMessage = "❌ The email address provided is invalid.";
+        }
+
+        // Render a simple page with the error message and resend button
+        echo "<html>
+            <head>
+                <title>Subscription Confirmation</title>
+            </head>
+            <body>
+                <h1>Subscription Confirmation</h1>
+                <p style='color: red;'>$errorMessage</p>";
+
+        if ($resendLink) {
+            echo "<p>If you believe this is a mistake, you can resend the verification email:</p>
+                  <a href='$resendLink' style='display: inline-block; padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;'>Resend Verification Email</a>";
+        }
+
+        echo "<p><a href='/'>Return to Home</a></p>
+            </body>
+        </html>";
+        exit();
+    }
+
+    public function resendToSubscriber()
+    {
+        if (!isset($_GET['email'])) {
+            die("❌ Invalid request.");
+        }
+
+        $email = $_GET['email'];
+
+        $db = Database::connect();
+        $stmt = $db->prepare("SELECT id, confirmation_token, is_confirmed FROM subscribers WHERE email = :email");
+        $stmt->execute(['email' => $email]);
+        $subscriber = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (!$subscriber) {
+            die("❌ No subscriber found with this email.");
+        }
+
+        if ($subscriber['is_confirmed']) {
+            die("✅ Your email is already confirmed. You can <a href='/'>return to the homepage</a>.");
+        }
+
+        // Generate new confirmation token
+        $newToken = bin2hex(random_bytes(32));
+
+        // Store the new token in the database
+        $stmt = $db->prepare("UPDATE subscribers SET confirmation_token = :token WHERE id = :id");
+        $stmt->execute([
+            'token' => $newToken,
+            'id' => $subscriber['id']
+        ]);
+
+        // Send confirmation email
+        $confirmationLink = "http://localhost:8000/confirm-subscription?email=" . urlencode($email);
+        $subject = "Confirm Your Subscription (Resent)";
+        $body = "
+            <html>
+            <head>
+                <title>Confirm Your Subscription</title>
+            </head>
+            <body>
+                <p>Click the link below to confirm your subscription:</p>
+                <p><a href='$confirmationLink'>Confirm Subscription</a></p>
+            </body>
+            </html>
+        ";
+
+        if (sendEmail($email, $subject, $body)) {
+            echo "✅ Confirmation email resent! Please check your inbox.";
+        } else {
+            echo "❌ Error sending email.";
         }
     }
 

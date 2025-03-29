@@ -64,6 +64,14 @@ class UserModel extends BaseModel
 
     public function toggleUserStatus(int $id, bool $isActive): bool
     {
+        $stmt = $this->db->prepare("SELECT current_role FROM {$this->table} WHERE id = :id");
+        $stmt->execute(['id' => $id]);
+        $user = $stmt->fetch();
+
+        if ($user && $user['current_role'] === 'admin') {
+            return false; // Prevent deletion of admin users
+        }
+        
         $stmt = $this->db->prepare("UPDATE {$this->table} SET is_active = :is_active WHERE id = :id");
         return $stmt->execute([
             'is_active' => $isActive ? 1 : 0,

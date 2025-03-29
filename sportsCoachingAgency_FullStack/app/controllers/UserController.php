@@ -17,7 +17,7 @@ class UserController extends BaseController
 
     public function index()
     {
-        requireAdmin();
+        requireAdminOrSuper();
 
         $perPage = 10;
         $page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int)$_GET['page'] : 1;
@@ -54,7 +54,7 @@ class UserController extends BaseController
 
     public function pause(int $id)
     {
-        requireAdmin();
+        requireAdminOrSuper();
 
         if ($this->userModel->toggleUserStatus($id, false)) {
             $this->redirect('/admin/users?success=pause');
@@ -65,7 +65,7 @@ class UserController extends BaseController
 
     public function unpause(int $id)
     {
-        requireAdmin();
+        requireAdminOrSuper();
 
         if ($this->userModel->toggleUserStatus($id, true)) {
             $this->redirect('/admin/users?success=unpause');
@@ -76,7 +76,7 @@ class UserController extends BaseController
 
     public function resetPassword(int $id)
     {
-        requireAdmin();
+        requireAdminOrSuper();
 
         $tempPassword = bin2hex(random_bytes(4)); // 8 characters long
         $hashedPassword = password_hash($tempPassword, PASSWORD_DEFAULT);

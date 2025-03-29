@@ -1,4 +1,3 @@
-<!-- filepath: c:\Users\danie\Documents\github\coreProgramming\sportsCoachingAgency_FullStack\templates\back_pages\dashboard.php -->
 <?php include 'header.php'; ?>
 
 <section class="container">

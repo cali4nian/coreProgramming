@@ -67,57 +67,6 @@
     </div>
     <!-- END Pagination Links -->
     
-    <!-- Add User Form -->
-    <aside class="add-user-form-container">
-        <h2>Add User</h2>
-        <form action="/admin/users/add" method="POST">
-            <div class="form-group">
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" required />
-            </div>
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required />
-            </div>
-            <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required />
-            </div>
-            <div class="form-group">
-                <label for="role">Role:</label>
-                <select id="role" name="role" required>
-                    <option value="athlete">Athlete</option>
-                    <option value="coach">Coach</option>
-                    <option value="admin">Admin</option>
-                </select>
-            </div>
-            <button type="submit">Add User</button>
-        </form>
-    </aside>
-    <!-- END Add User Form -->
-    
-    <!-- Add Admin Form -->
-    <aside class="add-user-form-container">
-        <h2>Add Admin</h2>
-        <form action="/admin/users/add" method="POST">
-            <div class="form-group">
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" required />
-            </div>
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required />
-            </div>
-            <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required />
-            </div>
-            <!-- Role is hardcoded as 'admin' in the backend -->
-            <button type="submit">Add Admin</button>
-        </form>
-    </aside>
-    <!-- END Add Admin Form -->
-    
     <!-- Add Super User Form -->
     <aside class="add-user-form-container">
         <h2>Add Super User</h2>

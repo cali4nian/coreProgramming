@@ -37,11 +37,15 @@ class DashboardController
             'pageDescription' => 'Welcome to your dashboard, ' . htmlspecialchars($_SESSION['user_name']) . '. Here you can view your activities and manage your account.',
         ];
 
-        // Fetch total count of subscribers
-        $data['totalSubscribers'] = $this->dashboardModel->getTotalSubscribers();
-
-        // Fetch recent subscribers
-        $data['recentSubscribers'] = $this->dashboardModel->getRecentSubscribers();
+        if(isAdminOrSuper()) {
+            $data['isAdminOrSuper'] = true; // Set flag for admin or super user
+            // Fetch total count of subscribers
+            $data['totalSubscribers'] = $this->dashboardModel->getTotalSubscribers();
+            // Fetch recent subscribers
+            $data['recentSubscribers'] = $this->dashboardModel->getRecentSubscribers();
+        } else {
+            $data['isAdminOrSuper'] = false; // Set flag for non-admin users
+        }
 
         // Render the dashboard template with the prepared data
         renderTemplate('back_pages/dashboard.php', $data);

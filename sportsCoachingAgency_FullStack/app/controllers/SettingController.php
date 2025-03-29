@@ -12,7 +12,7 @@ class SettingController extends BaseController
 {
     public function index()
     {
-        requireAdmin();
+        requireAdminOrSuper();
 
         $db = Database::connect();
 
@@ -34,7 +34,7 @@ class SettingController extends BaseController
 
     public function updateSiteSettings()
     {
-        requireAdmin();
+        requireAdminOrSuper();
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $db = Database::connect();
@@ -49,7 +49,7 @@ class SettingController extends BaseController
 
     public function updateSocialMediaSettings()
     {
-        requireAdmin();
+        requireAdminOrSuper();
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $db = Database::connect();
@@ -69,7 +69,7 @@ class SettingController extends BaseController
 
     public function updateHomePageSettings()
     {
-        requireAdmin();
+        requireAdminOrSuper();
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $db = Database::connect();

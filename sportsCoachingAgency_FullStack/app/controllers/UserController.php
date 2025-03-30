@@ -27,7 +27,11 @@ class UserController extends BaseController
         $totalUsers = $this->userModel->getTotalUsers();
         $totalPages = ceil($totalUsers / $perPage);
 
+        $userId = $_SESSION['user_id'];
+        $currentRole = $this->userModel->getUserRoleById($userId);
+
         $data = [
+            'currentRole' => $currentRole,
             'users' => $users,
             'totalPages' => $totalPages,
             'currentPage' => $page,

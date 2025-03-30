@@ -5,6 +5,19 @@ class UserModel extends BaseModel
 {
     private string $table = "users"; // Set the table name
 
+    /**
+     * Get the current role of a user by their ID.
+     *
+     * @param int $userId
+     * @return string|null
+     */
+    public function getUserRoleById(int $userId): ?string
+    {
+        $stmt = $this->db->prepare("SELECT current_role FROM users WHERE id = :id");
+        $stmt->execute(['id' => $userId]);
+        return $stmt->fetchColumn() ?: null;
+    }
+    
     public function getAllUsers(int $limit, int $offset): array
     {
         $stmt = $this->db->prepare("SELECT id, name, email, is_verified, is_active FROM {$this->table} LIMIT :limit OFFSET :offset");
@@ -71,7 +84,7 @@ class UserModel extends BaseModel
         if ($user && $user['current_role'] === 'admin') {
             return false; // Prevent deletion of admin users
         }
-        
+
         $stmt = $this->db->prepare("UPDATE {$this->table} SET is_active = :is_active WHERE id = :id");
         return $stmt->execute([
             'is_active' => $isActive ? 1 : 0,

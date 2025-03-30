@@ -5,28 +5,34 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Config\Database;
 use PDO;
+use App\Models\SettingModel;
 
 require_once __DIR__ . '/../functions/auth.php';
 
 class SettingController extends BaseController
 {
+    private SettingModel $settingsModel;
+
+    public function __construct()
+    {
+        // call settings model if needed
+        $this->settingsModel = new SettingModel();
+    }
+    
     public function index()
     {
         requireAdminOrSuper();
 
-        $db = Database::connect();
-
         // Fetch all settings
-        $stmt = $db->query("SELECT key_name, value FROM settings");
-        $settings = $stmt->fetchAll(PDO::FETCH_KEY_PAIR);
+        $settings = $this->settingsModel->getAllSettings();
 
         $data = [
             'header_title' => 'Settings',
             'page_css_url' => '/assets/css/settings.css',
             'page_js_url' => '/assets/js/backend/settings/settings.js',
             'settings' => $settings,
-            'pageName' => 'Settings', // Added pageName
-            'pageDescription' => 'Manage your application settings, including site details, social media links, and homepage configurations.', // Added pageDescription
+            'pageName' => 'Settings',
+            'pageDescription' => 'Manage your application settings, including site details, social media links, and homepage configurations.',
         ];
 
         renderTemplate('back_pages/settings.php', $data);

@@ -36,7 +36,7 @@ function requireSuper()
 function requireAdminOrSuper()
 {
     requireLogin(); // Ensure user is logged in first
-    if (!isset($_SESSION['current_role']) || $_SESSION['current_role'] !== 'admin' || $_SESSION['current_role'] !== 'super user') {
+    if (!isset($_SESSION['current_role']) || $_SESSION['current_role'] !== 'admin' && $_SESSION['current_role'] !== 'super user') {
         header("Location: /dashboard"); // Redirect unauthorized users to the dashboard
         exit();
     }

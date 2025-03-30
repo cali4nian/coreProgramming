@@ -1,6 +1,7 @@
 <?php include 'header.php'; ?>
 
-<div>
+<section>
+    <?php if ($data['currentRole'] === 'admin' || $data['currentRole'] === 'super user'): ?>
     <table>
         <thead>
             <tr>
@@ -40,11 +41,13 @@
                             <input type="hidden" name="id" value="<?php echo $user['id']; ?>">
                             <button type="submit" class="reset-btn">Reset Password</button>
                         </form>
-                        <!-- Delete Button -->
-                        <form action="/admin/users/delete" method="POST" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this user?');">
-                            <input type="hidden" name="id" value="<?php echo $user['id']; ?>">
-                            <button type="submit" class="delete-btn" style="background-color: red; color: white;">Delete</button>
-                        </form>
+                        <?php if ($data['currentRole'] === 'admin'): ?>
+                            <!-- Delete Button -->
+                            <form action="/admin/users/delete" method="POST" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this user?');">
+                                <input type="hidden" name="id" value="<?php echo $user['id']; ?>">
+                                <button type="submit" class="delete-btn" style="background-color: red; color: white;">Delete</button>
+                            </form>
+                        <?php endif; ?>
                     </td>
                 </tr>
             <?php endforeach; ?>
@@ -88,7 +91,7 @@
         </form>
     </aside>
     <!-- END Add Super User Form -->
-     
-</div>
+     <?php endif; ?>
+</section>
 
 <?php include 'footer.php'; ?>

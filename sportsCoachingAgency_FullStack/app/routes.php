@@ -36,7 +36,7 @@ $routes = [
     '/admin/users/pause' => 'App\Controllers\UserController@pause',
     '/admin/users/unpause' => 'App\Controllers\UserController@unpause',
     '/admin/users/update' => 'App\Controllers\UserController@update',
-    '/admin/users/reset_password' => 'App\Controllers\UserController@reset_password',
+    '/admin/users/reset_password' => 'App\Controllers\UserController@resetPassword',
     '/admin/users/add' => 'App\Controllers\UserController@add',
     '/admin/users/delete' => 'App\Controllers\UserController@delete',
     // Subscriber Management

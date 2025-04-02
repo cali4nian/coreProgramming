@@ -2,6 +2,7 @@
 namespace App\Controllers;
 
 require_once __DIR__ . '/../functions/auth.php';
+require_once __DIR__ . '/../functions/email.php';
 require_once __DIR__ . '/../models/UserModel.php';
 
 use App\Models\UserModel;
@@ -45,10 +46,15 @@ class UserController extends BaseController
         renderTemplate('back_pages/users.php', $data);
     }
 
-    public function delete(int $id)
+    public function delete()
     {
         requireAdmin();
-
+        
+        $id = $_POST['id'] ?? null;
+        if (!$id) {
+            $this->redirect('/admin/users?error=invalid_request');
+            return;
+        }
         if ($this->userModel->deleteUser($id)) {
             $this->redirect('/admin/users?success=delete');
         } else {
@@ -56,9 +62,15 @@ class UserController extends BaseController
         }
     }
 
-    public function pause(int $id)
+    public function pause()
     {
         requireAdminOrSuper();
+        
+        $id = $_POST['id'] ?? null;
+        if (!$id) {
+            $this->redirect('/admin/users?error=invalid_request');
+            return;
+        }
 
         if ($this->userModel->toggleUserStatus($id, false)) {
             $this->redirect('/admin/users?success=pause');
@@ -67,9 +79,15 @@ class UserController extends BaseController
         }
     }
 
-    public function unpause(int $id)
+    public function unpause()
     {
         requireAdminOrSuper();
+
+        $id = $_POST['id'] ?? null;
+        if (!$id) {
+            $this->redirect('/admin/users?error=invalid_request');
+            return;
+        }
 
         if ($this->userModel->toggleUserStatus($id, true)) {
             $this->redirect('/admin/users?success=unpause');
@@ -78,9 +96,15 @@ class UserController extends BaseController
         }
     }
 
-    public function resetPassword(int $id)
+    public function resetPassword()
     {
         requireAdminOrSuper();
+
+        $id = $_POST['id'] ?? null;
+        if (!$id) {
+            $this->redirect('/admin/users?error=invalid_request');
+            return;
+        }
 
         $tempPassword = bin2hex(random_bytes(4)); // 8 characters long
         $hashedPassword = password_hash($tempPassword, PASSWORD_DEFAULT);
@@ -127,5 +151,30 @@ class UserController extends BaseController
         } else {
             $this->redirect('/admin/users?error=invalid_request');
         }
+    }
+
+    public function edit()
+    {
+        requireAdminOrSuper();
+
+        $id = $_POST['id'] ?? null;
+        if (!$id) {
+            $this->redirect('/admin/users?error=invalid_request');
+            return;
+        }
+
+        $user = $this->userModel->getUserById($id);
+        if (!$user) {
+            $this->redirect('/admin/users?error=user_not_found');
+            return;
+        }
+
+        renderTemplate('back_pages/edit_user.php', [
+            'header_title' => 'Edit User',
+            'page_css_url' => '/assets/css/edit-user.css',
+            'page_js_url' => '/assets/js/backend/edit_user/edit_user.js',
+            'user' => $user,
+            'currentRole' => $_SESSION['current_role'],
+        ]);
     }
 }

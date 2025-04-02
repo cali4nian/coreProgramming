@@ -18,14 +18,15 @@
                 <input type="email" id="email" name="email" value="<?= htmlspecialchars($user['email']); ?>" required>
             </div>
 
-            <div class="form-group">
-                <label for="role">Role:</label>
-                <select id="role" name="role" required>
-                    <option value="admin" <?= $user['current_role'] === 'admin' ? 'selected' : ''; ?>>Admin</option>
-                    <option value="coach" <?= $user['current_role'] === 'coach' ? 'selected' : ''; ?>>Coach</option>
-                    <option value="athlete" <?= $user['current_role'] === 'athlete' ? 'selected' : ''; ?>>Athlete</option>
-                </select>
-            </div>
+            <?php if ($currentRole === 'admin'): ?>
+                <div class="form-group">
+                    <label for="role">Role:</label>
+                    <select id="role" name="role" required>
+                        <option value="admin" <?= $user['current_role'] === 'admin' ? 'selected' : ''; ?>>Admin</option>
+                        <option value="super user" <?= $user['current_role'] === 'super user' ? 'selected' : ''; ?>>Super User</option>
+                    </select>
+                </div>
+            <?php endif; ?>
 
             <button type="submit" class="btn btn-primary">Update User</button>
         </form>

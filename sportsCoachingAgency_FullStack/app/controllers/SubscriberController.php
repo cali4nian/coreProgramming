@@ -6,30 +6,31 @@ require_once __DIR__ . '/../config/Database.php';
 require_once __DIR__ . '/../functions/email.php';
 
 use App\Config\Database;
+use App\Models\SubscriberModel;
 use PDO;
 
 class SubscriberController extends BaseController
 {
+    private SubscriberModel $subscriberModel;
+
+    public function __construct()
+    {
+        $this->subscriberModel = new SubscriberModel();
+    }
+
     public function index()
     {
-        requireAdmin(); // Ensure only admins can access
+        requireAdminOrSuper(); // Ensure only admins can access
 
-        $db = Database::connect();
-        
         $perPage = 10; // Number of subscribers per page
         $page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int)$_GET['page'] : 1;
         $offset = ($page - 1) * $perPage;
 
         // Fetch subscribers with pagination
-        $stmt = $db->prepare("SELECT id, email, is_confirmed, subscribed_at FROM subscribers LIMIT :limit OFFSET :offset");
-        $stmt->bindValue(':limit', $perPage, PDO::PARAM_INT);
-        $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
-        $stmt->execute();
-        $subscribers = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $subscribers = $this->subscriberModel->getAllSubscribersWithPagination($perPage, $offset);
 
         // Get total number of subscribers for pagination
-        $stmt = $db->query("SELECT COUNT(*) FROM subscribers");
-        $totalSubscribers = $stmt->fetchColumn();
+        $totalSubscribers = $this->subscriberModel->getTotalSubscribers();
         $totalPages = ceil($totalSubscribers / $perPage);
 
         $data = [
@@ -39,21 +40,22 @@ class SubscriberController extends BaseController
             'header_title' => 'Subscribers List',
             'page_css_url' => '/assets/css/subscribers.css',
             'page_js_url' => '/assets/js/backend/subscribers/subscribers.js',
-            'pageName' => 'Subscriber Management', // Added pageName
-            'pageDescription' => 'View and manage all subscribers, including their subscription status and details.', // Added pageDescription
+            'pageName' => 'Subscriber Management',
+            'pageDescription' => 'View and manage all subscribers, including their subscription status and details.',
         ];
 
         renderTemplate('back_pages/admin/subscribers.php', $data);
     }
+
     public function subscribe()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email'])) {
             $email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
 
             if ($email) {
-                $db = Database::connect();
-                $stmt = $db->prepare("INSERT INTO subscribers (email, is_confirmed, subscribed_at) VALUES (:email, 0, NOW())");
-                $stmt->execute(['email' => $email]);
+
+                $this->subscriberModel->addSubscriber($email); // Add subscriber to the database
+                
                 // Send confirmation email
                 $subject = "Confirm your subscription";
                 $message = "
@@ -157,10 +159,7 @@ class SubscriberController extends BaseController
 
         $email = $_GET['email'];
 
-        $db = Database::connect();
-        $stmt = $db->prepare("SELECT id, confirmation_token, is_confirmed FROM subscribers WHERE email = :email");
-        $stmt->execute(['email' => $email]);
-        $subscriber = $stmt->fetch(PDO::FETCH_ASSOC);
+        $subscriber = $this->subscriberModel->getSubscriberByEmail($email);
 
         if (!$subscriber) {
             die("❌ No subscriber found with this email.");
@@ -174,11 +173,7 @@ class SubscriberController extends BaseController
         $newToken = bin2hex(random_bytes(32));
 
         // Store the new token in the database
-        $stmt = $db->prepare("UPDATE subscribers SET confirmation_token = :token WHERE id = :id");
-        $stmt->execute([
-            'token' => $newToken,
-            'id' => $subscriber['id']
-        ]);
+        $this->subscriberModel->setNewToken($newToken, $subscriber['id']);
 
         // Send confirmation email
         $confirmationLink = "http://localhost:8000/confirm-subscription?email=" . urlencode($email);
@@ -210,9 +205,7 @@ class SubscriberController extends BaseController
             die("❌ Invalid subscriber ID.");
         }
 
-        $db = Database::connect();
-        $stmt = $db->prepare("DELETE FROM subscribers WHERE id = :id");
-        $stmt->execute(['id' => $_GET['id']]);
+        $this->subscriberModel->deleteSubscriber($_GET['id']);
 
         // Redirect to the subscriber list with a success message
         header("Location: /admin/subscribers?deleted=true");
@@ -222,12 +215,8 @@ class SubscriberController extends BaseController
     // Download All Subscribers
     public function downloadAllSubscribers()
     {
-        requireAdmin(); // Ensure only admins can download
-
-        $db = Database::connect();
-        $stmt = $db->query("SELECT id, email, is_confirmed, subscribed_at FROM subscribers");
-        $subscribers = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
+        requireAdminOrSuper(); // Ensure only admins can download
+        $subscribers = $this->subscriberModel->getAllSubscribers();
         // Set headers for CSV download
         header('Content-Type: text/csv; charset=utf-8');
         header('Content-Disposition: attachment; filename=all_subscribers.csv');
@@ -252,13 +241,8 @@ class SubscriberController extends BaseController
     // Download Confirmed Subscribers
     public function downloadConfirmedSubscribers()
     {
-        requireAdmin(); // Ensure only admins can download
-
-        $db = Database::connect();
-        $stmt = $db->prepare("SELECT id, email, is_confirmed, subscribed_at FROM subscribers WHERE is_confirmed = 1");
-        $stmt->execute();
-        $subscribers = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
+        requireAdminOrSuper(); // Ensure only admins can download
+        $subscribers = $this->subscriberModel->getAllConfirmedSubscribers();
         // Set headers for CSV download
         header('Content-Type: text/csv; charset=utf-8');
         header('Content-Disposition: attachment; filename=confirmed_subscribers.csv');
@@ -283,12 +267,8 @@ class SubscriberController extends BaseController
     // Download Unconfirmed Subscribers
     public function downloadUnconfirmedSubscribers()
     {
-        requireAdmin(); // Ensure only admins can download
-
-        $db = Database::connect();
-        $stmt = $db->prepare("SELECT id, email, is_confirmed, subscribed_at FROM subscribers WHERE is_confirmed = 0");
-        $stmt->execute();
-        $subscribers = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        requireAdminOrSuper(); // Ensure only admins can download
+        $subscribers = $this->subscriberModel->getAllUnconfirmedSubscribers();
 
         // Set headers for CSV download
         header('Content-Type: text/csv; charset=utf-8');

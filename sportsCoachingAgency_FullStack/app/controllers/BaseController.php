@@ -13,6 +13,12 @@ class BaseController
         exit();
     }
 
+    protected function isSessionOrStart() {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+    }
+
     // Check if user is logged in
     protected function isLoggedIn() 
     {

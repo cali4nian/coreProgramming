@@ -35,3 +35,29 @@
         Error when sending email. Try again later.
     </div>
 <?php endif; ?>
+
+<?php if (isset($_GET['error']) && $_GET['error'] == 'invalid_request'): ?>
+    <div class="alert alert-danger">
+        Refresh web browser, clear browser cache, or try again later.
+    </div>
+<?php endif; ?>
+
+<?php if (isset($_GET['error']) && $_GET['error'] == 'email_or_password_empty'): ?>
+    <div class="alert alert-danger">
+        You must provide an email and password.
+    </div>
+<?php endif; ?>
+
+<?php if (isset($_GET['error']) && $_GET['error'] == 'invalid_email_or_password'): ?>
+    <div class="alert alert-danger">
+        You must provide a valid email and password.
+    </div>
+<?php endif; ?>
+
+<?php if (isset($_GET['error']) && $_GET['error'] == 'user_not_verified'): ?>
+    <div class="alert alert-danger">
+        ❌ Please verify your email before logging in.
+        <br><a href='/resend-verification?email=<?php urlencode($_GET['email']); ?>'>Resend Verification Email</a>
+        <br><a href='/login'>Back to Login</a>";
+    </div>
+<?php endif; ?>

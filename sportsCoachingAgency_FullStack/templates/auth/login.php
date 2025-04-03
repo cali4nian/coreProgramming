@@ -6,13 +6,6 @@
     <aside class="login-box">
     <a href="/"><img src="/assets/img/basketballLogo.webp" alt="" /></a>
     <h2>Login</h2>
-    <?php if (isset($_GET['success'])): ?>
-        <p style="color: green;"><?= htmlspecialchars($_GET['success']) ?></p>
-    <?php endif; ?>
-
-    <?php if (isset($_GET['error'])): ?>
-        <p style="color: red;"><?= htmlspecialchars($_GET['error']) ?></p>
-    <?php endif; ?>
     <form action="/login/request" method="POST">
     <input type="hidden" name="csrf_token" value="<?php echo generateCsrfToken(); ?>">
         <p class="input-group">
@@ -30,4 +23,5 @@
 </section>
 <!-- END Admin Login Section -->
 
+<?php include 'partials/confirmation_messages.php'; ?>
 <?php include __DIR__ . '/../footer.php'; ?>

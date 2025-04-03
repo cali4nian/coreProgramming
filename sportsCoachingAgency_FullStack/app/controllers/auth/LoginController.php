@@ -4,36 +4,33 @@ namespace App\Controllers\Auth;
 require_once __DIR__ . '/../../functions/csrf.php';
 require_once __DIR__ . '/../../config/Database.php';
 
-use App\Config\Database;
-use App\Controllers\BaseController; // Extend BaseController
-use PDO;
-use Exception;
+use App\Models\AuthModel;
+use App\Controllers\BaseController;
 
 class LoginController extends BaseController
 {
+
+    private AuthModel $authModel;
+
+    public function __construct()
+    {
+        $this->authModel = new AuthModel();
+    }
+
     public function index()
     {
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start(); // Start session only if not already started
-        }
-
-        // Redirect to dashboard if already logged in
-        if (isset($_SESSION['user_id'])) {
-            $this->redirect('/dashboard'); // Use BaseController's redirect method
-        }
+        // Start session only if not already started
+        $this->isLoggedIn();
+        $this->isSessionOrStart();
 
         // Fetch settings using the BaseController method
         $settings = $this->fetchSettings();
 
         // Prepare data for the login page
         $data = [
-            // CSS file URL
             'page_css_url' => '/assets/css/login.css',
-            // JS file URL
             'page_js_url' => '/assets/js/auth/login.js',
-            // Header title for the page
             'header_title' => 'Login to Your Account',
-            // Settings data
             'settings' => $settings,
         ];
 
@@ -41,70 +38,41 @@ class LoginController extends BaseController
         renderTemplate('auth/login.php', $data);
     }
 
+    // Login user if authenticated
     public function login()
     {
         // Redirect to dashboard if already logged in
-        if (isset($_SESSION['user_id'])) {
-            $this->redirect('/dashboard'); // Use BaseController's redirect method
-        }
-
-        if (session_status() !== PHP_SESSION_ACTIVE) {
-            session_start();
-        }
+        $this->isLoggedIn();
+        $this->isSessionOrStart();
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            if (!isset($_POST['csrf_token']) || !validateCsrfToken($_POST['csrf_token'])) {
-                die("CSRF token validation failed.");
-            }
+            if (!isset($_POST['csrf_token']) || !validateCsrfToken($_POST['csrf_token'])) $this->redirect('login?error=invalid_request');
 
-            $email = trim($_POST['email']);
+            $email = $this->sanitizeEmail($_POST['email']);
             $password = trim($_POST['password']);
 
-            if (empty($email) || empty($password)) {
-                die("Email and password are required.");
-            }
+            if (empty($email) || empty($password)) $this->redirect('login?error=email_or_password_empty');
 
-            $db = Database::connect();
-
-            // Fetch user and their current role
-            $stmt = $db->prepare("
-                SELECT 
-                    id, 
-                    name, 
-                    email, 
-                    password, 
-                    is_verified, 
-                    current_role 
-                FROM users
-                WHERE email = :email
-                LIMIT 1
-            ");
-            $stmt->execute(['email' => $email]);
-            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+            $user = $this->authModel->fetchUser($email);
 
             if ($user && password_verify($password, $user['password'])) {
-                if (!$user['is_verified']) {
-                    echo "❌ Please verify your email before logging in.";
-                    echo "<br><a href='/resend-verification?email=" . urlencode($user['email']) . "'>Resend Verification Email</a>";
-                    echo "<br><a href='/login'>Back to Login</a>";
-                    exit();
-                }
-            
+                if (!$user['is_verified']) $this->redirect('login?error=user_not_verified&email='.$user['email']);
                 // Store user data in session
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['user_name'] = $user['name'];
-                $_SESSION['current_role'] = $user['current_role']; // Store the current role for access control
-                $this->redirect('/dashboard'); // Use BaseController's redirect method
+                $_SESSION['current_role'] = $user['current_role'];
+                $this->redirect('/dashboard');
             } else {
-                die("Invalid email or password.");
+                $this->redirect("login?error=invalid_email_or_password");
             }
         }
     }
 
+    // Destroy session
     public function logout()
     {
         session_start();
-        session_destroy(); // Destroy session
-        $this->redirect('/login'); // Use BaseController's redirect method
+        session_destroy();
+        $this->redirect('/login');
     }
 }

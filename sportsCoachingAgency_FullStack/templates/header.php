@@ -38,5 +38,3 @@
       </ul>
     </nav>
     <!-- END Navigation -->
-  </body>
-</html>

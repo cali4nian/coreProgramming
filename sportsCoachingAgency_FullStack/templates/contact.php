@@ -23,5 +23,6 @@
   </div>
 </section>
 <!-- END Contact Section -->
-
+ 
+<?php include 'partials/confirmation_messages.php'; ?>
 <?php include 'footer.php'; ?>

@@ -29,3 +29,6 @@
 
     <!-- Back to top Button -->
     <button id="backToTop" class="hidden">&#9650;</button>
+
+</body>
+</html>

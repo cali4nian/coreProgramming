@@ -1,4 +1,10 @@
 <!-- SUCCESS -->
+<?php if (isset($_GET['success']) && $_GET['success'] == 'account_verified'): ?>
+    <div class="alert alert-info">
+    <p>✅ Your account has been confirmed. You can now login.</p>
+    </div>
+<?php endif; ?>
+
 <?php if (isset($_GET['pending']) && $_GET['pending'] == 'true'): ?>
     <div class="alert alert-info">
     <p>Subscription pending. ✅ A confirmation email has been sent. Please check your inbox.</p>
@@ -11,11 +17,30 @@
     </div>
 <?php endif; ?>
 
+<?php if (isset($_GET['confirmed']) && $_GET['confirmed'] == 'already_confirmed'): ?>
+    <div class="alert alert-success">
+        ✅ Your email is already verified. You can <a href='/login'>login</a>.
+    </div>
+<?php endif; ?>
+
 <?php if (isset($_GET['success']) && $_GET['success'] == 'password_reset_email_sent'): ?>
     <div class="alert alert-success">
         Check your inbox. Your password reset link has been sent!
     </div>
 <?php endif; ?>
+
+<?php if (isset($_GET['confirmation']) && $_GET['confirmation'] == 'resent'): ?>
+    <div class="alert alert-success">
+        ✅ Verification email resent! Please check your inbox.
+    </div>
+<?php endif; ?>
+
+<?php if (isset($_GET['success']) && $_GET['success'] == 'password_reset_successful'): ?>
+    <div class="alert alert-success">
+        ✅ Password reset successful! You can now <a href='/login'>login</a>.
+    </div>
+<?php endif; ?>
+<!-- END SUCCESS -->
 
 <!-- ERRORS -->
 <?php if (isset($_GET['error']) && $_GET['error'] == 'invalid_email'): ?>
@@ -54,7 +79,7 @@
     </div>
 <?php endif; ?>
 
-<?php if (isset($_GET['error']) && $_GET['error'] == 'user_not_verified'): ?>
+<?php if (isset($_GET['error']) && isset($_GET['email']) && $_GET['error'] == 'user_not_verified'): ?>
     <div class="alert alert-danger">
         ❌ Please verify your email before logging in.
         <br><a href='/resend-verification?email=<?php urlencode($_GET['email']); ?>'>Resend Verification Email</a>

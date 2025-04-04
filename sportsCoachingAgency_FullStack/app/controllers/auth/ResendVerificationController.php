@@ -4,51 +4,50 @@ namespace App\Controllers\Auth;
 require_once __DIR__ . '/../../functions/email.php';
 require_once __DIR__ . '/../../config/Database.php';
 
-use App\Config\Database;
-use PDO;
+use App\Models\AuthModel;
+use App\Controllers\BaseController;
 
-class ResendVerificationController
+class ResendVerificationController extends BaseController
 {
+    private AuthModel $authModel;
+
+    public function __construct()
+    {
+        $this->authModel = new AuthModel();
+    }
+
     public function resend()
     {
-        if (!isset($_GET['email'])) {
-            die("❌ Invalid request.");
-        }
+        if (!isset($_GET['email'])) $this->redirect('login?error=invalid_request');
 
-        $email = $_GET['email'];
+        $email = $this->sanitizeEmail($_GET['email']);
 
-        $db = Database::connect();
-        $stmt = $db->prepare("SELECT id, is_verified FROM users WHERE email = :email");
-        $stmt->execute(['email' => $email]);
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        if (!$email) $this->redirect('login?error=invalid_email');
 
-        if (!$user) {
-            die("❌ No account found with this email.");
-        }
+        $user = $this->authModel->fetchUserRVC($email);
 
-        if ($user['is_verified']) {
-            die("✅ Your email is already verified. You can <a href='/login'>login</a>.");
-        }
+        if (!$user) $this->redirect('login?error=not_found');
+        
+        if ($user['is_verified']) $this->redirect('login?confirmed=already_confirmed');
 
         // Generate new verification token
         $newToken = bin2hex(random_bytes(32));
 
         // Store the new token in the database
-        $stmt = $db->prepare("UPDATE users SET verification_token = :token WHERE id = :id");
-        $stmt->execute([
-            'token' => $newToken,
-            'id' => $user['id']
-        ]);
+        $this->authModel->restoreResetToken($newToken, $user['id']);
 
         // Send verification email
         $verificationLink = "http://localhost:8000/verify-email?token=$newToken";
-        $subject = "Verify Your Email (Resent)";
-        $body = "<p>Click <a href='$verificationLink'>here</a> to verify your email.</p>";
 
-        if (sendEmail($email, $subject, $body)) {
-            echo "✅ Verification email resent! Please check your inbox.";
-        } else {
-            echo "❌ Error sending email.";
-        }
+        if (!file_exists(__DIR__ . '/../../../templates/email/confirm_email_template.html')) $this->redirect('forgot-password?error=system');
+
+        $template = file_get_contents(__DIR__ . '/../../../templates/email/confirm_email_template.html');
+
+        // Replace placeholder with actual link
+        $subject = "Verify Your Email (Resent)";
+        $emailBody = str_replace("{{verification_link}}", $verificationLink, $template);
+
+        if (sendEmail($email, $subject, $emailBody)) $this->redirect('login?confirmation=resent');
+        else $this->redirect('login?error=emailing_error');
     }
 }

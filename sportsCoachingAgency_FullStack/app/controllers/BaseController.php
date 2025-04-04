@@ -57,13 +57,10 @@ class BaseController
 
     // Sanitize phone number
     protected function sanitizePhoneNumber($phone) {
-    $phone = trim($phone); // Remove spaces from start and end
-    $phone = strip_tags($phone); // Remove any HTML tags
-    $phone = preg_replace('/[^\d\+\-]/', '', $phone); // Allow only digits, +, and -
-    return $phone;
-}
-
-    
-    
-    
+        $phone = trim($phone); // Remove spaces from start and end
+        $phone = strip_tags($phone); // Remove any HTML tags
+        $phone = preg_replace('/[^\d\+\-]/', '', $phone); // Allow only digits, +, and -
+        return $phone;
+    }
+       
 }

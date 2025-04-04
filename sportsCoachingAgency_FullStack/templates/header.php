@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="/assets/img/default_logo.webp" type="image/x-icon" />
     <link rel="stylesheet" href="/assets/css/front-global.css" />
-    <link rel="stylesheet" href="<?php echo $page_css_url; ?>" />
+    <link rel="stylesheet" href="<?php echo $page_css_url ?? ''; ?>" />
     <script type="module" src="/assets/js/frontend/global.js"></script>
-    <script type="module" src="<?php echo $page_js_url; ?>"></script>
+    <script type="module" src="<?php echo $page_js_url ?? ''; ?>"></script>
     <title><?php echo $header_title ?? 'Welcome to our website!'; ?></title>
   </head>
   <body>

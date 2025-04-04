@@ -51,49 +51,58 @@ class SubscriberController extends BaseController
             $email = $this->sanitizeEmail($_POST['email']);
             $email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
 
-            if ($email) {
-                $this->subscriberModel->addSubscriber($email);
-                
-                // Send confirmation email
-                $subject = "Confirm your subscription";
-                $message = "
-                    <html>
-                    <head>
-                        <title>Confirm your subscription</title>
-                    </head>
-                    <body>
-                        <p>Please click the link below to confirm your subscription:</p>
-                        <p><a href='http://localhost:8000/confirm-subscription?email=" . urlencode($email) . "'>Confirm Subscription</a></p>
-                    </body>
-                    </html>
-                ";
-                $headers = "MIME-Version: 1.0" . "\r\n";
-                $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+            // Check if the email is already in the database
+            $subscriber = $this->subscriberModel->getSubscriberByEmail($email);
 
-                sendEmail($email, $subject, $message);
-                $this->redirect('/?pending=true'); // Redirect to home with a pending message
-            
-            } else {
-                $this->redirect('/?error=invalid_email'); // Redirect to home with an error message
+            // If the email is already in the database, check if it's confirmed
+            if ($subscriber) {
+                // If it's confirmed, redirect to home with an error message
+                if ($subscriber['is_confirmed']) $this->redirect('/?error=subscriber_already_verified');
+                // If it's not confirmed, redirect to home with a pending message
+                else $this->sendConfirmationEmail($email); // Send confirmation email
             }
-        } else {
-            $this->redirect('/'); // Redirect to home if accessed directly
-        }
+            
+            // If the email is not in the database, add it and send a confirmation email
+            if ($email && !$subscriber) {
+                $this->subscriberModel->addSubscriber($email);
+                $this->sendConfirmationEmail($email); // Send confirmation email
+            
+            } else $this->redirect('/?error=invalid_email'); // Redirect to home with an error message
+        } else $this->redirect('/'); // Redirect to home if accessed directly
+    }
+
+    public function sendConfirmationEmail($email)
+    {
+        // Send confirmation email
+        $subject = "Confirm your subscription";
+
+        // Load the template
+        $template = file_get_contents(__DIR__ . '/../../templates/email/confirm_subscription_template.html');
+
+        $confirmationLink = "http://localhost:8000/confirm-subscription?email=" . urlencode($email);
+        $message = str_replace('{{confirmation_link}}', $confirmationLink, $template);
+        $headers = "MIME-Version: 1.0" . "\r\n";
+        $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+
+        sendEmail($email, $subject, $message);
+        $this->redirect('/?pending=true'); // Redirect to home with a pending message
     }
 
     public function confirm()
     {
         if (isset($_GET['email'])) {
-            $email = filter_var($_GET['email'], FILTER_VALIDATE_EMAIL);
+            $emailClean = $this->sanitizeEmail($_GET['email']);
+            $emailFiltered = filter_var($emailClean, FILTER_VALIDATE_EMAIL);
 
-            if ($email) {
-                $this->subscriberModel->confirmSubscriber($email);
+            if ($emailClean && $emailFiltered) {
+                $this->subscriberModel->confirmSubscriber($emailFiltered);
+                
                 // Check if the email exists in the database
-                $subscriber = $this->subscriberModel->getSubscriberByEmail($email);
+                $subscriber = $this->subscriberModel->getSubscriberByEmail($emailFiltered);
 
                 // Redirect to home with a confirmation message
-                if ($subscriber) $this->redirect('/?confirmed=true');
-                else $this->showResendVerificationPage($email, 'not_found');
+                if ($subscriber && $subscriber['is_confirmed']) $this->redirect('/?confirmed=true');
+                else $this->showResendVerificationPage($emailFiltered, 'not_found');
 
             } else {
                 // Invalid email, show a resend verification button
@@ -145,6 +154,7 @@ class SubscriberController extends BaseController
         </html>";
         exit();
     }
+    
 
     public function resendToSubscriber()
     {

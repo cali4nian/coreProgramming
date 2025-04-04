@@ -7,7 +7,7 @@
     <a href="/"><img src="/assets/img/basketballLogo.webp" alt="" /></a>
     <h2>Login</h2>
     <form action="/login/request" method="POST">
-    <input type="hidden" name="csrf_token" value="<?php echo generateCsrfToken(); ?>">
+        <input type="hidden" name="csrf_token" value="<?php echo generateCsrfToken(); ?>">
         <p class="input-group">
         <label for="email">Email Address</label>
         <input type="email" id="email" name="email" placeholder="Enter your email" value="admin@example.com" required />

@@ -13,6 +13,7 @@ class BaseController
         exit();
     }
 
+    // Method to check if session is started, if not, start it
     protected function isSessionOrStart() {
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
@@ -30,9 +31,8 @@ class BaseController
     // Fetch all settings from database
     protected function fetchSettings(): array
     {
-        // Connect to the database
+        // connect to the database
         $db = Database::connect();
-
         // Fetch all settings
         $stmt = $db->query("SELECT key_name, value FROM settings");
         return $stmt->fetchAll(PDO::FETCH_KEY_PAIR);

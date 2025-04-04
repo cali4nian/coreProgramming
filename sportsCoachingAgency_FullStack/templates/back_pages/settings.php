@@ -1,14 +1,5 @@
 <?php include 'header.php'; ?>
 
-<?php if (isset($_GET['success'])): ?>
-    <div class="banner-message success-banner">
-        <p>
-            <?= htmlspecialchars(ucwords(str_replace('-', ' ', $_GET['success']))) ?> successfully updated!
-        </p>
-        <button class="close-banner" onclick="this.parentElement.style.display='none';">Close</button>
-    </div>
-<?php endif; ?>
-
 <!-- Site Name and Customer Service Email Address -->
 <section class="settings-form-container">
   <form action="/admin/update-site-settings" method="POST" enctype="multipart/form-data">

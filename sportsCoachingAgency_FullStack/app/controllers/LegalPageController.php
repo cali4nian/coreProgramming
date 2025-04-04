@@ -10,13 +10,9 @@ class LegalPageController extends BaseController
 
         // Prepare data for the privacy policy page
         $data = [
-            // CSS file URL
             'page_css_url' => '/assets/css/privacy-policy.css',
-            // JS file URL
             'page_js_url' => '/assets/js/contact/privacy-policy.js',
-            // Header title for the page
-            'header_title' => 'Williams Coaching Privacy Policy Agreement',
-            // Settings data
+            'header_title' => $settings['site_name'] . ' Privacy Policy Agreement',
             'settings' => $settings,
         ];
 
@@ -31,13 +27,9 @@ class LegalPageController extends BaseController
 
         // Prepare data for the terms of use page
         $data = [
-            // CSS file URL
             'page_css_url' => '/assets/css/terms-of-use.css',
-            // JS file URL
             'page_js_url' => '/assets/js/contact/terms-of-use.js',
-            // Header title for the page
-            'header_title' => 'Williams Coaching Terms Of Use Agreement',
-            // Settings data
+            'header_title' => $settings['site_name'] . ' Terms Of Use Agreement',
             'settings' => $settings,
         ];
 

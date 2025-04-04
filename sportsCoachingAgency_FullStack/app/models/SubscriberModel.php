@@ -75,4 +75,9 @@ class SubscriberModel
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function confirmSubscriber($email) {
+        $stmt = $this->db->prepare("UPDATE subscribers SET is_confirmed = 1 WHERE email = :email");
+        $stmt->execute(['email' => $email]);
+    }
+
 }

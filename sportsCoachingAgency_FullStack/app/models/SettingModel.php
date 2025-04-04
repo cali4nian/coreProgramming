@@ -19,5 +19,25 @@ class SettingModel
         return $stmt->fetchAll(PDO::FETCH_KEY_PAIR);
     }
 
+    public function updateSetting($key, $value)
+    {
+        $stmt = $this->db->prepare("INSERT INTO settings (key_name, value) VALUES (:key_name, :value)
+                              ON DUPLICATE KEY UPDATE value = :value");
+        $stmt->execute(['key_name' => $key, 'value' => $value]);
+    }
+
+    public function handleFileUpload($key, $file)
+    {
+        if ($file['error'] === UPLOAD_ERR_OK) {
+            $uploadDir = __DIR__ . '/../../public_html/uploads/';
+            $fileName = basename($file['name']);
+            $filePath = $uploadDir . $fileName;
+
+            if (move_uploaded_file($file['tmp_name'], $filePath)) {
+                $this->updateSetting($this->db, $key, '/uploads/' . $fileName);
+            }
+        }
+    }
+
     
 }

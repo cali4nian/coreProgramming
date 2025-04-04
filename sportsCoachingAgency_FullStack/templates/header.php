@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="<?php echo $page_css_url; ?>" />
     <script type="module" src="/assets/js/frontend/global.js"></script>
     <script type="module" src="<?php echo $page_js_url; ?>"></script>
-    <title><?php echo $header_title; ?> | <?= htmlspecialchars($settings['site_name'] ?? 'Welcome to Our Website') ?></title>
+    <title><?php echo $header_title ?? 'Welcome to our website!'; ?></title>
   </head>
   <body>
     <!-- Navigation -->

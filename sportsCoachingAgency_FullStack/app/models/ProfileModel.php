@@ -1,15 +1,16 @@
 <?php
 namespace App\Models;
 
+use App\Config\Database;
 use PDO;
 
 class ProfileModel
 {
     private PDO $db;
 
-    public function __construct(PDO $db)
+    public function __construct()
     {
-        $this->db = $db;
+        $this->db = Database::connect();
     }
 
     /**

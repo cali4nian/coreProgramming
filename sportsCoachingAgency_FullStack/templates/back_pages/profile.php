@@ -6,18 +6,6 @@
     <h1>Update Profile</h1>
     <p>Here you can update your profile information.</p>
 
-    <?php if (isset($_GET['success'])): ?>
-        <p style="color: green;">✅ Profile updated successfully.</p>
-    <?php endif; ?>
-
-    <?php if (isset($_GET['password_changed'])): ?>
-        <p style="color: green;">✅ Password changed successfully.</p>
-    <?php endif; ?>
-
-    <?php if (isset($_GET['error'])): ?>
-        <p style="color: red;">❌ <?= htmlspecialchars($_GET['error']) ?></p>
-    <?php endif; ?>
-
     <form action="/profile/update" method="POST" enctype="multipart/form-data">
         <label for="name">Name:</label>
         <input type="text" name="name" value="<?= htmlspecialchars($user['name']) ?>" required>

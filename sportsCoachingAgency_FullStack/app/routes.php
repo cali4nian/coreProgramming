@@ -7,6 +7,7 @@ $routes = [
     '/'                                => 'App\Controllers\HomeController@index',
     '/about'                           => 'App\Controllers\AboutController@index',
     '/contact'                         => 'App\Controllers\ContactController@index',
+    '/contact/message'                 => 'App\Controllers\ContactController@sendMessage',
     '/privacy-policy'                  => 'App\Controllers\LegalPageController@privacy_policy',
     '/terms-of-use'                    => 'App\Controllers\LegalPageController@terms_of_use',
     '/subscribe'                       => 'App\Controllers\SubscriberController@subscribe',

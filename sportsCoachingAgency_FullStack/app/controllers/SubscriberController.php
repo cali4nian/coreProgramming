@@ -5,9 +5,7 @@ require_once __DIR__ . '/../functions/auth.php';
 require_once __DIR__ . '/../config/Database.php';
 require_once __DIR__ . '/../functions/email.php';
 
-use App\Config\Database;
 use App\Models\SubscriberModel;
-use PDO;
 
 class SubscriberController extends BaseController
 {
@@ -20,9 +18,9 @@ class SubscriberController extends BaseController
 
     public function index()
     {
-        requireAdminOrSuper(); // Ensure only admins can access
+        requireAdminOrSuper();
 
-        $perPage = 10; // Number of subscribers per page
+        $perPage = 10;
         $page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int)$_GET['page'] : 1;
         $offset = ($page - 1) * $perPage;
 
@@ -50,11 +48,11 @@ class SubscriberController extends BaseController
     public function subscribe()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email'])) {
+            $email = $this->sanitizeEmail($_POST['email']);
             $email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
 
             if ($email) {
-
-                $this->subscriberModel->addSubscriber($email); // Add subscriber to the database
+                $this->subscriberModel->addSubscriber($email);
                 
                 // Send confirmation email
                 $subject = "Confirm your subscription";
@@ -89,17 +87,14 @@ class SubscriberController extends BaseController
             $email = filter_var($_GET['email'], FILTER_VALIDATE_EMAIL);
 
             if ($email) {
-                $db = Database::connect();
-                $stmt = $db->prepare("UPDATE subscribers SET is_confirmed = 1 WHERE email = :email");
-                $stmt->execute(['email' => $email]);
+                $this->subscriberModel->confirmSubscriber($email);
+                // Check if the email exists in the database
+                $subscriber = $this->subscriberModel->getSubscriberByEmail($email);
 
-                if ($stmt->rowCount() > 0) {
-                    // Redirect to home with a confirmation message
-                    $this->redirect('/?confirmed=true');
-                } else {
-                    // Email not found, show a resend verification button
-                    $this->showResendVerificationPage($email, 'not_found');
-                }
+                // Redirect to home with a confirmation message
+                if ($subscriber) $this->redirect('/?confirmed=true');
+                else $this->showResendVerificationPage($email, 'not_found');
+
             } else {
                 // Invalid email, show a resend verification button
                 $this->showResendVerificationPage(null, 'invalid_email');
@@ -153,21 +148,15 @@ class SubscriberController extends BaseController
 
     public function resendToSubscriber()
     {
-        if (!isset($_GET['email'])) {
-            die("❌ Invalid request.");
-        }
+        if (!isset($_GET['email'])) $this->redirect('/?error=invalid_request');
 
         $email = $_GET['email'];
 
         $subscriber = $this->subscriberModel->getSubscriberByEmail($email);
 
-        if (!$subscriber) {
-            die("❌ No subscriber found with this email.");
-        }
+        if (!$subscriber) $this->redirect('/?error=not_found');
 
-        if ($subscriber['is_confirmed']) {
-            die("✅ Your email is already confirmed. You can <a href='/'>return to the homepage</a>.");
-        }
+        if ($subscriber['is_confirmed']) $this->redirect('/?error=subscription_already_verified');
 
         // Generate new confirmation token
         $newToken = bin2hex(random_bytes(32));
@@ -178,38 +167,29 @@ class SubscriberController extends BaseController
         // Send confirmation email
         $confirmationLink = "http://localhost:8000/confirm-subscription?email=" . urlencode($email);
         $subject = "Confirm Your Subscription (Resent)";
-        $body = "
-            <html>
-            <head>
-                <title>Confirm Your Subscription</title>
-            </head>
-            <body>
-                <p>Click the link below to confirm your subscription:</p>
-                <p><a href='$confirmationLink'>Confirm Subscription</a></p>
-            </body>
-            </html>
-        ";
 
-        if (sendEmail($email, $subject, $body)) {
-            echo "✅ Confirmation email resent! Please check your inbox.";
-        } else {
-            echo "❌ Error sending email.";
-        }
+        if (!file_exists(__DIR__ . '/../../templates/email/confirm_email_template.html')) $this->redirect('forgot-password?error=system');
+
+        $template = file_get_contents(__DIR__ . '/../../templates/email/confirm_email_template.html');
+
+        // Replace placeholder with actual link
+        $emailBody = str_replace("{{verification_link}}", $confirmationLink, $template);
+
+        if (sendEmail($email, $subject, $emailBody)) $this->redirect('/?success=confirmation_email_sent');
+        else $this->redirect('/?error=email_failed');
+
     }
 
     public function deleteSubscriber()
     {
         requireAdmin(); // Ensure only admins can delete subscribers
 
-        if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
-            die("❌ Invalid subscriber ID.");
-        }
+        if (!isset($_GET['id']) || !is_numeric($_GET['id'])) $this->redirect('/admin/subscribers?error=invalid_request');
 
         $this->subscriberModel->deleteSubscriber($_GET['id']);
 
         // Redirect to the subscriber list with a success message
-        header("Location: /admin/subscribers?deleted=true");
-        exit();
+        $this->redirect('/admin/subscribers?success=subscriber_deleted');
     }
 
     // Download All Subscribers

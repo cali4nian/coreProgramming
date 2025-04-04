@@ -10,13 +10,9 @@ class AboutController extends BaseController
 
         // Prepare data for the about page
         $data = [
-            // CSS file URL
             'page_css_url' => '/assets/css/about.css',
-            // JS file URL
             'page_js_url' => '/assets/js/about/about.js',
-            // Header title for the page
-            'header_title' => 'About Williams Coaching',
-            // Settings data
+            'header_title' => 'About ' . $settings['site_name'],
             'settings' => $settings,
         ];
 

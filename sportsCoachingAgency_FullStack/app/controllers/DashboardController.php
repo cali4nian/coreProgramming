@@ -5,7 +5,6 @@ require_once __DIR__ . '/../functions/auth.php';
 require_once __DIR__ . '/../config/Database.php';
 require_once __DIR__ . '/../models/DashboardModel.php';
 
-use App\Config\Database;
 use App\Models\DashboardModel;
 
 class DashboardController
@@ -15,7 +14,7 @@ class DashboardController
     public function __construct()
     {
         // Initialize the DashboardModel with the database connection
-        $this->dashboardModel = new DashboardModel(Database::connect());
+        $this->dashboardModel = new DashboardModel();
     }
 
     public function index()

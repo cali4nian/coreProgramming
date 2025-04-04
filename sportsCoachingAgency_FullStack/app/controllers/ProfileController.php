@@ -5,16 +5,16 @@ require_once __DIR__ . '/../functions/auth.php';
 require_once __DIR__ . '/../config/Database.php';
 require_once __DIR__ . '/../models/ProfileModel.php';
 
-use App\Config\Database;
 use App\Models\ProfileModel;
+use App\Controllers\BaseController;
 
-class ProfileController
+class ProfileController extends BaseController
 {
     private ProfileModel $profileModel;
 
     public function __construct()
     {
-        $this->profileModel = new ProfileModel(Database::connect());
+        $this->profileModel = new ProfileModel();
     }
 
     /**
@@ -26,10 +26,7 @@ class ProfileController
 
         $user = $this->profileModel->getUserById($_SESSION['user_id']);
 
-        if (!$user) {
-            header("Location: /errors/404.php");
-            exit();
-        }
+        if (!$user) $this->redirect('/logout');
 
         $data = [
             'user' => $user,
@@ -51,27 +48,18 @@ class ProfileController
         requireLogin();
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $name = trim($_POST['name']);
-            $email = trim($_POST['email']);
-            $phoneNumber = trim($_POST['phone_number'] ?? '');
-            $address = trim($_POST['address'] ?? '');
+            $name = $this->sanitizeString($_POST['name']);
+            $email = $this->sanitizeEmail($_POST['email']);
+            $phoneNumber = $this->sanitizePhoneNumber($_POST['phone_number'] ?? '');
+            $address = $this->sanitizeString($_POST['address'] ?? '');
             $profileImage = $_FILES['profile_image']['name'] ?? null;
 
             // Validate inputs
-            if (empty($name) || empty($email)) {
-                header("Location: /profile?error=Name and email cannot be empty.");
-                exit();
-            }
+            if (empty($name) || empty($email)) $this->redirect('/profile?error=empty_fields');
 
-            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                header("Location: /profile?error=Invalid email format.");
-                exit();
-            }
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) $this->redirect('/profile?error=invalid_email');
 
-            if ($this->profileModel->isEmailTaken($email, $_SESSION['user_id'])) {
-                header("Location: /profile?error=Email is already in use.");
-                exit();
-            }
+            if ($this->profileModel->isEmailTaken($email, $_SESSION['user_id'])) $this->redirect('/profile?error=email_taken');
 
             // Handle profile image upload
             if ($profileImage) {
@@ -81,16 +69,10 @@ class ProfileController
 
                 // Validate file type
                 $allowedTypes = ['jpg', 'jpeg', 'png', 'gif'];
-                if (!in_array($fileType, $allowedTypes)) {
-                    header("Location: /profile?error=Invalid file type. Only JPG, JPEG, PNG, and GIF are allowed.");
-                    exit();
-                }
+                if (!in_array($fileType, $allowedTypes)) $this->redirect('/profile?error=invalid_file_type');
 
                 // Validate file size (e.g., max 2MB)
-                if ($_FILES['profile_image']['size'] > 2 * 1024 * 1024) {
-                    header("Location: /profile?error=File size exceeds the 2MB limit.");
-                    exit();
-                }
+                if ($_FILES['profile_image']['size'] > 2 * 1024 * 1024) $this->redirect('/profile?error=file_too_large');
 
                 // Delete the existing profile image if it exists
                 $currentUser = $this->profileModel->getUserById($_SESSION['user_id']);
@@ -102,10 +84,7 @@ class ProfileController
                 }
 
                 // Move the uploaded file
-                if (!move_uploaded_file($_FILES['profile_image']['tmp_name'], $targetFile)) {
-                    header("Location: /profile?error=Failed to upload the profile image.");
-                    exit();
-                }
+                if (!move_uploaded_file($_FILES['profile_image']['tmp_name'], $targetFile)) $this->redirect('/profile?error=upload_failed');
             }
 
             // Update user in the database
@@ -121,8 +100,7 @@ class ProfileController
             // Update session
             $_SESSION['user_name'] = $name;
 
-            header("Location: /profile?success=1");
-            exit();
+            $this->redirect('/profile?success=profile_updated');
         }
     }
 
@@ -134,38 +112,26 @@ class ProfileController
         requireLogin();
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // UPDATE TO CLEAN PASSWORD
             $currentPassword = $_POST['current_password'];
             $newPassword = $_POST['new_password'];
             $confirmPassword = $_POST['confirm_password'];
 
             // Validate inputs
-            if (empty($currentPassword) || empty($newPassword) || empty($confirmPassword)) {
-                header("Location: /profile?error=All fields are required.");
-                exit();
-            }
+            if (empty($currentPassword) || empty($newPassword) || empty($confirmPassword)) $this->redirect('/profile?error=empty_fields');
 
-            if ($newPassword !== $confirmPassword) {
-                header("Location: /profile?error=New passwords do not match.");
-                exit();
-            }
+            if ($newPassword !== $confirmPassword) $this->redirect('/profile?error=password_mismatch');
 
-            if (strlen($newPassword) < 6) {
-                header("Location: /profile?error=Password must be at least 6 characters.");
-                exit();
-            }
+            if (strlen($newPassword) < 6) $this->redirect('/profile?error=password_too_short');
 
             // Verify current password
             $hashedPassword = $this->profileModel->getPasswordById($_SESSION['user_id']);
-            if (!password_verify($currentPassword, $hashedPassword)) {
-                header("Location: /profile?error=Current password is incorrect.");
-                exit();
-            }
+            if (!password_verify($currentPassword, $hashedPassword)) $this->redirect('/profile?error=incorrect_password');
 
             // Update password
             $this->profileModel->updatePassword($_SESSION['user_id'], password_hash($newPassword, PASSWORD_DEFAULT));
 
-            header("Location: /profile?password_changed=1");
-            exit();
+            $this->redirect('/profile?success=password_changed');
         }
     }
 
@@ -182,8 +148,7 @@ class ProfileController
             // Destroy session
             session_destroy();
 
-            header("Location: /logout");
-            exit();
+            $this->redirect('/logout');
         }
     }
 }

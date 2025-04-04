@@ -49,51 +49,28 @@ class UserController extends BaseController
     public function delete()
     {
         requireAdmin();
-        
         $id = $_POST['id'] ?? null;
-        if (!$id) {
-            $this->redirect('/admin/users?error=invalid_request');
-            return;
-        }
-        if ($this->userModel->deleteUser($id)) {
-            $this->redirect('/admin/users?success=delete');
-        } else {
-            $this->redirect('/admin/users?error=cannot_delete_admin');
-        }
+        if (!$id) $this->redirect('/admin/users?error=invalid_request');
+        if ($this->userModel->deleteUser($id)) $this->redirect('/admin/users?success=delete');
+        else $this->redirect('/admin/users?error=cannot_delete_admin');
     }
 
     public function pause()
     {
         requireAdminOrSuper();
-        
         $id = $_POST['id'] ?? null;
-        if (!$id) {
-            $this->redirect('/admin/users?error=invalid_request');
-            return;
-        }
-
-        if ($this->userModel->toggleUserStatus($id, false)) {
-            $this->redirect('/admin/users?success=pause');
-        } else {
-            $this->redirect('/admin/users?error=action_failed');
-        }
+        if (!$id) $this->redirect('/admin/users?error=invalid_request');
+        if ($this->userModel->toggleUserStatus($id, false)) $this->redirect('/admin/users?success=pause');
+        else $this->redirect('/admin/users?error=action_failed');
     }
 
     public function unpause()
     {
         requireAdminOrSuper();
-
         $id = $_POST['id'] ?? null;
-        if (!$id) {
-            $this->redirect('/admin/users?error=invalid_request');
-            return;
-        }
-
-        if ($this->userModel->toggleUserStatus($id, true)) {
-            $this->redirect('/admin/users?success=unpause');
-        } else {
-            $this->redirect('/admin/users?error=action_failed');
-        }
+        if (!$id) $this->redirect('/admin/users?error=invalid_request');
+        if ($this->userModel->toggleUserStatus($id, true)) $this->redirect('/admin/users?success=unpause');
+        else $this->redirect('/admin/users?error=action_failed');
     }
 
     public function resetPassword()
@@ -101,10 +78,7 @@ class UserController extends BaseController
         requireAdminOrSuper();
 
         $id = $_POST['id'] ?? null;
-        if (!$id) {
-            $this->redirect('/admin/users?error=invalid_request');
-            return;
-        }
+        if (!$id) $this->redirect('/admin/users?error=invalid_request');
 
         $tempPassword = bin2hex(random_bytes(4)); // 8 characters long
         $hashedPassword = password_hash($tempPassword, PASSWORD_DEFAULT);
@@ -129,8 +103,8 @@ class UserController extends BaseController
         requireAdmin();
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['name'], $_POST['email'], $_POST['password'])) {
-            $name = trim($_POST['name']);
-            $email = trim($_POST['email']);
+            $name = $this->sanitizeString($_POST['name']);
+            $email = $this->sanitizeEmail($_POST['email']);
             $password = password_hash(trim($_POST['password']), PASSWORD_DEFAULT);
             $role = 'super user'; // Hardcoded role as 'super user'
 
@@ -158,16 +132,10 @@ class UserController extends BaseController
         requireAdminOrSuper();
 
         $id = $_POST['id'] ?? null;
-        if (!$id) {
-            $this->redirect('/admin/users?error=invalid_request');
-            return;
-        }
+        if (!$id) $this->redirect('/admin/users?error=invalid_request');
 
         $user = $this->userModel->getUserById($id);
-        if (!$user) {
-            $this->redirect('/admin/users?error=user_not_found');
-            return;
-        }
+        if (!$user) $this->redirect('/admin/users?error=user_not_found');
 
         renderTemplate('back_pages/edit_user.php', [
             'header_title' => 'Edit User',

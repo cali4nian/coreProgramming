@@ -15,17 +15,13 @@ class BaseController
 
     // Method to check if session is started, if not, start it
     protected function isSessionOrStart() {
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
-        }
+        if (session_status() === PHP_SESSION_NONE) session_start();
     }
 
     // Check if user is logged in
     protected function isLoggedIn() 
     {
-        if (isset($_SESSION['user_id'])) {
-            $this->redirect('/dashboard');
-        }
+        if (isset($_SESSION['user_id'])) $this->redirect('/dashboard');
     }
 
     // Fetch all settings from database

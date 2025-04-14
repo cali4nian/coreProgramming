@@ -47,8 +47,23 @@ class BaseController
         $input = trim($input); // Remove leading/trailing whitespace
         $input = strip_tags($input); // Remove HTML tags
         $input = htmlspecialchars($input, ENT_QUOTES, 'UTF-8'); // Convert special characters
-        $input = strtolower($input);
         return $input;
+    }
+
+    // Sanitize Integer
+    protected function sanitizeInteger($input) {
+        $input = trim($input); // Remove leading/trailing whitespace
+        $input = strip_tags($input); // Remove HTML tags
+        $input = filter_var($input, FILTER_SANITIZE_NUMBER_INT); // Sanitize as integer
+        return filter_var($input, FILTER_VALIDATE_INT) ? (int)$input : false; // Validate and cast to integer
+    }
+
+    // Sanitize float
+    protected function sanitizeFloat($input) {
+        $input = trim($input); // Remove leading/trailing whitespace
+        $input = strip_tags($input); // Remove HTML tags
+        $input = filter_var($input, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION); // Sanitize as float
+        return filter_var($input, FILTER_VALIDATE_FLOAT) ? (float)$input : false; // Validate and cast to float
     }
 
     // Sanitize phone number

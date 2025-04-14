@@ -1,4 +1,4 @@
-<?php include __DIR__ . '/../header.php'; ?>
+<?php include __DIR__ . '/header.php'; ?>
 
 <a href="/admin/download-all-subscribers" class="btn">⬇ Download All Subscribers</a>
 <a href="/admin/download-confirmed-subscribers" class="btn">⬇ Download Confirmed Subscribers</a>
@@ -48,4 +48,4 @@
     <?php endif; ?>
 </aside>
 
-<?php include __DIR__ . '/../footer.php'; ?>
+<?php include __DIR__ . '/footer.php'; ?>

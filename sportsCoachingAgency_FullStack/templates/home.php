@@ -38,17 +38,22 @@
         <h1>Meet Our Top Players</h1>
         <p>Explore the stats and achievements of our elite players.</p>
     </div>
-    <div class="profiles-container">
-        <!-- Example Player Cards -->
-        <div class="player-card">
-            <img src="/assets/img/default_athlete_image.jpg" alt="Player 1" />
-            <h2>John Doe</h2>
-            <p>Point Guard | 25 Goals</p>
-        </div>
-        <div class="player-card">
-            <img src="/assets/img/default_athlete_image.jpg" alt="Player 2" />
-            <h2>Jane Smith</h2>
-            <p>Shooting Guard | 18 Assists</p>
+    <div class="profiles-container" style="display: flex; flex-wrap: wrap; gap: 1.5rem;">
+            <?php foreach ($players as $player): ?>
+                <div class="player-card" style="width: 250px; border: 1px solid #ddd; border-radius: 8px; padding: 1rem; background-color: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                    <img 
+                    src="<?= !empty($player['image_url']) ? htmlspecialchars($player['image_url']) : '/assets/img/default_athlete_image.jpg' ?>" 
+                    alt="<?= htmlspecialchars((string)($player['first_name'] ?? '') . ' ' . ($player['last_name'] ?? '')) ?>" 
+                    style="width: 100%; height: auto; border-radius: 6px;" 
+                    />
+                    <h2><?= htmlspecialchars((string)($player['first_name'] ?? '') . ' ' . ($player['last_name'] ?? '')) ?></h2>
+                    <p><strong><?= htmlspecialchars((string)($player['position'] ?? '')) ?></strong> — <?= htmlspecialchars((string)($player['team'] ?? '')) ?></p>
+                    <p>🏀 <strong><?= $player['points_per_game'] ?></strong> PPG</p>
+                    <p>🎯 FG%: <?= $player['field_goal_percentage'] ?>%</p>
+                    <p>🎯 3P%: <?= $player['three_point_percentage'] ?>%</p>
+                    <p>💪 REB: <?= $player['rebounds_per_game'] ?> | 🎯 AST: <?= $player['assists_per_game'] ?></p>
+                </div>
+            <?php endforeach; ?>
         </div>
     </div>
 </section>

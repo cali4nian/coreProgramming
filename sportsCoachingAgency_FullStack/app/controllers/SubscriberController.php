@@ -2,7 +2,6 @@
 namespace App\Controllers;
 
 require_once __DIR__ . '/../functions/auth.php';
-require_once __DIR__ . '/../config/Database.php';
 require_once __DIR__ . '/../functions/email.php';
 
 use App\Models\SubscriberModel;
@@ -42,7 +41,7 @@ class SubscriberController extends BaseController
             'pageDescription' => 'View and manage all subscribers, including their subscription status and details.',
         ];
 
-        renderTemplate('back_pages/admin/subscribers.php', $data);
+        renderTemplate('back_pages/subscribers.php', $data);
     }
 
     public function subscribe()
@@ -194,12 +193,12 @@ class SubscriberController extends BaseController
     {
         requireAdmin(); // Ensure only admins can delete subscribers
 
-        if (!isset($_GET['id']) || !is_numeric($_GET['id'])) $this->redirect('/admin/subscribers?error=invalid_request');
+        if (!isset($_GET['id']) || !is_numeric($_GET['id'])) $this->redirect('/subscribers?error=invalid_request');
 
         $this->subscriberModel->deleteSubscriber($_GET['id']);
 
         // Redirect to the subscriber list with a success message
-        $this->redirect('/admin/subscribers?success=subscriber_deleted');
+        $this->redirect('/subscribers?success=subscriber_deleted');
     }
 
     // Download All Subscribers

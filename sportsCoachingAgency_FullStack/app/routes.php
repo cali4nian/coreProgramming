@@ -52,6 +52,12 @@ $routes = [
     '/admin/update-site-settings' => 'App\Controllers\SettingController@updateSiteSettings',
     '/admin/update-social-media-settings' => 'App\Controllers\SettingController@updateSocialMediaSettings',
     '/admin/update-home-page-settings' => 'App\Controllers\SettingController@updateHomePageSettings',
+    // Top Players Management
+    '/admin/top-players' => 'App\Controllers\TopPlayerController@index',
+    '/admin/top-players/create' => 'App\Controllers\TopPlayerController@create',
+    '/admin/top-players/edit' => 'App\Controllers\TopPlayerController@edit',
+    '/admin/top-players/update' => 'App\Controllers\TopPlayerController@update',
+    '/admin/top-players/delete' => 'App\Controllers\TopPlayerController@delete',
 ];
 
 // Get the requested URL path

@@ -6,7 +6,6 @@ This document outlines the remaining tasks for the application. Prioritize by ur
 
 ## 🏀 Players Module (MVC)
 
-- [ ] Create **PlayerController** with `index`, `create`, `edit`, `delete`, `show` methods
 - [ ] Build **Player model** for database interactions
 - [ ] Create **views** for:
   - [ ] Player listing (admin & public)

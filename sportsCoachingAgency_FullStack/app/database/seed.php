@@ -161,3 +161,129 @@ foreach ($defaultSettings as $setting) {
 }
 
 echo "✅ Default Settings Inserted Successfully!\n";
+
+// ✅ Seed Top Players
+$players = [
+    [
+        'first_name' => 'Jalen',
+        'last_name' => 'King',
+        'position' => 'Guard',
+        'team' => 'Fresno Flames',
+        'height_ft' => 6,
+        'height_in' => 2,
+        'weight_lbs' => 185,
+        'age' => 20,
+        'image_url' => null,
+        'games_played' => 28,
+        'points_per_game' => 22.4,
+        'rebounds_per_game' => 4.5,
+        'assists_per_game' => 6.2,
+        'steals_per_game' => 2.1,
+        'blocks_per_game' => 0.3,
+        'field_goal_percentage' => 47.8,
+        'three_point_percentage' => 38.5,
+        'free_throw_percentage' => 81.2
+    ],
+    [
+        'first_name' => 'Tyrese',
+        'last_name' => 'Walker',
+        'position' => 'Forward',
+        'team' => 'Valley Vipers',
+        'height_ft' => 6,
+        'height_in' => 7,
+        'weight_lbs' => 220,
+        'age' => 22,
+        'image_url' => null,
+        'games_played' => 30,
+        'points_per_game' => 18.9,
+        'rebounds_per_game' => 8.3,
+        'assists_per_game' => 3.1,
+        'steals_per_game' => 1.4,
+        'blocks_per_game' => 1.2,
+        'field_goal_percentage' => 51.6,
+        'three_point_percentage' => 35.4,
+        'free_throw_percentage' => 76.0
+    ],
+    [
+        'first_name' => 'Marcus',
+        'last_name' => 'Lopez',
+        'position' => 'Center',
+        'team' => 'Kingsway Titans',
+        'height_ft' => 6,
+        'height_in' => 10,
+        'weight_lbs' => 245,
+        'age' => 23,
+        'image_url' => null,
+        'games_played' => 27,
+        'points_per_game' => 15.1,
+        'rebounds_per_game' => 11.2,
+        'assists_per_game' => 2.0,
+        'steals_per_game' => 0.8,
+        'blocks_per_game' => 2.4,
+        'field_goal_percentage' => 56.3,
+        'three_point_percentage' => 12.5,
+        'free_throw_percentage' => 68.9
+    ],
+    [
+        'first_name' => 'Devon',
+        'last_name' => 'Mitchell',
+        'position' => 'Guard',
+        'team' => 'Ridgecrest Raiders',
+        'height_ft' => 5,
+        'height_in' => 11,
+        'weight_lbs' => 175,
+        'age' => 19,
+        'image_url' => null,
+        'games_played' => 25,
+        'points_per_game' => 14.7,
+        'rebounds_per_game' => 3.9,
+        'assists_per_game' => 7.6,
+        'steals_per_game' => 2.5,
+        'blocks_per_game' => 0.2,
+        'field_goal_percentage' => 44.1,
+        'three_point_percentage' => 40.8,
+        'free_throw_percentage' => 87.5
+    ],
+    [
+        'first_name' => 'Andre',
+        'last_name' => 'Carter',
+        'position' => 'Forward',
+        'team' => 'Southside Spartans',
+        'height_ft' => 6,
+        'height_in' => 5,
+        'weight_lbs' => 210,
+        'age' => 21,
+        'image_url' => null,
+        'games_played' => 29,
+        'points_per_game' => 19.8,
+        'rebounds_per_game' => 6.7,
+        'assists_per_game' => 4.4,
+        'steals_per_game' => 1.9,
+        'blocks_per_game' => 0.9,
+        'field_goal_percentage' => 49.5,
+        'three_point_percentage' => 34.6,
+        'free_throw_percentage' => 79.3
+    ],
+];
+
+$stmt = $db->prepare("
+    INSERT INTO top_players (
+        first_name, last_name, position, team,
+        height_ft, height_in, weight_lbs, age, image_url,
+        games_played, points_per_game, rebounds_per_game, assists_per_game,
+        steals_per_game, blocks_per_game,
+        field_goal_percentage, three_point_percentage, free_throw_percentage
+    ) VALUES (
+        :first_name, :last_name, :position, :team,
+        :height_ft, :height_in, :weight_lbs, :age, :image_url,
+        :games_played, :points_per_game, :rebounds_per_game, :assists_per_game,
+        :steals_per_game, :blocks_per_game,
+        :field_goal_percentage, :three_point_percentage, :free_throw_percentage
+    )
+");
+
+foreach ($players as $player) {
+    $stmt->execute($player);
+}
+
+echo "✅ Seeded top_players table with 5 dummy records including image URLs.\n";

@@ -1,7 +1,0 @@
-/* Frontend Global styles */
-@import url("front-global.css");
-
-/* Player Profile Styles */
-@import url("player-profile/player-profile.css");
-@import url("player-profile/highlights.css");
-@import url("player-profile/other-players.css");

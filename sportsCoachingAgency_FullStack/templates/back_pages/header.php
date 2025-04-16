@@ -15,7 +15,6 @@
     <!-- Main Content -->
     <main class="main-content">
 
-
     <?php
       // Set default values for page name and description if not provided
       $pageName = $pageName ?? 'Default Page Title';

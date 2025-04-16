@@ -36,40 +36,35 @@ class BaseController
 
     // Sanitize email
     protected function sanitizeEmail($email) {
-        $email = trim($email);
+        $email = trim(strtolower($email));
         $email = filter_var($email, FILTER_SANITIZE_EMAIL);
-        $email = strtolower($email);
         return filter_var($email, FILTER_VALIDATE_EMAIL) ? $email : false;
     }
 
     // Sanitize string
     protected function sanitizeString($input) {
-        $input = trim($input); // Remove leading/trailing whitespace
-        $input = strip_tags($input); // Remove HTML tags
-        $input = htmlspecialchars($input, ENT_QUOTES, 'UTF-8'); // Convert special characters
+        $input = trim(strip_tags($input));
+        $input = htmlspecialchars($input, ENT_QUOTES, 'UTF-8');
         return $input;
     }
 
     // Sanitize Integer
     protected function sanitizeInteger($input) {
-        $input = trim($input); // Remove leading/trailing whitespace
-        $input = strip_tags($input); // Remove HTML tags
-        $input = filter_var($input, FILTER_SANITIZE_NUMBER_INT); // Sanitize as integer
-        return filter_var($input, FILTER_VALIDATE_INT) ? (int)$input : false; // Validate and cast to integer
+        $input = trim(strip_tags($input));
+        $input = filter_var($input, FILTER_SANITIZE_NUMBER_INT);
+        return filter_var($input, FILTER_VALIDATE_INT) ? (int)$input : false;
     }
 
     // Sanitize float
     protected function sanitizeFloat($input) {
-        $input = trim($input); // Remove leading/trailing whitespace
-        $input = strip_tags($input); // Remove HTML tags
-        $input = filter_var($input, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION); // Sanitize as float
-        return filter_var($input, FILTER_VALIDATE_FLOAT) ? (float)$input : false; // Validate and cast to float
+        $input = trim(strip_tags($input));
+        $input = filter_var($input, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+        return filter_var($input, FILTER_VALIDATE_FLOAT) ? (float)$input : false;
     }
 
     // Sanitize phone number
     protected function sanitizePhoneNumber($phone) {
-        $phone = trim($phone); // Remove spaces from start and end
-        $phone = strip_tags($phone); // Remove any HTML tags
+        $phone = trim(strip_tags($phone));
         $phone = preg_replace('/[^\d\+\-]/', '', $phone); // Allow only digits, +, and -
         return $phone;
     }

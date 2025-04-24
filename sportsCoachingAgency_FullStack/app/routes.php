@@ -52,6 +52,7 @@ $routes = [
     '/admin/update-site-settings' => 'App\Controllers\SettingController@updateSiteSettings',
     '/admin/update-social-media-settings' => 'App\Controllers\SettingController@updateSocialMediaSettings',
     '/admin/update-home-page-settings' => 'App\Controllers\SettingController@updateHomePageSettings',
+    '/admin/update-about-page-settings' => 'App\Controllers\SettingController@updateAboutPageSettings',
     // Top Players Management
     '/admin/top-players' => 'App\Controllers\TopPlayerController@index',
     '/admin/top-players/create' => 'App\Controllers\TopPlayerController@create',

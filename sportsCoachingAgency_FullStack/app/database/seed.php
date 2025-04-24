@@ -149,6 +149,15 @@ $defaultSettings = [
     ['key_name' => 'instagram_url', 'value' => 'https://instagram.com/sportscoachingagency'],
     ['key_name' => 'linkedin_url', 'value' => 'https://linkedin.com/company/sportscoachingagency'],
     ['key_name' => 'youtube_url', 'value' => 'https://youtube.com/sportscoachingagency'],
+    ['key_name' => 'tiktok_url', 'value' => 'https://tiktok.com/@sportscoachingagency'],
+    ['key_name' => 'snapchat_url', 'value' => 'https://snapchat.com/add/sportscoachingagency'],
+    ['key_name' => 'site_logo', 'value' => '/assets/images/logo.png'],
+    ['key_name' => 'site_favicon', 'value' => '/assets/images/favicon.ico'],
+    ['key_name' => 'site_description', 'value' => 'Your go-to agency for sports coaching and training.'],
+    ['key_name' => 'site_keywords', 'value' => 'sports, coaching, training, agency'],
+    ['key_name' => 'about_page_text_one', 'value' => 'Welcome to Our Website! We are dedicated to helping athletes of all ages reach their full potential. Our team brings years of experience, passion, and expertise to every training session.'],
+    ['key_name' => 'about_page_text_two', 'value' => "Our mission is to provide top-notch coaching and resources to help you improve your game and achieve your goals. Whether you're just starting out or looking to take your skills to the next level, we have the tools and knowledge to help you succeed."],
+    ['key_name' => 'about_page_text_three', 'value' => 'Join our community and start your journey towards excellence today!']
 ];
 
 foreach ($defaultSettings as $setting) {

@@ -1,6 +1,6 @@
 <?php include 'header.php'; ?>
 
-<section>
+<section class="user-management-container">
     <?php if ($data['currentRole'] === 'admin' || $data['currentRole'] === 'super user'): ?>
     <table>
         <thead>

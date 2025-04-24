@@ -63,7 +63,7 @@ textarea {
 }
 
 /* Buttons */
-button {
+form button {
   display: block;
   width: 100%;
   padding: 12px;
@@ -76,20 +76,20 @@ button {
   transition: background-color 0.3s ease;
 }
 
-button:hover {
+form button:hover {
   background-color: #0056b3;
 }
 
-button[type="submit"] {
+form button[type="submit"] {
   margin-top: 10px;
 }
 
-button[style="background-color: red; color: white;"] {
+form button[style="background-color: red; color: white;"] {
   background-color: #dc3545;
   color: #ffffff;
 }
 
-button[style="background-color: red; color: white;"]:hover {
+form button[style="background-color: red; color: white;"]:hover {
   background-color: #c82333;
 }
 
@@ -132,7 +132,7 @@ img {
     font-size: 1.5rem;
   }
 
-  button {
+  form button {
     font-size: 0.9rem;
     padding: 10px;
   }

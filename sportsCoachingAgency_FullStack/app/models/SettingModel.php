@@ -32,10 +32,10 @@ class SettingModel
             $uploadDir = __DIR__ . '/../../public_html/uploads/';
             $fileName = basename($file['name']);
             $filePath = $uploadDir . $fileName;
-
-            if (move_uploaded_file($file['tmp_name'], $filePath)) {
-                $this->updateSetting($this->db, $key, '/uploads/' . $fileName);
-            }
+            // delete old file if exists
+            $oldFilePath = __DIR__ . '/../../public_html' . $this->getAllSettings()[$key];
+            if (file_exists($oldFilePath)) unlink($oldFilePath);
+            if (move_uploaded_file($file['tmp_name'], $filePath)) $this->updateSetting($key, '/uploads/' . $fileName);
         }
     }
 

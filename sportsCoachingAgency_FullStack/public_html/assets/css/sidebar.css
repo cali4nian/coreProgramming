@@ -17,6 +17,7 @@
 .sidebar ul {
   list-style-type: none;
   padding: 0;
+  margin-top: 3rem;
 }
 
 .sidebar ul li {
@@ -73,14 +74,19 @@
     justify-content: space-between;
     width: 30px;
     height: 25px;
+    opacity: 0.3;
   }
 
   .hamburger-line {
     width: 100%;
-    height: 3px;
-    background-color: #fff;
+    height: 2px;
+    background-color: #000;
     border-radius: 2px;
     transition: all 0.3s ease-in-out;
+  }
+
+  .hamburger:hover {
+    opacity: 1;
   }
 
   /* Adjust sidebar links for mobile */

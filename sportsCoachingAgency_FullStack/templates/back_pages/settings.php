@@ -127,4 +127,43 @@
 </section>
 <!-- END Home Page Settings -->
 
+<!-- About Page Settings -->
+<section class="settings-form-container">
+  <form action="/admin/update-about-page-settings" method="POST" enctype="multipart/form-data">
+      <h2>About Page Settings</h2>
+
+      <div class="form-group">
+          <label for="about_page_image">About Page Image:</label>
+          <input type="file" id="about_page_image" name="about_page_image" accept="image/*">
+          <?php if (!empty($settings['about_page_image'])): ?>
+              <p>Current: <a href="<?= htmlspecialchars($settings['about_page_image']) ?>" target="_blank">View Image</a></p>
+          <?php endif; ?>
+      </div>
+
+      <!-- paragraph one -->
+        <div class="form-group">
+            <label for="about_page_text_one">Paragraph One:</label>
+            <textarea id="about_page_text_one" name="about_page_text_one" rows="5" maxlength="255" placeholder="Enter about page text for paragraph one"><?= htmlspecialchars($settings['about_page_text_one'] ?? '') ?></textarea>
+            <p>Max 255 characters</p>
+        </div>
+
+        <!-- paragraph two -->
+        <div class="form-group">
+            <label for="about_page_text_two">Paragraph Two:</label>
+            <textarea id="about_page_text_two" name="about_page_text_two" rows="5" placeholder="Enter about page text for paragraph two"><?= htmlspecialchars($settings['about_page_text_two'] ?? '') ?></textarea>
+            <p>Max 255 characters</p>
+        </div>
+
+        <!-- paragraph three -->
+        <div class="form-group">
+            <label for="about_page_text_three">Paragraph Three:</label>
+            <textarea id="about_page_text_three" name="about_page_text_three" rows="5" placeholder="Enter about page text for paragraph three"><?= htmlspecialchars($settings['about_page_text_three'] ?? '') ?></textarea>
+            <p>Max 255 characters</p>
+        </div>
+
+      <button type="submit" class="btn">Save About Page Settings</button>
+  </form>
+</section>
+<!-- END About Page Settings -->
+
 <?php include 'footer.php'; ?>

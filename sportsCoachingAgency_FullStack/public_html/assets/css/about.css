@@ -27,3 +27,18 @@
   color: #666;
   text-align: justify;
 }
+/* about-image-container styles */
+.about-image-container {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+/* about-image styles */
+.about-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}

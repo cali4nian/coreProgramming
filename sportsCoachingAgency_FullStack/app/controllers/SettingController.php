@@ -88,5 +88,23 @@ class SettingController extends BaseController
             $this->redirect('/admin/settings?success=home_page_updated');
         }
     }
+
+    public function updateAboutPageSettings()
+    {
+        requireAdminOrSuper();
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+            // Update About Page Settings
+            $this->settingsModel->updateSetting('about_page_text_one', $_POST['about_page_text_one']);
+            $this->settingsModel->updateSetting('about_page_text_two', $_POST['about_page_text_two']);
+            $this->settingsModel->updateSetting('about_page_text_three', $_POST['about_page_text_three']);
+
+            // Handle file uploads for images
+            $this->settingsModel->handleFileUpload('about_page_image', $_FILES['about_page_image']);
+
+            $this->redirect('/admin/settings?success=about_page_updated');
+        }
+    }
     
 }

@@ -64,7 +64,7 @@ form {
 }
 
 /* Button Styling */
-button {
+.settings-form-container button {
   display: block;
   width: 100%;
   padding: 10px;
@@ -76,11 +76,11 @@ button {
   transition: background-color 0.3s;
 }
 
-button:hover {
+.settings-form-container button:hover {
   background-color: #575757;
 }
 
-button.btn {
+.settings-form-container button.btn {
   display: block;
   width: 100%;
   padding: 12px;
@@ -108,7 +108,7 @@ button.btn:active {
     padding: 15px;
   }
 
-  button.btn {
+  .settings-form-container button.btn {
     font-size: 0.9rem;
     padding: 10px;
   }
@@ -158,4 +158,16 @@ button.btn:active {
 .banner-message .close-banner:hover {
   background-color: #28a745;
   color: #fff;
+}
+/* styles for textarea */
+textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  background-color: #fff;
+  transition: border-color 0.3s;
+  resize: none;
 }

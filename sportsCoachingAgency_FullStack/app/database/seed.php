@@ -296,3 +296,18 @@ foreach ($players as $player) {
 }
 
 echo "✅ Seeded top_players table with 5 dummy records including image URLs.\n";
+
+// ✅ Seed Messages
+echo "Seeding messages...\n";
+
+// create loop to insert 100 messages
+for ($i = 0; $i < 100; $i++) {
+    $stmt = $db->prepare("INSERT INTO messages (name, email, message) VALUES (:name, :email, :message)");
+    $stmt->execute([
+        'name' => getRandomName(),
+        'email' => getRandomEmail('user'),
+        'message' => 'This is a test message.',
+    ]);
+}
+
+echo "✅ Messages Inserted Successfully!\n";

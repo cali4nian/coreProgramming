@@ -59,6 +59,10 @@ $routes = [
     '/admin/top-players/edit' => 'App\Controllers\TopPlayerController@edit',
     '/admin/top-players/update' => 'App\Controllers\TopPlayerController@update',
     '/admin/top-players/delete' => 'App\Controllers\TopPlayerController@delete',
+    // Message Management
+    '/admin/messages' => 'App\Controllers\MessageController@index',
+    '/admin/messages/delete' => 'App\Controllers\MessageController@delete',
+    '/admin/messages/read' => 'App\Controllers\MessageController@read',
 ];
 
 // Get the requested URL path

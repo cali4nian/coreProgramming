@@ -3,6 +3,7 @@
 <!-- Site Name and Customer Service Email Address -->
 <section class="settings-form-container">
   <form action="/admin/update-site-settings" method="POST" enctype="multipart/form-data">
+    <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>">
       <div class="form-group">
           <label for="site_name">Site Name:</label>
           <input type="text" id="site_name" name="site_name" value="<?= htmlspecialchars($settings['site_name'] ?? '') ?>" placeholder="Enter site name" required>
@@ -21,6 +22,7 @@
 <!-- Social Media URLs -->
 <section class="settings-form-container">
   <form action="/admin/update-social-media-settings" method="POST">
+    <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>">
       <h2>Social Media URLs</h2>
       <div class="form-group">
           <label for="facebook_url">Facebook URL:</label>
@@ -65,6 +67,7 @@
 <!-- Home Page Settings -->
 <section class="settings-form-container">
   <form action="/admin/update-home-page-settings" method="POST" enctype="multipart/form-data">
+    <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>">
       <h2>Home Page Settings</h2>
 
       <div class="form-group">
@@ -130,6 +133,7 @@
 <!-- About Page Settings -->
 <section class="settings-form-container">
   <form action="/admin/update-about-page-settings" method="POST" enctype="multipart/form-data">
+    <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>">
       <h2>About Page Settings</h2>
 
       <div class="form-group">

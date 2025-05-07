@@ -3,8 +3,12 @@ namespace App\Controllers;
 
 class LegalPageController extends BaseController
 {
+    // Method to display the privacy policy page
     public function privacy_policy()
-    {    
+    {
+        // Redirect if user is logged in
+        $this->isLoggedIn();
+        
         // Fetch settings using the BaseController method
         $settings = $this->fetchSettings();
 
@@ -20,8 +24,12 @@ class LegalPageController extends BaseController
         renderTemplate('privacy-policy.php', $data);
     }
 
+    // Method to display the terms of use page
     public function terms_of_use()
-    {    
+    {
+        // Redirect if user is logged in
+        $this->isLoggedIn();
+
         // Fetch settings using the BaseController method
         $settings = $this->fetchSettings();
 

@@ -1,4 +1,3 @@
-<?php require_once __DIR__ . '/../app/functions/csrf.php'; ?>
 <?php include 'header.php'; ?>
 
 <!-- Contact Section -->
@@ -7,7 +6,7 @@
     <h1>Contact Us</h1>
     <p>If you have any questions or need assistance, please feel free to reach out to our customer service team. We're here to help!</p>
     <form class="contact-form" action="/contact/message" method="post">
-      <input type="hidden" name="csrf_token" value="<?php echo generateCsrfToken(); ?>">
+      <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($csrf_token); ?>" />
       <div class="form-group">
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" required />

@@ -3,8 +3,12 @@ namespace App\Controllers;
 
 class AboutController extends BaseController
 {
+    // Method to display the about page
     public function index()
-    {   
+    {
+        // Redirect to dashboard if user is logged in
+        $this->isLoggedIn();
+        
         // Fetch settings using the BaseController method
         $settings = $this->fetchSettings();
 

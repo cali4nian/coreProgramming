@@ -23,6 +23,7 @@
                     <td>
                         <!-- Delete Button -->
                         <form action="/admin/messages/delete" method="POST" onsubmit="return confirm('Are you sure you want to delete this message?');">
+                            <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($csrf_token); ?>">
                             <input type="hidden" name="id" value="<?php echo $message['id']; ?>">
                             <button type="submit" class="delete-btn">Delete</button>
                         </form>

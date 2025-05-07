@@ -1,26 +1,33 @@
 <?php
 namespace App\Controllers;
 
-require_once __DIR__ . '/../functions/csrf.php';
-
 use App\Models\ContactModel;
 
 class ContactController extends BaseController
 {
     private ContactModel $contactModel;
 
+    // Constructor to initialize the ContactModel
     public function __construct()
     {
         $this->contactModel = new ContactModel();
     }
 
+    // Method to render the contact page
     public function index()
     {    
+        // Redirect to dashboard if user is logged in
+        $this->isLoggedIn();
+
         // Fetch settings using the BaseController method
         $settings = $this->fetchSettings();
 
+        // Generate CSRF token for the form
+        $csrf_token = $this->generateOrValidateCsrfToken();
+
         // Prepare data for the contact page
         $data = [
+            'csrf_token' => $csrf_token,
             'page_css_url' => '/assets/css/contact.css',
             'page_js_url' => '/assets/js/contact/contact.js',
             'header_title' => 'Contact ' . $settings['site_name'],
@@ -31,9 +38,14 @@ class ContactController extends BaseController
         renderTemplate('contact.php', $data);
     }
 
+    // Method to handle the contact form submission
     public function sendMessage()
     {
-        if (!isset($_POST['csrf_token']) || !validateCsrfToken($_POST['csrf_token'])) $this->redirect('contact?error=invalid_request');
+        // Redirect to dashboard if user is logged in
+        $this->isLoggedIn();
+        
+        // Validate CSRF token
+        $this->generateOrValidateCsrfToken($_POST['csrf_token'], 'contact?error=invalid_request', true);
         
         // Handle the contact form submission
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -44,8 +56,11 @@ class ContactController extends BaseController
             // Validate input (basic validation)
             if (empty($name) || empty($email) || empty($message)) $this->redirect('/contact?error=empty_fields');
 
-            // Here you would typically send the email or save the message to a database
+            // Save the message using the ContactModel
             $message = $this->contactModel->saveMessage($name, $email, $message);
+
+            // Send email notification (optional)
+            // $this->contactModel->sendEmailNotification($name, $email, $message);
 
             // Check if the message was saved successfully
             if (!$message) $this->redirect('/contact?error=message_failed');

@@ -9,6 +9,7 @@ class MessageModel
 {
     private $db;
 
+    // Constructor to initialize the database connection
     public function __construct()
     {
         $this->db = Database::connect();

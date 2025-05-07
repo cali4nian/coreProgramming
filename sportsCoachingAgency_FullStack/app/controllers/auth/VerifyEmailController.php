@@ -10,11 +10,13 @@ class VerifyEmailController extends BaseController
 {
     private AuthModel $authModel;
 
+    // Constructor to initialize the AuthModel
     public function __construct()
     {
         $this->authModel = new AuthModel();
     }
 
+    // Method to handle the email verification process
     public function verify()
     {
         if (!isset($_GET['token'])) $this->redirect('/login?error=invalid_request');

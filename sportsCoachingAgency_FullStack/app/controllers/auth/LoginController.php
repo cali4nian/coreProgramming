@@ -12,22 +12,30 @@ class LoginController extends BaseController
 
     private AuthModel $authModel;
 
+    // Constructor to initialize AuthModel
     public function __construct()
     {
         $this->authModel = new AuthModel();
     }
 
+    // Render the login page
     public function index()
     {
         // Start session only if not already started
-        $this->isLoggedIn();
         $this->isSessionOrStart();
+
+        // Redirect to dashboard if already logged in
+        $this->isLoggedIn();
+
+        // Generate CSRF token for the login form
+        $csrf_token = $this->generateOrValidateCsrfToken();
 
         // Fetch settings using the BaseController method
         $settings = $this->fetchSettings();
 
         // Prepare data for the login page
         $data = [
+            'csrf_token' => $csrf_token,
             'page_css_url' => '/assets/css/login.css',
             'page_js_url' => '/assets/js/auth/login.js',
             'header_title' => 'Login to Your Account',
@@ -43,20 +51,27 @@ class LoginController extends BaseController
     {
         // Redirect to dashboard if already logged in
         $this->isLoggedIn();
-        $this->isSessionOrStart();
+
+        // Validate CSRF token and redirect if invalid
+        $this->generateOrValidateCsrfToken($_POST['csrf_token'], 'login?error=invalid_request', true);
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            if (!isset($_POST['csrf_token']) || !validateCsrfToken($_POST['csrf_token'])) $this->redirect('login?error=invalid_request');
 
+            // Check if email and password are set
+            if (empty($_POST['email']) || empty($_POST['password'])) $this->redirect('login?error=email_or_password_empty');
+
+            // Assign email and password to variables
             $email = $this->sanitizeEmail($_POST['email']);
             $password = trim($_POST['password']);
 
-            if (empty($email) || empty($password)) $this->redirect('login?error=email_or_password_empty');
-
+            // Fetch user by email
             $user = $this->authModel->fetchUser($email);
 
+            // Check if user exists and password is correct
             if ($user && password_verify($password, $user['password'])) {
                 if (!$user['is_verified']) $this->redirect('login?error=user_not_verified&email='.$user['email']);
+                // Start session only if not already started
+                $this->isSessionOrStart();
                 // Store user data in session
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['user_name'] = $user['name'];

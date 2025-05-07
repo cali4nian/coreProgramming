@@ -1,6 +1,8 @@
 <?php
 namespace App\Controllers;
 
+require_once __DIR__ . '/../functions/csrf.php';
+
 use App\Config\Database;
 use PDO;
 
@@ -13,9 +15,26 @@ class BaseController
         exit();
     }
 
+    // Method to generate or validate CSRF token
+    protected function generateOrValidateCsrfToken($token = null, $url = null, $validate = false) {
+        if ($validate && isset($token) && isset($url)) {
+            if (!isset($token) || !validateCsrfToken($token)) $this->redirect($url);
+            else return true;
+        } else {
+            if (!isset($_SESSION['csrf_token'])) $_SESSION['csrf_token'] = generateCsrfToken();
+            return $_SESSION['csrf_token'];
+        }
+    }
+
     // Method to check if session is started, if not, start it
     protected function isSessionOrStart() {
         if (session_status() === PHP_SESSION_NONE) session_start();
+    }
+
+    // Check if user is not logged in
+    protected function isNotLoggedIn() 
+    {
+        if (!isset($_SESSION['user_id'])) $this->redirect('/login');
     }
 
     // Check if user is logged in

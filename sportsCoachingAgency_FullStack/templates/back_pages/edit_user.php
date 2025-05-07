@@ -1,11 +1,9 @@
 <?php include 'header.php'; ?>
 
 <div class="container">
-    <h1><?= htmlspecialchars($pageName) ?></h1>
-    <p><?= htmlspecialchars($pageDescription) ?></p>
-
     <?php if ($user): ?>
         <form action="/admin/users/update" method="POST">
+            <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token); ?>">
             <input type="hidden" name="id" value="<?= htmlspecialchars($user['id']); ?>">
             
             <div class="form-group">

@@ -11,14 +11,22 @@ class UserController extends BaseController
 {
     private UserModel $userModel;
 
+    // Constructor to initialize UserModel
     public function __construct()
     {
         $this->userModel = new UserModel();
     }
 
+    // Method to handle user management
     public function index()
     {
-        requireAdminOrSuper();
+        // Check if the user is logged in and session is started
+        $this->isSessionOrStart();
+        $this->isNotLoggedIn();
+        isAdminOrSuper();
+
+        // Generate CSRF token for the session
+        $csrfToken = $this->generateOrValidateCsrfToken();
 
         $perPage = 10;
         $page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int)$_GET['page'] : 1;
@@ -32,6 +40,7 @@ class UserController extends BaseController
         $currentRole = $this->userModel->getUserRoleById($userId);
 
         $data = [
+            'csrf_token' => $csrfToken,
             'currentRole' => $currentRole,
             'users' => $users,
             'totalPages' => $totalPages,
@@ -46,36 +55,66 @@ class UserController extends BaseController
         renderTemplate('back_pages/users.php', $data);
     }
 
+    // Method to handle deleting a user
     public function delete()
     {
-        requireAdmin();
+        // Check if the user is logged in and session is started
+        $this->isSessionOrStart();
+        $this->isNotLoggedIn();
+        isAdminOrSuper();
+
+        // Validate CSRF token
+        $this->generateOrValidateCsrfToken($_POST['csrf_token'], '/admin/users?error=invalid_request', true);
+
         $id = $_POST['id'] ?? null;
         if (!$id) $this->redirect('/admin/users?error=invalid_request');
         if ($this->userModel->deleteUser($id)) $this->redirect('/admin/users?success=delete');
         else $this->redirect('/admin/users?error=cannot_delete_admin');
     }
 
+    // Method to handle pausing a user (deactivating)
     public function pause()
     {
-        requireAdminOrSuper();
+        // Check if the user is logged in and session is started
+        $this->isSessionOrStart();
+        $this->isNotLoggedIn();
+        isAdminOrSuper();
+
+        // Validate CSRF token
+        $this->generateOrValidateCsrfToken($_POST['csrf_token'], '/admin/users?error=invalid_request', true);
+
         $id = $_POST['id'] ?? null;
         if (!$id) $this->redirect('/admin/users?error=invalid_request');
         if ($this->userModel->toggleUserStatus($id, false)) $this->redirect('/admin/users?success=pause');
         else $this->redirect('/admin/users?error=action_failed');
     }
 
+    // Method to handle unpausing a user (activating)
     public function unpause()
     {
-        requireAdminOrSuper();
+        // Check if the user is logged in and session is started
+        $this->isSessionOrStart();
+        $this->isNotLoggedIn();
+        isAdminOrSuper();
+
+        // Validate CSRF token
+        $this->generateOrValidateCsrfToken($_POST['csrf_token'], '/admin/users?error=invalid_request', true);
         $id = $_POST['id'] ?? null;
         if (!$id) $this->redirect('/admin/users?error=invalid_request');
         if ($this->userModel->toggleUserStatus($id, true)) $this->redirect('/admin/users?success=unpause');
         else $this->redirect('/admin/users?error=action_failed');
     }
 
+    // Method to handle changing a user's role
     public function resetPassword()
     {
-        requireAdminOrSuper();
+        // Check if the user is logged in and session is started
+        $this->isSessionOrStart();
+        $this->isNotLoggedIn();
+        isAdminOrSuper();
+
+        // Validate CSRF token
+        $this->generateOrValidateCsrfToken($_POST['csrf_token'], '/admin/users?error=invalid_request', true);
 
         $id = $_POST['id'] ?? null;
         if (!$id) $this->redirect('/admin/users?error=invalid_request');
@@ -98,9 +137,16 @@ class UserController extends BaseController
         }
     }
 
+    // Method to handle adding a new super user
     public function add()
     {
-        requireAdmin();
+        // Check if the user is logged in and session is started
+        $this->isSessionOrStart();
+        $this->isNotLoggedIn();
+        isAdminOrSuper();
+
+        // Validate CSRF token
+        $this->generateOrValidateCsrfToken($_POST['csrf_token'], '/admin/users?error=invalid_request', true);
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['name'], $_POST['email'], $_POST['password'])) {
             $name = $this->sanitizeString($_POST['name']);
@@ -127,9 +173,16 @@ class UserController extends BaseController
         }
     }
 
+    // Method to handle editing a user
     public function edit()
     {
-        requireAdminOrSuper();
+        // Check if the user is logged in and session is started
+        $this->isSessionOrStart();
+        $this->isNotLoggedIn();
+        isAdminOrSuper();
+
+        // Validate CSRF token
+        $this->generateOrValidateCsrfToken($_POST['csrf_token'], '/admin/users?error=invalid_request', true);
 
         $id = $_POST['id'] ?? null;
         if (!$id) $this->redirect('/admin/users?error=invalid_request');
@@ -138,11 +191,42 @@ class UserController extends BaseController
         if (!$user) $this->redirect('/admin/users?error=user_not_found');
 
         renderTemplate('back_pages/edit_user.php', [
+            'csrf_token' => $_POST['csrf_token'],
+            'pageName' => 'Edit User',
+            'pageDescription' => 'Edit user details and roles.',
             'header_title' => 'Edit User',
             'page_css_url' => '/assets/css/edit-user.css',
             'page_js_url' => '/assets/js/backend/edit_user/edit_user.js',
             'user' => $user,
             'currentRole' => $_SESSION['current_role'],
         ]);
+    }
+
+    // Method to handle updating a user
+    public function update()
+    {
+        // Check if the user is logged in and session is started
+        $this->isSessionOrStart();
+        $this->isNotLoggedIn();
+        isAdminOrSuper();
+
+        // Validate CSRF token
+        $this->generateOrValidateCsrfToken($_POST['csrf_token'], '/admin/users?error=invalid_request', true);
+
+        $id = $_POST['id'] ?? null;
+        if (!$id) $this->redirect('/admin/users?error=invalid_request');
+
+        $name = $this->sanitizeString($_POST['name']);
+        $email = $this->sanitizeEmail($_POST['email']);
+        $role = $_POST['role'] ?? null;
+
+        if ($this->userModel->updateUser($id, $name, $email, $role)) {
+            if ($role) {
+                $this->userModel->updateUserRole($id, $role);
+            }
+            $this->redirect('/admin/users?success=update');
+        } else {
+            $this->redirect('/admin/users?error=update_failed');
+        }
     }
 }

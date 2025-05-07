@@ -10,14 +10,26 @@ class SubscriberController extends BaseController
 {
     private SubscriberModel $subscriberModel;
 
+    // Constructor to initialize the SubscriberModel
     public function __construct()
     {
         $this->subscriberModel = new SubscriberModel();
     }
 
+    // Method to display the list of subscribers with pagination
     public function index()
     {
+        // Check if the session is started
+        $this->isSessionOrStart();
+
+        // Check if the user is logged in
+        $this->isLoggedIn();
+        
+        // Check if the user is logged in and has admin or super privileges
         requireAdminOrSuper();
+
+        // Generate CSRF token
+        $csrfToken = $this->generateOrValidateCsrfToken();
 
         $perPage = 10;
         $page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int)$_GET['page'] : 1;
@@ -30,7 +42,9 @@ class SubscriberController extends BaseController
         $totalSubscribers = $this->subscriberModel->getTotalSubscribers();
         $totalPages = ceil($totalSubscribers / $perPage);
 
+        // Prepare data for rendering
         $data = [
+            'csrf_token' => $csrfToken,
             'subscribers' => $subscribers,
             'totalPages' => $totalPages,
             'currentPage' => $page,
@@ -44,6 +58,7 @@ class SubscriberController extends BaseController
         renderTemplate('back_pages/subscribers.php', $data);
     }
 
+    // Method to handle subscription requests UPDATE TO ADD CSRF TOKEN
     public function subscribe()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email'])) {
@@ -70,6 +85,7 @@ class SubscriberController extends BaseController
         } else $this->redirect('/'); // Redirect to home if accessed directly
     }
 
+    // Method to send a confirmation email to the subscriber
     public function sendConfirmationEmail($email)
     {
         // Send confirmation email
@@ -87,6 +103,7 @@ class SubscriberController extends BaseController
         $this->redirect('/?pending=true'); // Redirect to home with a pending message
     }
 
+    // Method to handle the confirmation of a subscription
     public function confirm()
     {
         if (isset($_GET['email'])) {
@@ -154,7 +171,7 @@ class SubscriberController extends BaseController
         exit();
     }
     
-
+    // Method to handle the resending of the confirmation email
     public function resendToSubscriber()
     {
         if (!isset($_GET['email'])) $this->redirect('/?error=invalid_request');
@@ -189,13 +206,21 @@ class SubscriberController extends BaseController
 
     }
 
+    // Method to handle the deletion of a subscriber
     public function deleteSubscriber()
     {
-        requireAdmin(); // Ensure only admins can delete subscribers
+        // Check if the user is logged in and has admin privileges
+        $this->isSessionOrStart();
+        $this->isLoggedIn();
+        requireAdmin();
 
-        if (!isset($_GET['id']) || !is_numeric($_GET['id'])) $this->redirect('/subscribers?error=invalid_request');
+        // Validate the CSRF token
+        $this->generateOrValidateCsrfToken($_POST['csrf_token'], '/subscribers?error=invalid_request', true);
 
-        $this->subscriberModel->deleteSubscriber($_GET['id']);
+        if (!isset($_POST['id']) || !is_numeric($_POST['id']) || !isset($_POST['csrf_token'])) $this->redirect('/subscribers?error=invalid_request');
+
+        // Delete the subscriber from the database
+        $this->subscriberModel->deleteSubscriber($_POST['id']);
 
         // Redirect to the subscriber list with a success message
         $this->redirect('/subscribers?success=subscriber_deleted');
@@ -204,7 +229,11 @@ class SubscriberController extends BaseController
     // Download All Subscribers
     public function downloadAllSubscribers()
     {
-        requireAdminOrSuper(); // Ensure only admins can download
+        // Check if the user is logged in and has admin privileges
+        $this->isSessionOrStart();
+        $this->isLoggedIn();
+        requireAdminOrSuper();
+
         $subscribers = $this->subscriberModel->getAllSubscribers();
         // Set headers for CSV download
         header('Content-Type: text/csv; charset=utf-8');
@@ -230,7 +259,11 @@ class SubscriberController extends BaseController
     // Download Confirmed Subscribers
     public function downloadConfirmedSubscribers()
     {
-        requireAdminOrSuper(); // Ensure only admins can download
+        // Check if the user is logged in and has admin privileges
+        $this->isSessionOrStart();
+        $this->isLoggedIn();
+        requireAdminOrSuper();
+
         $subscribers = $this->subscriberModel->getAllConfirmedSubscribers();
         // Set headers for CSV download
         header('Content-Type: text/csv; charset=utf-8');
@@ -256,7 +289,11 @@ class SubscriberController extends BaseController
     // Download Unconfirmed Subscribers
     public function downloadUnconfirmedSubscribers()
     {
-        requireAdminOrSuper(); // Ensure only admins can download
+        // Check if the user is logged in and has admin privileges
+        $this->isSessionOrStart();
+        $this->isLoggedIn();
+        requireAdminOrSuper();
+        
         $subscribers = $this->subscriberModel->getAllUnconfirmedSubscribers();
 
         // Set headers for CSV download

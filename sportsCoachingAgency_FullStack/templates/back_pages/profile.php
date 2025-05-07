@@ -2,11 +2,11 @@
 
 <!-- Update Profile -->
 <section class="container">
-
     <h1>Update Profile</h1>
     <p>Here you can update your profile information.</p>
 
     <form action="/profile/update" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>">
         <label for="name">Name:</label>
         <input type="text" name="name" value="<?= htmlspecialchars($user['name']) ?>" required>
 
@@ -34,9 +34,11 @@
 
 <!-- Update Password -->
 <section class="container">
-    <h2>Change Password</h2>
+    <h1>Change Password</h1>
     <p>Here you can update your password.</p>
+
     <form action="/profile/change-password" method="POST">
+        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>">
         <label for="current_password">Current Password:</label>
         <input type="password" name="current_password" required>
 
@@ -52,13 +54,17 @@
 <!-- END Update Password -->
 
 <!-- Delete Account -->
-<section class="container">
-    <h2>Delete Account</h2>
-    <p>After deleting your profile, all of your data will be lost forever.</p>
-    <form action="/profile/delete" method="POST" onsubmit="return confirm('Are you sure? This cannot be undone.');">
-        <button type="submit" style="background-color: red; color: white;">Delete Account</button>
-    </form>
-</section>
+ <!-- check if $_SESSION['user_role'] == admin -->
+<?php if ($_SESSION['current_role'] != 'admin'): ?>
+    <section class="container">
+        <h2>Delete Account</h2>
+        <p>After deleting your profile, all of your data will be lost forever.</p>
+        <form action="/profile/delete" method="POST" onsubmit="return confirm('Are you sure? This cannot be undone.');">
+            <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>">
+            <button type="submit" style="background-color: red; color: white;">Delete Account</button>
+        </form>
+    </section>
+<?php endif; ?>
 <!-- END Delete Account -->
 
 <?php include 'footer.php'; ?>

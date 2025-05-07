@@ -7,13 +7,18 @@ class HomeController extends BaseController
 {
     private TopPlayerModel $topPlayerModel;
 
+    // Constructor to initialize the TopPlayerModel
     public function __construct()
     {
         $this->topPlayerModel = new TopPlayerModel();
     }
 
+    // Method to handle the home page request
     public function index()
-    {   
+    {
+        // Redirect if user is logged in
+        $this->isLoggedIn();
+
         // Fetch settings using the BaseController method
         $settings = $this->fetchSettings();
 

@@ -1,13 +1,12 @@
-<?php require_once __DIR__ . '/../../app/functions/csrf.php'; ?>
 <?php include __DIR__ . '/../header.php'; ?>
 
 <!-- Login Section -->
 <section class="login-container">
     <aside class="login-box">
-    <a href="/"><img src="/assets/img/basketballLogo.webp" alt="" /></a>
+    <a href="/"><img src="/assets/img/basketballLogo.webp" alt="Company Logo" /></a>
     <h2>Login</h2>
     <form action="/login/request" method="POST">
-        <input type="hidden" name="csrf_token" value="<?php echo generateCsrfToken(); ?>">
+        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>" />
         <p class="input-group">
         <label for="email">Email Address</label>
         <input type="email" id="email" name="email" placeholder="Enter your email" value="admin@example.com" required />

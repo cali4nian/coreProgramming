@@ -82,7 +82,7 @@ class UserModel extends BaseModel
         $user = $stmt->fetch();
 
         if ($user && $user['current_role'] === 'admin') {
-            return false; // Prevent deletion of admin users
+            return false;
         }
 
         $stmt = $this->db->prepare("UPDATE {$this->table} SET is_active = :is_active WHERE id = :id");

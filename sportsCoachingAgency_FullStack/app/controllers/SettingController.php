@@ -10,20 +10,31 @@ class SettingController extends BaseController
 {
     private SettingModel $settingsModel;
 
+    // Constructor to initialize the settings model
     public function __construct()
     {
         // call settings model if needed
         $this->settingsModel = new SettingModel();
     }
-    
+
+    // Method to render the settings page
     public function index()
     {
+        // Check if session is started, if not, start it
+        $this->isSessionOrStart();
+        
+        // Check if user is logged in and has admin or super role
+        $this->isNotLoggedIn();
         requireAdminOrSuper();
+
+        // Generate CSRF token
+        $csrfToken = $this->generateOrValidateCsrfToken();
 
         // Fetch all settings
         $settings = $this->settingsModel->getAllSettings();
 
         $data = [
+            'csrf_token' => $csrfToken,
             'header_title' => 'Settings',
             'page_css_url' => '/assets/css/settings.css',
             'page_js_url' => '/assets/js/backend/settings/settings.js',
@@ -37,7 +48,14 @@ class SettingController extends BaseController
 
     public function updateSiteSettings()
     {
+        // Check if user is logged in and has admin or super role
+        $this->isSessionOrStart();
+        $this->isNotLoggedIn();
         requireAdminOrSuper();
+
+        // Validate CSRF token
+        $this->generateOrValidateCsrfToken($_POST['csrf_token'], '/admin/settings?error=invalid_request', true);
+
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Update Site Name and Customer Service Email
@@ -50,7 +68,13 @@ class SettingController extends BaseController
 
     public function updateSocialMediaSettings()
     {
+        // Check if user is logged in and has admin or super role
+        $this->isSessionOrStart();
+        $this->isNotLoggedIn();
         requireAdminOrSuper();
+
+        // Validate CSRF token
+        $this->generateOrValidateCsrfToken($_POST['csrf_token'], '/admin/settings?error=invalid_request', true);
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -69,7 +93,13 @@ class SettingController extends BaseController
 
     public function updateHomePageSettings()
     {
+        // Check if user is logged in and has admin or super role
+        $this->isSessionOrStart();
+        $this->isNotLoggedIn();
         requireAdminOrSuper();
+
+        // Validate CSRF token
+        $this->generateOrValidateCsrfToken($_POST['csrf_token'], '/admin/settings?error=invalid_request', true);
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -91,7 +121,13 @@ class SettingController extends BaseController
 
     public function updateAboutPageSettings()
     {
+        // Check if user is logged in and has admin or super role
+        $this->isSessionOrStart();
+        $this->isNotLoggedIn();
         requireAdminOrSuper();
+
+        // Validate CSRF token
+        $this->generateOrValidateCsrfToken($_POST['csrf_token'], '/admin/settings?error=invalid_request', true);
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 

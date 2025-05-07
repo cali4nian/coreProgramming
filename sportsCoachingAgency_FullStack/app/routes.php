@@ -12,7 +12,7 @@ $routes = [
     '/terms-of-use'                    => 'App\Controllers\LegalPageController@terms_of_use',
     '/subscribe'                       => 'App\Controllers\SubscriberController@subscribe',
     '/confirm-subscription'            => 'App\Controllers\SubscriberController@confirm',
-    'resend-subscription-verification' => 'App\Controllers\auth\SubscriberController@resendToSubscriber',
+    '/resend-subscription-verification' => 'App\Controllers\auth\SubscriberController@resendToSubscriber',
     // Auth
     '/login'                           => 'App\Controllers\Auth\LoginController@index',
     '/login/request'                   => 'App\Controllers\Auth\LoginController@login',

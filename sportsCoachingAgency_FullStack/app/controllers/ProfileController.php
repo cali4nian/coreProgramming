@@ -12,23 +12,31 @@ class ProfileController extends BaseController
 {
     private ProfileModel $profileModel;
 
+    // Constructor to initialize the ProfileModel
     public function __construct()
     {
         $this->profileModel = new ProfileModel();
     }
 
-    /**
-     * Display the profile page.
-     */
+    // Method to render the profile page
     public function index()
     {
+        // Check if user is logged in and session is started
         requireLogin();
+        $this->isNotLoggedIn();
+        $this->isSessionOrStart();
 
+        // Generate CSRF token for the form
+        $csrfToken = $this->generateOrValidateCsrfToken();
+
+        // Get user data from the database
         $user = $this->profileModel->getUserById($_SESSION['user_id']);
 
+        // Check if user exists
         if (!$user) $this->redirect('/logout');
 
         $data = [
+            'csrf_token' => $csrfToken,
             'user' => $user,
             'header_title' => 'Profile',
             'page_css_url' => '/assets/css/profile.css',
@@ -45,8 +53,15 @@ class ProfileController extends BaseController
      */
     public function updateProfile()
     {
+        // Check if user is logged in and session is started
+        $this->isSessionOrStart();
         requireLogin();
+        $this->isNotLoggedIn();
 
+        // Validate CSRF token
+        $this->generateOrValidateCsrfToken($_POST['csrf_token'] ?? null, '/profile?error=invalid_request', true);
+
+        // Check if the request method is POST
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $name = $this->sanitizeString($_POST['name']);
             $email = $this->sanitizeEmail($_POST['email']);
@@ -78,9 +93,8 @@ class ProfileController extends BaseController
                 $currentUser = $this->profileModel->getUserById($_SESSION['user_id']);
                 if (!empty($currentUser['profile_image'])) {
                     $existingFile = $targetDir . $currentUser['profile_image'];
-                    if (file_exists($existingFile)) {
-                        unlink($existingFile); // Delete the existing file
-                    }
+                    // Delete the existing file
+                    if (file_exists($existingFile)) unlink($existingFile);
                 }
 
                 // Move the uploaded file
@@ -109,7 +123,13 @@ class ProfileController extends BaseController
      */
     public function changePassword()
     {
+        // Check if user is logged in and session is started
+        $this->isSessionOrStart();
+        $this->isNotLoggedIn();
         requireLogin();
+
+        // Validate CSRF token
+        $this->generateOrValidateCsrfToken($_POST['csrf_token'] ?? null, '/profile?error=invalid_request', true);
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // UPDATE TO CLEAN PASSWORD
@@ -140,7 +160,13 @@ class ProfileController extends BaseController
      */
     public function deleteProfile()
     {
+        // Check if user is logged in and session is started
+        $this->isSessionOrStart();
+        $this->isNotLoggedIn();
         requireLogin();
+
+        // Validate CSRF token
+        $this->generateOrValidateCsrfToken($_POST['csrf_token'] ?? null, '/profile?error=invalid_request', true);
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $this->profileModel->deleteUser($_SESSION['user_id']);

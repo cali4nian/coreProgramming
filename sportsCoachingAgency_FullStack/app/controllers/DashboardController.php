@@ -7,29 +7,32 @@ require_once __DIR__ . '/../models/DashboardModel.php';
 
 use App\Models\DashboardModel;
 
-class DashboardController
+class DashboardController extends BaseController
 {
     private DashboardModel $dashboardModel;
 
+    // Constructor to initialize the DashboardModel
     public function __construct()
     {
         // Initialize the DashboardModel with the database connection
         $this->dashboardModel = new DashboardModel();
     }
 
+    // Method to render the dashboard page
     public function index()
     {
         // Ensure the user is logged in
         requireLogin();
+        $this->isNotLoggedIn();
 
         // Fetch the current user's role
-        $userId = $_SESSION['user_id']; // Assuming user ID is stored in the session
+        $userId = $_SESSION['user_id'];
         $currentRole = $this->dashboardModel->getUserRoleById($userId);
 
         // Prepare data for the dashboard
         $data = [
-            'currentRole' => $currentRole, // Pass currentRole to the template
-            'page_css_url' => '/assets/css/dashboard.css', // Dynamically set CSS file
+            'currentRole' => $currentRole,
+            'page_css_url' => '/assets/css/dashboard.css',
             'page_js_url' => '/assets/js/dashboard/dashboard.js',
             'header_title' => 'Dashboard',
             'pageName' => 'Dashboard Overview',
@@ -37,7 +40,7 @@ class DashboardController
         ];
 
         if(isAdminOrSuper()) {
-            $data['isAdminOrSuper'] = true; // Set flag for admin or super user
+            $data['isAdminOrSuper'] = true;
             // Fetch total count of subscribers
             $data['totalSubscribers'] = $this->dashboardModel->getTotalSubscribers();
             // Fetch recent subscribers

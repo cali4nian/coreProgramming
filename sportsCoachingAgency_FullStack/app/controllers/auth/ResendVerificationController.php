@@ -11,11 +11,13 @@ class ResendVerificationController extends BaseController
 {
     private AuthModel $authModel;
 
+    // Constructor to initialize the AuthModel
     public function __construct()
     {
         $this->authModel = new AuthModel();
     }
 
+    // Method to handle the resend verification request
     public function resend()
     {
         if (!isset($_GET['email'])) $this->redirect('login?error=invalid_request');
@@ -24,6 +26,7 @@ class ResendVerificationController extends BaseController
 
         if (!$email) $this->redirect('login?error=invalid_email');
 
+        // Fetch user by email
         $user = $this->authModel->fetchUserRVC($email);
 
         if (!$user) $this->redirect('login?error=not_found');
@@ -47,6 +50,7 @@ class ResendVerificationController extends BaseController
         $subject = "Verify Your Email (Resent)";
         $emailBody = str_replace("{{verification_link}}", $verificationLink, $template);
 
+        // Send email
         if (sendEmail($email, $subject, $emailBody)) $this->redirect('login?confirmation=resent');
         else $this->redirect('login?error=emailing_error');
     }

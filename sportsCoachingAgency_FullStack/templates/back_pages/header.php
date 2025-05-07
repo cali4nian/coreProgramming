@@ -15,9 +15,7 @@
     <!-- Main Content -->
     <main class="main-content">
 
-    <?php
-      // Set default values for page name and description if not provided
-      $pageName = $pageName ?? 'Default Page Title';
-      $pageDescription = $pageDescription ?? 'Welcome to the page.';
-      require_once 'partials/page-header.php';
-    ?>
+    <section class="page-header">
+      <h1><?= htmlspecialchars($pageName ?? 'Default Page Title') ?></h1>
+      <p><?= htmlspecialchars($pageDescription ?? 'Default Page Description') ?></p>
+    </section>

@@ -10,13 +10,18 @@ class ResetPasswordController extends BaseController
 {
     private AuthModel $authModel;
 
+    // Constructor to initialize the AuthModel
     public function __construct()
     {
         $this->authModel = new AuthModel();
     }
 
+    // Method to handle the password reset request
     public function index()
     {
+        // Redirect to dashboard if user is logged in
+        $this->isLoggedIn();
+
         if (!isset($_GET['token'])) $this->redirect('login?error=invalid_request');
 
         $token = $_GET['token'];
@@ -29,8 +34,12 @@ class ResetPasswordController extends BaseController
         // Fetch settings using the BaseController method
         $settings = $this->fetchSettings();
 
+        // Generate CSRF token for the form
+        $csrfToken = $this->generateOrValidateCsrfToken();
+
         // Prepare data for the reset password page
         $data = [
+            'csrf_token' => $csrfToken,
             'token' => $token,
             'page_css_url' => '/assets/css/reset-password.css',
             'page_js_url' => '/assets/js/auth/reset-password.js',
@@ -42,10 +51,13 @@ class ResetPasswordController extends BaseController
         renderTemplate('auth/reset-password.php', $data);
     }
 
+    // Method to handle the password reset form submission
     public function reset()
     {
+        // Redirect to dashboard if user is logged in
+        $this->isLoggedIn();
+        
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // UPDATE VALIDATION BEFORE TESTING ON LIVE SERVER
             $token = $_POST['token'];
             $newPassword = $_POST['password'];
 

@@ -19,10 +19,12 @@
                     <p>💪 REB: <?= $player['rebounds_per_game'] ?> | 🎯 AST: <?= $player['assists_per_game'] ?></p>
                     <!-- Add edit and delete forms -->
                     <form action="/admin/top-players/edit" method="POST" style="display: inline-block;">
+                        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>">
                         <input type="hidden" name="id" value="<?= htmlspecialchars($player['id']) ?>">
                         <button type="submit" class="edit-button">Edit</button>
                     </form>
                     <form action="/admin/top-players/delete" method="POST" style="display: inline-block;">
+                        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>">
                         <input type="hidden" name="id" value="<?= htmlspecialchars($player['id']) ?>">
                         <button type="submit" class="delete-button">Delete</button>
                     </form>
@@ -36,6 +38,7 @@
     <section class="player-form-section">
         <h1>Add New Top Player</h1>
         <form action="/admin/top-players/create" method="POST" enctype="multipart/form-data" class="player-form">
+            <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>">
             <!-- First Name -->
             <div class="form-group">
                 <label for="first_name">First Name</label>

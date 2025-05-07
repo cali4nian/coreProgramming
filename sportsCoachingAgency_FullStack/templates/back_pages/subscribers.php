@@ -26,7 +26,12 @@
                 <td><?= $subscriber['is_confirmed'] ? '✅ Yes' : '❌ No' ?></td>
                 <td><?= $subscriber['subscribed_at'] ?></td>
                 <td>
-                    <a href="/admin/delete-subscriber?id=<?= $subscriber['id'] ?>" class="delete-btn" onclick="return confirm('Are you sure you want to delete this subscriber?')">🗑 Delete</a>
+                    <!-- Form to delete subscriber -->
+                    <form action="/admin/delete-subscriber" method="POST" style="display: inline-block;">
+                        <input type="hidden" name="id" value="<?= htmlspecialchars($subscriber['id']) ?>">
+                        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>">
+                        <button type="submit" class="delete-btn" onclick="return confirm('Are you sure you want to delete this subscriber?')">🗑 Delete</button>
+                    </form>
                 </td>
             </tr>
         <?php endforeach; ?>

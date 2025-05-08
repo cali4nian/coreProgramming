@@ -3,7 +3,7 @@
 <!-- Login Section -->
 <section class="login-container">
     <aside class="login-box">
-    <a href="/"><img src="/assets/img/basketballLogo.webp" alt="Company Logo" /></a>
+    <a href="/"><img src="/assets/img/default_logo.webp" alt="Company Logo" /></a>
     <h2>Login</h2>
     <form action="/login/request" method="POST">
         <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>" />

@@ -13,6 +13,7 @@ class AuthModel
         $this->db = Database::connect();
     }
 
+    // Fetch user by email
     public function fetchUserIdByEmail($email) {
         $stmt = $this->db->prepare("SELECT id FROM users WHERE email = :email");
         $stmt->execute(['email' => $email]);
@@ -87,23 +88,43 @@ class AuthModel
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    // update user to set as verified
+    // Update user to set as verified
     public function updateUserToVerified($id) {
         $stmt = $this->db->prepare("UPDATE users SET is_verified = 1, verification_token = NULL WHERE id = :id");
         $stmt->execute(['id' => $id]);
     }
 
-    // fetch subscriber by email
+    // Fetch subscriber by email
     public function fetchSubscriberByEmail($email) {
         $stmt = $this->db->prepare("SELECT id FROM subscribers WHERE email = :email");
         $stmt->execute(['email' => $email]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    // add subscriber
+    // Add subscriber
     public function addSubscriber($email) {
         $stmt = $this->db->prepare("INSERT INTO subscribers (email, confirmation_token, is_confirmed) VALUES (:email, NULL, 1)");
         $stmt->execute(['email' => $email]);
     }
 
+    // Check throttle for login attempts
+    function isThrottled($ip, $limit = 5, $minutes = 15): bool {
+        $stmt = $this->db->prepare("SELECT COUNT(*) FROM login_attempts 
+                               WHERE ip_address = ? AND attempt_time > NOW() - INTERVAL ? MINUTE");
+        $stmt->execute([$ip, $minutes]);
+        return $stmt->fetchColumn() >= $limit;
+    }
+    
+    // Record login attempt
+    function recordLoginAttempt($ip): void {
+        $stmt = $this->db->prepare("INSERT INTO login_attempts (ip_address, attempt_time) VALUES (?, NOW())");
+        $stmt->execute([$ip]);
+    }
+
+    // Clear login attempts
+    function clearLoginAttempts($ip): void {
+        $stmt = $this->db->prepare("DELETE FROM login_attempts WHERE ip_address = ?");
+        $stmt->execute([$ip]);
+    }
+    
 }

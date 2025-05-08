@@ -45,7 +45,7 @@ class ContactController extends BaseController
         $this->isLoggedIn();
         
         // Validate CSRF token
-        $this->generateOrValidateCsrfToken($_POST['csrf_token'], 'contact?error=invalid_request', true);
+        $this->generateOrValidateCsrfToken($_POST['csrf_token'], '/contact?error=invalid_request', true);
         
         // Handle the contact form submission
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {

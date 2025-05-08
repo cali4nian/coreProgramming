@@ -56,22 +56,25 @@ class ResetPasswordController extends BaseController
     {
         // Redirect to dashboard if user is logged in
         $this->isLoggedIn();
+
+        // Validate CSRF token
+        $this->generateOrValidateCsrfToken($_POST['csrf_token'], '/reset-password?error=invalid_request', true);
         
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $token = $_POST['token'];
             $newPassword = $_POST['password'];
 
-            if (empty($newPassword) || strlen($newPassword) < 6) $this->redirect('reset-password?token=' . $token . '&error=password_too_short');
+            if (empty($newPassword) || strlen($newPassword) < 6) $this->redirect('/reset-password?token=' . $token . '&error=password_too_short');
 
             $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
 
             $user = $this->authModel->fetchUserRPC($token);
 
-            if (!$user) $this->redirect('login?error=invalid_request');
+            if (!$user) $this->redirect('/login?error=invalid_request');
 
             // Update password & clear reset token
             $this->authModel->updatePassword($hashedPassword, $user['id']);
-            $this->redirect('login?success=password_reset_successful');
+            $this->redirect('/login?success=password_reset_successful');
         }
     }
 }

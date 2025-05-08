@@ -93,6 +93,7 @@ class LoginController extends BaseController
     // Destroy session
     public function logout()
     {
+        $this->isNotLoggedIn();
         session_start();
         session_destroy();
         $this->redirect('/login');

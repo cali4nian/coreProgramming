@@ -23,7 +23,7 @@ class ForgotPasswordController extends BaseController
         // Check if session is started, if not, start it
         $this->isSessionOrStart();
         
-        // Check if user is already logged in
+        // Redirect to dashboard if user is logged in
         $this->isLoggedIn();
 
         // Get CSRF token
@@ -47,21 +47,21 @@ class ForgotPasswordController extends BaseController
     // Method to handle the password reset request
     public function requestReset()
     {
-        // Check if user is already logged in
+        // Redirect to dashboard if user is logged in
         $this->isLoggedIn();
         
         // Check CSRF token
-        $this->generateOrValidateCsrfToken($_POST['csrf_token'], 'forgot-password?error=invalid_csrf_token', true);
+        $this->generateOrValidateCsrfToken($_POST['csrf_token'], '/forgot-password?error=invalid_csrf_token', true);
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST')
         {
             $email = $this->sanitizeEmail($_POST['email']);
             
-            if (!$email) $this->redirect('forgot-password?error=invalid_email');
+            if (!$email) $this->redirect('/forgot-password?error=invalid_email');
             
             $user = $this->authModel->fetchUserIdByEmail($email);
             
-            if (!$user) $this->redirect('forgot-password?error=invalid_email');
+            if (!$user) $this->redirect('/forgot-password?error=invalid_email');
 
             // Generate reset token & expiration
             $resetToken = bin2hex(random_bytes(32));
@@ -84,8 +84,8 @@ class ForgotPasswordController extends BaseController
             $subject = "Reset Your Password";
 
             // Send email using the sendEmail function from functions/email.php
-            if (sendEmail($email, $subject, $emailBody)) $this->redirect('forgot-password?success=password_reset_email_sent');
-            else $this->redirect('forgot-password?error=emailing_error');
+            if (sendEmail($email, $subject, $emailBody)) $this->redirect('/forgot-password?success=password_reset_email_sent');
+            else $this->redirect('/forgot-password?error=emailing_error');
 
         }
     }

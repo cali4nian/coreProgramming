@@ -35,11 +35,20 @@
 }
 
 .error-page .btn-back:hover {
+    cursor: pointer;
     background-color: #0056b3;
 }
 </style>
 <div class="error-page">
     <h1>404 - Page Not Found</h1>
     <p>Oops! The page you're looking for doesn't exist.</p>
-    <a href="/" class="btn-back">Go Back to Home</a>
+    <p><button onclick="goBack()" class="btn-back">Go Back</button></p>
+    <p>If you think this is a mistake, please contact support.</p>
 </div>
+
+<!-- add javascript go back button -->
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>

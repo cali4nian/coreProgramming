@@ -37,3 +37,7 @@ A modern, responsive website built for sports coaches to showcase their skills, 
 - MySQL or MariaDB
 - Apache/Nginx server
 - Composer (optional, if you expand the project)
+
+## Starting the app in root directory
+
+- php -S localhost:8000 -t public_html

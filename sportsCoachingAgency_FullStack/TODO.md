@@ -2,6 +2,10 @@
 
 This document outlines the remaining tasks for the application. Prioritize by urgency and dependencies. Update this file as features are completed or updated.
 
+## Flash Messages
+
+- [ ] Write error and success messages per page
+
 ## 🔒 Security Audit & Hardening
 
 - [ ] Implement rate limiting or simple throttling on login/resend routes
@@ -13,8 +17,6 @@ This document outlines the remaining tasks for the application. Prioritize by ur
 
 ## 🌐 Routing & Views
 
-- [ ] Improve 404 error handling
-- [ ] Add fallback route for unexpected paths
 - [ ] Refactor repetitive routes to use dynamic controllers
 
 ---
@@ -26,5 +28,15 @@ This document outlines the remaining tasks for the application. Prioritize by ur
 - [ ] Add SEO tags & social share previews for public pages
 
 ---
+
+## Additional Features
+
+- [ ] CRUD to add coaches
+
+---
+
+## After completing backend
+
+- [ ] Add JavaScript
 
 > ✍️ Keep this list updated and tag tasks with initials or dates for accountability.

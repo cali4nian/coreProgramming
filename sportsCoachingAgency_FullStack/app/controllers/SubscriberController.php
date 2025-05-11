@@ -79,9 +79,9 @@ class SubscriberController extends BaseController
             // If the email is not in the database, add it and send a confirmation email
             if ($email && !$subscriber) {
                 $this->subscriberModel->addSubscriber($email);
-                $this->sendConfirmationEmail($email); // Send confirmation email
+                $this->sendConfirmationEmail($email);
             
-            } else $this->redirect('/?error=invalid_email'); // Redirect to home with an error message
+            } else $this->redirect('/?error=invalid_request');
         } else $this->redirect('/'); // Redirect to home if accessed directly
     }
 
@@ -100,7 +100,7 @@ class SubscriberController extends BaseController
         $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 
         sendEmail($email, $subject, $message);
-        $this->redirect('/?pending=true'); // Redirect to home with a pending message
+        $this->redirect('/?success=subscription_pending'); // Redirect to home with a pending message
     }
 
     // Method to handle the confirmation of a subscription
@@ -117,58 +117,17 @@ class SubscriberController extends BaseController
                 $subscriber = $this->subscriberModel->getSubscriberByEmail($emailFiltered);
 
                 // Redirect to home with a confirmation message
-                if ($subscriber && $subscriber['is_confirmed']) $this->redirect('/?confirmed=true');
-                else $this->showResendVerificationPage($emailFiltered, 'not_found');
+                if ($subscriber && $subscriber['is_confirmed']) $this->redirect('/?success=subscriber_confirmed');
+                else $this->redirect('/?error=not_found');
 
             } else {
                 // Invalid email, show a resend verification button
-                $this->showResendVerificationPage(null, 'invalid_email');
+                $this->redirect('/?error=invalid_email');
             }
         } else {
             // Redirect to home if accessed directly
             $this->redirect('/');
         }
-    }
-
-    /**
-     * Show a page with a resend verification button.
-     *
-     * @param string|null $email
-     * @param string $errorType
-     */
-    private function showResendVerificationPage(?string $email, string $errorType)
-    {
-        $errorMessage = '';
-        $resendLink = '';
-
-        if ($errorType === 'not_found') {
-            $errorMessage = "❌ We couldn't find a subscription with this email.";
-            if ($email) {
-                // Updated URL for resending subscription verification
-                $resendLink = "/resend-subscription-verification?email=" . urlencode($email);
-            }
-        } elseif ($errorType === 'invalid_email') {
-            $errorMessage = "❌ The email address provided is invalid.";
-        }
-
-        // Render a simple page with the error message and resend button
-        echo "<html>
-            <head>
-                <title>Subscription Confirmation</title>
-            </head>
-            <body>
-                <h1>Subscription Confirmation</h1>
-                <p style='color: red;'>$errorMessage</p>";
-
-        if ($resendLink) {
-            echo "<p>If you believe this is a mistake, you can resend the verification email:</p>
-                  <a href='$resendLink' style='display: inline-block; padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;'>Resend Verification Email</a>";
-        }
-
-        echo "<p><a href='/'>Return to Home</a></p>
-            </body>
-        </html>";
-        exit();
     }
     
     // Method to handle the resending of the confirmation email
@@ -194,7 +153,7 @@ class SubscriberController extends BaseController
         $confirmationLink = "http://localhost:8000/confirm-subscription?email=" . urlencode($email);
         $subject = "Confirm Your Subscription (Resent)";
 
-        if (!file_exists(__DIR__ . '/../../templates/email/confirm_email_template.html')) $this->redirect('forgot-password?error=system');
+        if (!file_exists(__DIR__ . '/../../templates/email/confirm_email_template.html')) $this->redirect('/?error=system_error');
 
         $template = file_get_contents(__DIR__ . '/../../templates/email/confirm_email_template.html');
 

@@ -2,7 +2,7 @@
 
 <!-- About Section -->
 <section class="about-section">
-  <div class="content">
+  <aside class="content">
     <h1>Our Story</h1>
     <aside class="about-image-container">
       <p>Discover our journey and what drives us.</p>
@@ -12,7 +12,7 @@
     <p><?php echo htmlspecialchars($settings['about_page_text_two'] ?? ''); ?></p>
     <p><?php echo htmlspecialchars($settings['about_page_text_three'] ?? ''); ?></p>
     
-  </div>
+  </aside>
 </section>
 <!-- END About Section -->
  

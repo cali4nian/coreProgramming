@@ -8,7 +8,6 @@ This document outlines the remaining tasks for the application. Prioritize by ur
 
 ## 🔒 Security Audit & Hardening
 
-- [ ] Audit public routes for exposure risk
 - [ ] Add HTTP headers for security (`Content-Security-Policy`, `X-Frame-Options`, etc.)
 - [ ] Add CSRF to subscriber form
 

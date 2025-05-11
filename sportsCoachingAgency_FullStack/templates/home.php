@@ -130,5 +130,5 @@
     </div>
 </section>
 <!-- END Facebook Section -->
-<?php include 'partials/confirmation_messages.php'; ?>
+<?php include 'flash_messages/home.php'; ?>
 <?php include 'footer.php'; ?>

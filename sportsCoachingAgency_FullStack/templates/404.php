@@ -39,12 +39,12 @@
     background-color: #0056b3;
 }
 </style>
-<div class="error-page">
+<section class="error-page">
     <h1>404 - Page Not Found</h1>
     <p>Oops! The page you're looking for doesn't exist.</p>
     <p><button onclick="goBack()" class="btn-back">Go Back</button></p>
     <p>If you think this is a mistake, please contact support.</p>
-</div>
+</section>
 
 <!-- add javascript go back button -->
 <script>

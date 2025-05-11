@@ -14,11 +14,11 @@
     <!-- Navigation -->
     <nav class="mainNavigation">
       <span class="logo"><?= htmlspecialchars($settings['site_name'] ?? 'Welcome to Our Website') ?></span>
-      <div class="hamburger">
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
+      <aside class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </aside>
       <ul>
         <li><a href="/">Home</a></li>
         <li><a href="/about">About</a></li>

@@ -31,7 +31,7 @@ class ResendVerificationController extends BaseController
 
         if (!$user) $this->redirect('login?error=not_found');
         
-        if ($user['is_verified']) $this->redirect('login?confirmed=already_confirmed');
+        if ($user['is_verified']) $this->redirect('login?success=account_confirmed');
 
         // Generate new verification token
         $newToken = bin2hex(random_bytes(32));
@@ -51,7 +51,7 @@ class ResendVerificationController extends BaseController
         $emailBody = str_replace("{{verification_link}}", $verificationLink, $template);
 
         // Send email
-        if (sendEmail($email, $subject, $emailBody)) $this->redirect('login?confirmation=resent');
-        else $this->redirect('login?error=emailing_error');
+        if (sendEmail($email, $subject, $emailBody)) $this->redirect('login?success=confirmation_email_sent');
+        else $this->redirect('login?error=system_emailing_error');
     }
 }

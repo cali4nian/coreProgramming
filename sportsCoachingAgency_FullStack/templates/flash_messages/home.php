@@ -1,4 +1,4 @@
-<!-- SUCCESS -->
+<!-- ##################### SUCCESS ##################### -->
 <!-- subscription_pending -->
 <?php if (isset($_GET['success']) && $_GET['success'] == 'subscription_pending'): ?>
     <aside class="alert alert-danger">
@@ -12,8 +12,14 @@
         ✅ Confirmation email sent. Please check your inbox.
     </aside>
 <?php endif; ?>
+<!-- subscriber_confirmed -->
+<?php if (isset($_GET['success']) && $_GET['success'] == 'subscriber_confirmed'): ?>
+    <aside class="alert alert-success">
+        ✅ Your email has been successfully verified. Thank you for subscribing!
+    </aside>
+<?php endif; ?>
 
-<!-- ERRORS -->
+<!-- ##################### ERRORS ##################### -->
 <!-- invalid_email -->
 <?php if (isset($_GET['error']) && $_GET['error'] == 'invalid_email'): ?>
     <aside class="alert alert-danger">

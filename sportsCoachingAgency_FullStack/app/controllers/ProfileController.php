@@ -48,9 +48,7 @@ class ProfileController extends BaseController
         renderTemplate('back_pages/profile.php', $data);
     }
 
-    /**
-     * Update the user's profile information.
-     */
+    // Method to update the user's profile information.
     public function updateProfile()
     {
         // Check if user is logged in and session is started
@@ -118,9 +116,7 @@ class ProfileController extends BaseController
         }
     }
 
-    /**
-     * Change the user's password.
-     */
+    // Method to change the user's password.
     public function changePassword()
     {
         // Check if user is logged in and session is started
@@ -155,9 +151,7 @@ class ProfileController extends BaseController
         }
     }
 
-    /**
-     * Delete the user's profile.
-     */
+    // Method to delete the user's profile.
     public function deleteProfile()
     {
         // Check if user is logged in and session is started

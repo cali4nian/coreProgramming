@@ -53,4 +53,5 @@
 </section>
 <!-- END create container and table for messages -->
 
+<?php require_once 'templates/back_pages/flash_messages/messages.php'; ?>
 <?php include 'footer.php'; ?>

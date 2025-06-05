@@ -170,4 +170,6 @@
 </section>
 <!-- END About Page Settings -->
 
-<?php include 'footer.php'; ?>
+<!-- Flash Messages -->
+ <?php require_once __DIR__ . '/../back_pages/flash_messages/settings.php'; ?>
+<?php include __DIR__ . '/../back_pages/footer.php'; ?>

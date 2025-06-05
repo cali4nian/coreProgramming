@@ -37,7 +37,7 @@ class VerifyEmailController extends BaseController
             if (!$existingSubscriber) $this->authModel->addSubscriber($user['email']);
 
             // Redirect to login page with a success message
-            $this->redirect('/login?success=account_verified');
+            $this->redirect('/login?success=account_confirmed');
 
         } else {
             // Redirect to login page with an error message

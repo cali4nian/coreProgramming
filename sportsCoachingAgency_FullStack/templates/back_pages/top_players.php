@@ -138,4 +138,5 @@
 
 </section>
 
+<?php require_once __DIR__ . 'flash_messages/top_players.php'; ?>
 <?php include __DIR__ . '/footer.php'; ?>

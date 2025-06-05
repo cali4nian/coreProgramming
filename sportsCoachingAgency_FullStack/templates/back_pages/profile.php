@@ -67,4 +67,5 @@
 <?php endif; ?>
 <!-- END Delete Account -->
 
+<?php require_once 'templates/back_pages/flash_messages/profile.php'; ?>
 <?php include 'footer.php'; ?>

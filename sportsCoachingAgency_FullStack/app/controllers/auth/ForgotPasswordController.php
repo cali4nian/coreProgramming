@@ -73,7 +73,7 @@ class ForgotPasswordController extends BaseController
             // Generate signed reset link
             $resetLink = "http://localhost:8000/reset-password?token=$resetToken";
 
-            if (!file_exists(__DIR__ . '/../../../templates/email/forgot_password_template.html')) $this->redirect('forgot-password?error=system');
+            if (!file_exists(__DIR__ . '/../../../templates/email/forgot_password_template.html')) $this->redirect('forgot-password?error=system_error_file_not_found');
 
             $template = file_get_contents(__DIR__ . '/../../../templates/email/forgot_password_template.html');
 
@@ -85,7 +85,7 @@ class ForgotPasswordController extends BaseController
 
             // Send email using the sendEmail function from functions/email.php
             if (sendEmail($email, $subject, $emailBody)) $this->redirect('/forgot-password?success=password_reset_email_sent');
-            else $this->redirect('/forgot-password?error=emailing_error');
+            else $this->redirect('/forgot-password?error=system_emailing_error');
 
         }
     }

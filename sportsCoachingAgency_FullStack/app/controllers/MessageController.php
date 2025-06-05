@@ -58,15 +58,13 @@ class MessageController extends BaseController
         renderTemplate('back_pages/messages.php', $data);
     }
 
-    // Function to read a single message
+    // Method to read a single message
     public function read()
     {
         // Check if session is started, if not, start it
         $this->isSessionOrStart();
-
         // Check if user is logged in
         $this->isNotLoggedIn();
-
         // Check if user is admin or super admin
         isAdminOrSuper();
 
@@ -76,7 +74,7 @@ class MessageController extends BaseController
         $id = $_GET['id'] ?? null;
 
         // Handle case where ID is not provided
-        if (!$id) $this->redirect('/messages.php?error=invalid_id');
+        if (!$id) $this->redirect('/messages?error=invalid_request');
 
         // Generate CSRF token for the form
         $csrf_token = $this->generateOrValidateCsrfToken();
@@ -107,15 +105,13 @@ class MessageController extends BaseController
         renderTemplate('back_pages/read_message.php', $data);
     }
 
-    // Function to delete a message
+    // Method to delete a message
     public function delete()
     {
         // Check if session is started, if not, start it
         $this->isSessionOrStart();
-
         // Check if user is admin or super admin
         isAdminOrSuper();
-        
         // Check if user is logged in
         $this->isNotLoggedIn();
 

@@ -175,6 +175,10 @@ class TopPlayerController extends BaseController
                     'pageName' => 'Edit Top Player',
                     'pageDescription' => 'Edit the details of a top player.',
                 ];
+
+                // Set session variable to retain player ID for redirect on form submission
+                $_SESSION['edit_top_player_id'] = $playerId;
+
                 renderTemplate('back_pages/edit_top_player.php', $data);
             } else {
                 // Handle error: Player not found
@@ -204,7 +208,7 @@ class TopPlayerController extends BaseController
     // Check if the request is a POST request
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Get the player ID from the POST data
-        $playerId = $_POST['id'] ?? null;
+        $playerId = $_SESSION['edit_top_player_id'] ?? null;
 
         // Validate the player ID
         if ($playerId) {
@@ -282,8 +286,11 @@ class TopPlayerController extends BaseController
         // Call the model method to update the player
         $this->topPlayerModel->updateTopPlayer($playerId, $updateData);
 
+        // Destroy the session variable for player ID
+        unset($_SESSION['edit_top_player_id']);
+
         // Redirect to the player listing page after successful update
-        $this->redirect('/admin/top-players?success=top_player_updated');
+        $this->redirect('/admin/top-players?success=top_player_updated&player_name=' . urlencode($formData['first_name'] . ' ' . $formData['last_name']));
     } else {
         // Handle error: Validation errors exist
         renderTemplate('back_pages/edit_top_player.php', ['errors' => $errors, 'formData' => $_POST]);

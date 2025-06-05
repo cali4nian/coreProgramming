@@ -16,4 +16,5 @@
     <p class="login"><a href="/login">Login</a></p>
     </aside>
 </section>
+<?php require_once __DIR__ . '/../flash_messages/auth/forgot_password.php'; ?>
 <?php include __DIR__ . '/../footer.php'; ?>

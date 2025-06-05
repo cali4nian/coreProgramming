@@ -21,10 +21,8 @@ class SubscriberController extends BaseController
     {
         // Check if the session is started
         $this->isSessionOrStart();
-
         // Check if the user is logged in
         $this->isLoggedIn();
-        
         // Check if the user is logged in and has admin or super privileges
         requireAdminOrSuper();
 

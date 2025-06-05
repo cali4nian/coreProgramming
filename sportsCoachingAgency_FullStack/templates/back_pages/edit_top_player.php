@@ -4,7 +4,7 @@
     
     <!-- Player Form Section -->
     <section class="player-form-section">
-        <h1>Add New Top Player</h1>
+        <h1>Editing <?php echo $player['first_name'] . "'s"; ?> Stat Card</h1>
         <form action="/admin/top-players/update" method="POST" enctype="multipart/form-data" class="player-form">
             <input type="hidden" name="id" value="<?= htmlspecialchars($player['id'] ?? '') ?>">
             <!-- First Name -->
@@ -106,4 +106,5 @@
 
 </section>
 
+<?php require_once __DIR__ . 'flash_messages/edit_top_player.php'; ?>
 <?php include __DIR__ . '/footer.php'; ?>

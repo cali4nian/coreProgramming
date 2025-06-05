@@ -2,10 +2,6 @@
 
 This document outlines the remaining tasks for the application. Prioritize by urgency and dependencies. Update this file as features are completed or updated.
 
-## Flash Messages
-
-- [ ] Write error and success messages per page
-
 ## 🔒 Security Audit & Hardening
 
 - [ ] Add HTTP headers for security (`Content-Security-Policy`, `X-Frame-Options`, etc.)

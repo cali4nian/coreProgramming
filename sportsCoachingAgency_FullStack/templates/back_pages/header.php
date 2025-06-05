@@ -10,12 +10,12 @@
   </head>
   <body>
     <section class="main-grid-container">
-    <!-- Sidebar -->
-    <?php require_once "partials/sidebar.php" ?>
-    <!-- Main Content -->
-    <main class="main-content">
+      <!-- Sidebar -->
+      <?php require_once "sidebar.php" ?>
+      <!-- Main Content -->
+      <main class="main-content">
 
-    <section class="page-header">
-      <h1><?= htmlspecialchars($pageName ?? 'Default Page Title') ?></h1>
-      <p><?= htmlspecialchars($pageDescription ?? 'Default Page Description') ?></p>
-    </section>
+      <section class="page-header">
+        <h1><?= htmlspecialchars($pageName ?? 'Default Page Title') ?></h1>
+        <p><?= htmlspecialchars($pageDescription ?? 'Default Page Description') ?></p>
+      </section>

@@ -22,7 +22,6 @@ class SettingController extends BaseController
     {
         // Check if session is started, if not, start it
         $this->isSessionOrStart();
-        
         // Check if user is logged in and has admin or super role
         $this->isNotLoggedIn();
         requireAdminOrSuper();
@@ -46,6 +45,7 @@ class SettingController extends BaseController
         renderTemplate('back_pages/settings.php', $data);
     }
 
+    // Methods to handle form submissions for updating settings
     public function updateSiteSettings()
     {
         // Check if user is logged in and has admin or super role
@@ -66,6 +66,7 @@ class SettingController extends BaseController
         }
     }
 
+    // Method to handle form submissions for updating social media settings
     public function updateSocialMediaSettings()
     {
         // Check if user is logged in and has admin or super role
@@ -91,6 +92,7 @@ class SettingController extends BaseController
         }
     }
 
+    // Method to handle form submissions for updating home page settings
     public function updateHomePageSettings()
     {
         // Check if user is logged in and has admin or super role
@@ -119,6 +121,7 @@ class SettingController extends BaseController
         }
     }
 
+    // Method to handle form submissions for updating About Page settings
     public function updateAboutPageSettings()
     {
         // Check if user is logged in and has admin or super role

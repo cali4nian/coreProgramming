@@ -1,7 +1,8 @@
 <!-- ################### SUCCESS ################### -->
-<?php if (isset($_GET['success']) && $_GET['success'] == 'account_verified'): ?>
-    <div class="alert alert-info">
-    <p>✅ Your account has been confirmed. You can now login.</p>
+<!-- subscriber_deleted -->
+<?php if (isset($_GET['deleted']) && $_GET['deleted'] == 'subscriber_deleted'): ?>
+    <div class="alert alert-success">
+        <p>✅ Subscriber deleted successfully.</p>
     </div>
 <?php endif; ?>
 

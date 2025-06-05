@@ -68,7 +68,7 @@ class UserController extends BaseController
 
         $id = $_POST['id'] ?? null;
         if (!$id) $this->redirect('/admin/users?error=invalid_request');
-        if ($this->userModel->deleteUser($id)) $this->redirect('/admin/users?success=delete');
+        if ($this->userModel->deleteUser($id)) $this->redirect('/admin/users?success=user_deleted');
         else $this->redirect('/admin/users?error=cannot_delete_admin');
     }
 
@@ -85,7 +85,7 @@ class UserController extends BaseController
 
         $id = $_POST['id'] ?? null;
         if (!$id) $this->redirect('/admin/users?error=invalid_request');
-        if ($this->userModel->toggleUserStatus($id, false)) $this->redirect('/admin/users?success=pause');
+        if ($this->userModel->toggleUserStatus($id, false)) $this->redirect('/admin/users?success=user_paused');
         else $this->redirect('/admin/users?error=action_failed');
     }
 
@@ -101,7 +101,7 @@ class UserController extends BaseController
         $this->generateOrValidateCsrfToken($_POST['csrf_token'], '/admin/users?error=invalid_request', true);
         $id = $_POST['id'] ?? null;
         if (!$id) $this->redirect('/admin/users?error=invalid_request');
-        if ($this->userModel->toggleUserStatus($id, true)) $this->redirect('/admin/users?success=unpause');
+        if ($this->userModel->toggleUserStatus($id, true)) $this->redirect('/admin/users?success=user_unpaused');
         else $this->redirect('/admin/users?error=action_failed');
     }
 
@@ -164,7 +164,7 @@ class UserController extends BaseController
                     "Welcome to Sports Coaching Agency",
                     "Dear $name,\n\nYour super user account has been created successfully. You can log in with the following credentials:\n\nEmail: $email\nPassword: {$_POST['password']}\n\nPlease change your password after logging in."
                 );
-                $this->redirect('/admin/users?success=add_super_user');
+                $this->redirect('/admin/users?success=added_super_user');
             } else {
                 $this->redirect('/admin/users?error=add_failed');
             }
@@ -224,7 +224,7 @@ class UserController extends BaseController
             if ($role) {
                 $this->userModel->updateUserRole($id, $role);
             }
-            $this->redirect('/admin/users?success=update');
+            $this->redirect('/admin/users?success=user_updated');
         } else {
             $this->redirect('/admin/users?error=update_failed');
         }

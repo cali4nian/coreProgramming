@@ -1,4 +1,4 @@
-<?php include 'header.php'; ?>
+<?php require_once __DIR__ . '/header.php'; ?>
 
 <!-- About Section -->
 <section class="about-section">
@@ -16,4 +16,4 @@
 </section>
 <!-- END About Section -->
  
-<?php include 'footer.php'; ?>
+<?php require_once __DIR__ . '/footer.php'; ?>

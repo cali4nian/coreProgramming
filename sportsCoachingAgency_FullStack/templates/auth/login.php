@@ -22,5 +22,5 @@
 </section>
 <!-- END Admin Login Section -->
 
-<?php include 'partials/confirmation_messages.php'; ?>
+<?php include __DIR__ . "/../flash_messages/auth/login.php" ?>
 <?php include __DIR__ . '/../footer.php'; ?>

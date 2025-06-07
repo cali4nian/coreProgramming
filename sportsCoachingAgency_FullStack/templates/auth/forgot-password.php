@@ -1,4 +1,5 @@
-<?php include __DIR__ . '/../header.php'; ?>
+<?php require_once __DIR__ . '/../header.php'; ?>
+
 <section class="login-container">
     <aside class="login-box">
     <a href="/"><img src="img/basketballLogo.webp" alt="" /></a>
@@ -16,5 +17,6 @@
     <p class="login"><a href="/login">Login</a></p>
     </aside>
 </section>
+
 <?php require_once __DIR__ . '/../flash_messages/auth/forgot_password.php'; ?>
-<?php include __DIR__ . '/../footer.php'; ?>
+<?php require_once __DIR__ . '/../footer.php'; ?>

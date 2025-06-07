@@ -1,7 +1,6 @@
 <?php require_once __DIR__ . '/../../app/functions/csrf.php'; ?>
-<?php include __DIR__ . '/../header.php'; ?>
+<?php require_once __DIR__ . '/../header.php'; ?>
 
-<!-- Login Section -->
 <section class="login-container">
     <aside class="login-box">
     <a href="/"><img src="img/basketballLogo.webp" alt="" /></a>
@@ -15,7 +14,6 @@
     <p>Remembered your password? <a href="/login">Login</a></p>
     </aside>
 </section>
-<!-- END Admin Login Section -->
  
 <?php require_once __DIR__ . '/../flash_messages/auth/reset_password.php' ?>
-<?php include __DIR__ . '/../footer.php'; ?>
+<?php require_once __DIR__ . '/../footer.php'; ?>

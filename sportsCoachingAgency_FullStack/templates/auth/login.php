@@ -1,6 +1,5 @@
-<?php include __DIR__ . '/../header.php'; ?>
+<?php require_once __DIR__ . '/../header.php'; ?>
 
-<!-- Login Section -->
 <section class="login-container">
     <aside class="login-box">
     <a href="/"><img src="/assets/img/default_logo.webp" alt="Company Logo" /></a>
@@ -20,7 +19,6 @@
     </form>
     </aside>
 </section>
-<!-- END Admin Login Section -->
 
-<?php include __DIR__ . "/../flash_messages/auth/login.php" ?>
-<?php include __DIR__ . '/../footer.php'; ?>
+<?php require_once __DIR__ . "/../flash_messages/auth/login.php" ?>
+<?php require_once __DIR__ . '/../footer.php'; ?>

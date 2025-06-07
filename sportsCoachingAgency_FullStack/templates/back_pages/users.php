@@ -1,4 +1,4 @@
-<?php include 'header.php'; ?>
+<?php require_once __DIR__ . '/header.php'; ?>
 
 <section class="user-management-container">
     <?php if ($data['currentRole'] === 'admin' || $data['currentRole'] === 'super user'): ?>
@@ -28,28 +28,24 @@
                             <button type="submit" class="edit-btn">Edit</button>
                         </form>
                         <?php if ($user['is_active']): ?>
-                            <!-- Pause Button -->
                             <form action="/admin/users/pause" method="POST" style="display:inline;">
                                 <input type="hidden" name="csrf_token" value="<?php echo $data['csrf_token']; ?>">
                                 <input type="hidden" name="id" value="<?php echo $user['id']; ?>">
                                 <button type="submit" class="pause-btn">Pause</button>
                             </form>
                         <?php else: ?>
-                            <!-- Unpause Button -->
                             <form action="/admin/users/unpause" method="POST" style="display:inline;">
                                 <input type="hidden" name="csrf_token" value="<?php echo $data['csrf_token']; ?>">
                                 <input type="hidden" name="id" value="<?php echo $user['id']; ?>">
                                 <button type="submit" class="unpause-btn">Unpause</button>
                             </form>
                         <?php endif; ?>
-                        <!-- Reset Password Button -->
                         <form action="/admin/users/reset_password" method="POST" style="display:inline;">
                             <input type="hidden" name="csrf_token" value="<?php echo $data['csrf_token']; ?>">
                             <input type="hidden" name="id" value="<?php echo $user['id']; ?>">
                             <button type="submit" class="reset-btn">Reset Password</button>
                         </form>
                         <?php if ($data['currentRole'] === 'admin'): ?>
-                            <!-- Delete Button -->
                             <form action="/admin/users/delete" method="POST" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this user?');">
                                 <input type="hidden" name="csrf_token" value="<?php echo $data['csrf_token']; ?>">
                                 <input type="hidden" name="id" value="<?php echo $user['id']; ?>">
@@ -62,7 +58,6 @@
         </tbody>
     </table>
 
-    <!-- Pagination Links -->
     <div class="pagination">
         <?php if ($currentPage > 1): ?>
             <a href="?page=<?= $currentPage - 1 ?>">⬅ Previous</a>
@@ -76,9 +71,7 @@
             <a href="?page=<?= $currentPage + 1 ?>">Next ➡</a>
         <?php endif; ?>
     </div>
-    <!-- END Pagination Links -->
     
-    <!-- Add Super User Form -->
     <aside class="add-user-form-container">
         <h2>Add Super User</h2>
         <form action="/admin/users/add" method="POST">
@@ -95,12 +88,10 @@
                 <label for="password">Password:</label>
                 <input type="password" id="password" name="password" required />
             </div>
-            <!-- Role is hardcoded as 'super user' in the backend -->
             <button type="submit">Add Super User</button>
         </form>
     </aside>
-    <!-- END Add Super User Form -->
      <?php endif; ?>
 </section>
 
-<?php include 'footer.php'; ?>
+<?php require_once __DIR__ . '/footer.php'; ?>

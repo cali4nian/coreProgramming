@@ -1,11 +1,3 @@
-<?php
-// Ensure session is started before checking user role
-if (session_status() !== PHP_SESSION_ACTIVE) {
-    session_start();
-}
-?>
-
-<!-- Hamburger Button -->
 <button class="hamburger" aria-label="Toggle Menu">
     <span class="hamburger-line"></span>
     <span class="hamburger-line"></span>

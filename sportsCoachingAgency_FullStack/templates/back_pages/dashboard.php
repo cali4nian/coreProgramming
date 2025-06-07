@@ -1,8 +1,6 @@
-<?php include 'header.php'; ?>
+<?php require_once __DIR__ . '/header.php'; ?>
 
 <section class="container">
-
-    <!-- Dashboard Stats -->
     <aside class="dashboard-stats">
         <?php if (isset($totalUsers) && ($currentRole === 'admin' || $currentRole === 'super user')): ?>
             <div class="stat-card">
@@ -33,7 +31,6 @@
         <?php endif; ?>
     </aside>
 
-    <!-- Recent Users -->
     <?php if (isset($recentUsers) && ($currentRole === 'admin' || $currentRole === 'super user')): ?>
         <h2>Recent Users</h2>
         <table class="table table-striped table-bordered">
@@ -66,7 +63,6 @@
         </table>
     <?php endif; ?>
 
-    <!-- Recent Subscribers -->
     <?php if (isset($recentSubscribers)): ?>
         <h2>Recent Subscribers</h2>
         <table class="table table-striped table-bordered">
@@ -103,7 +99,6 @@
         </table>
     <?php endif; ?>
 
-    <!-- Error Handling -->
     <?php if (isset($error)): ?>
         <div class="alert alert-danger">
             <?= htmlspecialchars($error) ?>
@@ -112,4 +107,4 @@
 
 </section>
 
-<?php include 'footer.php'; ?>
+<?php require_once __DIR__ . '/footer.php'; ?>

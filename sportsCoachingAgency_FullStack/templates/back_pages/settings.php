@@ -1,6 +1,5 @@
-<?php include 'header.php'; ?>
+<?php require_once __DIR__ . '/header.php'; ?>
 
-<!-- Site Name and Customer Service Email Address -->
 <section class="settings-form-container">
   <form action="/admin/update-site-settings" method="POST" enctype="multipart/form-data">
     <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>">
@@ -17,9 +16,7 @@
       <button type="submit" class="btn">Save Settings</button>
   </form>
 </section>
-<!-- END Site Name and Customer Service Email Address -->
 
-<!-- Social Media URLs -->
 <section class="settings-form-container">
   <form action="/admin/update-social-media-settings" method="POST">
     <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>">
@@ -62,9 +59,7 @@
       <button type="submit" class="btn">Save Social Media URLs</button>
   </form>
 </section>
-<!-- END Social Media URLs -->
 
-<!-- Home Page Settings -->
 <section class="settings-form-container">
   <form action="/admin/update-home-page-settings" method="POST" enctype="multipart/form-data">
     <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>">
@@ -128,9 +123,7 @@
       <button type="submit" class="btn">Save Home Page Settings</button>
   </form>
 </section>
-<!-- END Home Page Settings -->
 
-<!-- About Page Settings -->
 <section class="settings-form-container">
   <form action="/admin/update-about-page-settings" method="POST" enctype="multipart/form-data">
     <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>">
@@ -144,21 +137,18 @@
           <?php endif; ?>
       </div>
 
-      <!-- paragraph one -->
         <div class="form-group">
             <label for="about_page_text_one">Paragraph One:</label>
             <textarea id="about_page_text_one" name="about_page_text_one" rows="5" maxlength="255" placeholder="Enter about page text for paragraph one"><?= htmlspecialchars($settings['about_page_text_one'] ?? '') ?></textarea>
             <p>Max 255 characters</p>
         </div>
 
-        <!-- paragraph two -->
         <div class="form-group">
             <label for="about_page_text_two">Paragraph Two:</label>
             <textarea id="about_page_text_two" name="about_page_text_two" rows="5" placeholder="Enter about page text for paragraph two"><?= htmlspecialchars($settings['about_page_text_two'] ?? '') ?></textarea>
             <p>Max 255 characters</p>
         </div>
 
-        <!-- paragraph three -->
         <div class="form-group">
             <label for="about_page_text_three">Paragraph Three:</label>
             <textarea id="about_page_text_three" name="about_page_text_three" rows="5" placeholder="Enter about page text for paragraph three"><?= htmlspecialchars($settings['about_page_text_three'] ?? '') ?></textarea>
@@ -168,8 +158,6 @@
       <button type="submit" class="btn">Save About Page Settings</button>
   </form>
 </section>
-<!-- END About Page Settings -->
 
-<!-- Flash Messages -->
- <?php require_once __DIR__ . '/../back_pages/flash_messages/settings.php'; ?>
-<?php include __DIR__ . '/../back_pages/footer.php'; ?>
+<?php require_once __DIR__ . '/../back_pages/flash_messages/settings.php'; ?>
+<?php require_once __DIR__ . '/footer.php'; ?>

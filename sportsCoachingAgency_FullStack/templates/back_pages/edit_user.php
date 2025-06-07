@@ -1,4 +1,4 @@
-<?php include 'header.php'; ?>
+<?php require_once __DIR__ . '/header.php'; ?>
 
 <div class="container">
     <?php if ($user): ?>
@@ -33,4 +33,4 @@
     <?php endif; ?>
 </div>
 
-<?php include 'footer.php'; ?>
+<?php require_once __DIR__ . '/footer.php'; ?>

@@ -1,4 +1,4 @@
-<?php include __DIR__ . '/header.php'; ?>
+<?php require_once __DIR__ . '/header.php'; ?>
 
 <a href="/admin/download-all-subscribers" class="btn">⬇ Download All Subscribers</a>
 <a href="/admin/download-confirmed-subscribers" class="btn">⬇ Download Confirmed Subscribers</a>
@@ -26,7 +26,6 @@
                 <td><?= $subscriber['is_confirmed'] ? '✅ Yes' : '❌ No' ?></td>
                 <td><?= $subscriber['subscribed_at'] ?></td>
                 <td>
-                    <!-- Form to delete subscriber -->
                     <form action="/admin/delete-subscriber" method="POST" style="display: inline-block;">
                         <input type="hidden" name="id" value="<?= htmlspecialchars($subscriber['id']) ?>">
                         <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>">
@@ -38,7 +37,6 @@
     </tbody>
 </table>
 
-<!-- Pagination Links -->
 <aside class="pagination-links">
     <?php if ($currentPage > 1): ?>
         <a href="?page=<?= $currentPage - 1 ?>">⬅ Previous</a>
@@ -54,4 +52,4 @@
 </aside>
 
 <?php require_once __DIR__ . '/../back_pages/flash_messages/subscribers.php'; ?>
-<?php include __DIR__ . '/footer.php'; ?>
+<?php require_once __DIR__ . '/footer.php'; ?>

@@ -1,4 +1,3 @@
-<!-- Footer Section -->
 <footer class="footer">
       <div class="footer-content">
         <span class="logo"><?= htmlspecialchars($settings['site_name'] ?? 'Welcome to Our Website') ?></span>
@@ -25,10 +24,6 @@
         <a href="/privacy-policy">Privacy Policy</a>
       </nav>
     </footer>
-    <!-- End Footer Section -->
-
-    <!-- Back to top Button -->
     <button id="backToTop" class="hidden">&#9650;</button>
-
 </body>
 </html>

@@ -1,6 +1,5 @@
 <?php require_once __DIR__ . '/header.php'; ?>
 
-<!-- About Section -->
 <section class="about-section">
   <aside class="content">
     <h1>Our Story</h1>
@@ -14,6 +13,5 @@
     
   </aside>
 </section>
-<!-- END About Section -->
  
 <?php require_once __DIR__ . '/footer.php'; ?>

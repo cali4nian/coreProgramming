@@ -1,6 +1,5 @@
-<?php include 'header.php'; ?>
+<?php require_once __DIR__ . '/header.php'; ?>
 
-<!-- Terms of Use Section -->
 <section class="terms-of-use-container">
   <div class="terms-of-use">
     <h2>Terms of Use</h2>
@@ -42,6 +41,5 @@
     <p>[Your Business Address]</p>
   </div>
 </section>
-<!-- END Terms of Use Section -->
 
-<?php include 'footer.php'; ?>
+<?php require_once __DIR__ . '/footer.php'; ?>

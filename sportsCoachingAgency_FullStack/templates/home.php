@@ -1,4 +1,4 @@
-<?php include 'header.php'; ?>
+<?php require_once __DIR__ . '/header.php'; ?>
 
 <!-- Hero Section -->
 <section class="hero-section" style="background-image: url('<?= htmlspecialchars($settings['hero_image'] ?? '/assets/img/default_hero.jpg') ?>');">
@@ -130,5 +130,6 @@
     </div>
 </section>
 <!-- END Facebook Section -->
-<?php include 'flash_messages/home.php'; ?>
-<?php include 'footer.php'; ?>
+ 
+<?php require_once __DIR__ . '/flash_messages/home.php'; ?>
+<?php require_once __DIR__ . '/footer.php'; ?>

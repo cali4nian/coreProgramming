@@ -2,16 +2,15 @@
 
 This document outlines the remaining tasks for the application. Prioritize by urgency and dependencies. Update this file as features are completed or updated.
 
+## Fixes
+
+- [ ] Fix social media links to go with settings in db
+- [ ] Add meta tags
+- [ ] Add website URL to .env file and implement throughout code base
+
 ## 🔒 Security Audit & Hardening
 
-- [ ] Add HTTP headers for security (`Content-Security-Policy`, `X-Frame-Options`, etc.)
 - [ ] Add CSRF to subscriber form
-
----
-
-## 🌐 Routing & Views
-
-- [ ] Refactor repetitive routes to use dynamic controllers
 
 ---
 

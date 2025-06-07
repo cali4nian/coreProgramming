@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- Add Meta Tags -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ADMIN | <?php echo $header_title; ?></title>
@@ -10,12 +11,9 @@
   </head>
   <body>
     <section class="main-grid-container">
-      <!-- Sidebar -->
-      <?php require_once "sidebar.php" ?>
-      <!-- Main Content -->
+      <?php require_once __DIR__ . "/sidebar.php" ?>
       <main class="main-content">
-
-      <section class="page-header">
-        <h1><?= htmlspecialchars($pageName ?? 'Default Page Title') ?></h1>
-        <p><?= htmlspecialchars($pageDescription ?? 'Default Page Description') ?></p>
-      </section>
+        <section class="page-header">
+          <h1><?= htmlspecialchars($pageName ?? 'Default Page Title') ?></h1>
+          <p><?= htmlspecialchars($pageDescription ?? 'Default Page Description') ?></p>
+        </section>

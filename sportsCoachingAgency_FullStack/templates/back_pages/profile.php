@@ -1,6 +1,5 @@
-<?php include 'header.php'; ?>
+<?php require_once __DIR__ . '/header.php'; ?>
 
-<!-- Update Profile -->
 <section class="container">
     <h1>Update Profile</h1>
     <p>Here you can update your profile information.</p>
@@ -30,9 +29,7 @@
         <button type="submit">Update Profile</button>
     </form>
 </section>
-<!-- END Update Profile -->
 
-<!-- Update Password -->
 <section class="container">
     <h1>Change Password</h1>
     <p>Here you can update your password.</p>
@@ -51,10 +48,7 @@
         <button type="submit">Change Password</button>
     </form>
 </section>
-<!-- END Update Password -->
 
-<!-- Delete Account -->
- <!-- check if $_SESSION['user_role'] == admin -->
 <?php if ($_SESSION['current_role'] != 'admin'): ?>
     <section class="container">
         <h2>Delete Account</h2>
@@ -65,7 +59,6 @@
         </form>
     </section>
 <?php endif; ?>
-<!-- END Delete Account -->
 
-<?php require_once 'templates/back_pages/flash_messages/profile.php'; ?>
-<?php include 'footer.php'; ?>
+<?php require_once __DIR__ . '/templates/back_pages/flash_messages/profile.php'; ?>
+<?php require_once __DIR__ . '/footer.php'; ?>

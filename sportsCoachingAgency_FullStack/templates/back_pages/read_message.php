@@ -1,6 +1,6 @@
-<?php include 'header.php'; ?>
-<!-- create read single message container with back and delete button -->
-<div class="container">
+<?php require_once __DIR__ . '/header.php'; ?>
+
+<section class="container">
     <div class="row">
         <div class="col-md-12">
             <h2>Read Message</h2>
@@ -25,6 +25,6 @@
             </div>
         </div>
     </div>
-</div>
+</section>
 
-<?php include 'footer.php'; ?>
+<?php require_once __DIR__ . '/footer.php'; ?>

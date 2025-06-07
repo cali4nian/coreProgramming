@@ -1,6 +1,5 @@
-<?php include 'header.php'; ?>
+<?php require_once __DIR__ . '/header.php'; ?>
 
-<!-- Contact Section -->
 <section class="contact-section">
   <aside class="content">
     <h1>Contact Us</h1>
@@ -23,7 +22,7 @@
     </form>
   </aside>
 </section>
-<!-- END Contact Section -->
  
-<?php include 'flash_messages/contact.php'; ?>
-<?php include 'footer.php'; ?>
+<?php require_once __DIR__ . '/flash_messages/contact.php'; ?>
+<?php require_once __DIR__ . '/footer.php'; ?>
+

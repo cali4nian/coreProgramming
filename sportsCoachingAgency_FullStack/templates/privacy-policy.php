@@ -1,6 +1,5 @@
-<?php include 'header.php'; ?>
+<?php require_once __DIR__ . '/header.php'; ?>
 
-<!-- Privacy Policy Agreement Section -->
 <section class="privacy-policy-agreement-container">
   <div class="privacy-policy">
     <h2>Privacy Policy</h2>
@@ -45,6 +44,5 @@
     <p>[Your Business Address]</p>
   </div>
 </section>
-<!-- END Privacy Policy Agreement Section -->
 
-<?php include 'footer.php'; ?>
+<?php require_once __DIR__ . '/footer.php'; ?>

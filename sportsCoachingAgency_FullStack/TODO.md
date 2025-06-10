@@ -5,7 +5,6 @@ This document outlines the remaining tasks for the application. Prioritize by ur
 ## Fixes
 
 - [ ] Add meta tags
-- [ ] Add website URL to .env file and implement throughout code base
 
 ## 🔒 Security Audit & Hardening
 

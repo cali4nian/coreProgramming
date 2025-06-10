@@ -16,6 +16,13 @@
   color: #333;
 }
 
+.settings-form-container .settings_text_instructions {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
 form {
   max-width: 600px;
   margin: 0 auto;

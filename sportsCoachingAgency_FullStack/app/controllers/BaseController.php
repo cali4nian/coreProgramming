@@ -11,7 +11,7 @@ class BaseController
     // Method to redirect to a different URL
     protected function redirect($url)
     {
-        header('Location: ' . $url);
+        header('Location: '. $url);
         exit();
     }
 

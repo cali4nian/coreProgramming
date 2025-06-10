@@ -18,7 +18,6 @@ class HomeController extends BaseController
     {
         // Redirect if user is logged in
         $this->isLoggedIn();
-
         // Fetch settings using the BaseController method
         $settings = $this->fetchSettings();
 
@@ -30,6 +29,9 @@ class HomeController extends BaseController
             'header_title' => 'Welcome to ' . $settings['site_name'],
             'settings' => $settings,
         ];
+
+        // dump settings for debugging
+        // var_dump($settings);
 
         // Render the template and pass data
         renderTemplate('home.php', $data);

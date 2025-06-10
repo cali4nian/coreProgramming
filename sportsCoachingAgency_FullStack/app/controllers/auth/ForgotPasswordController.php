@@ -22,7 +22,6 @@ class ForgotPasswordController extends BaseController
     {
         // Check if session is started, if not, start it
         $this->isSessionOrStart();
-        
         // Redirect to dashboard if user is logged in
         $this->isLoggedIn();
 

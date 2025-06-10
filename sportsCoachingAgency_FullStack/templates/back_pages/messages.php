@@ -48,5 +48,5 @@
     </div>
 </section>
 
-<?php require_once __DIR__ . '/templates/back_pages/flash_messages/messages.php'; ?>
+<?php require_once __DIR__ . '/flash_messages/messages.php'; ?>
 <?php require_once __DIR__ . '/footer.php'; ?>

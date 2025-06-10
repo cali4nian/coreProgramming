@@ -2,6 +2,7 @@
 namespace App\Controllers;
 
 require_once __DIR__ . '/../functions/csrf.php';
+require_once __DIR__ . '/../functions/auth.php';
 
 use App\Models\MessageModel;
 

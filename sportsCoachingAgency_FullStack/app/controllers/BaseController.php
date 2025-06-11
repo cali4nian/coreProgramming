@@ -16,11 +16,19 @@ class BaseController
     }
 
     // Method to generate or validate CSRF token
-    protected function generateOrValidateCsrfToken($token = null, $url = null, $validate = false) {
-        if ($validate && isset($token) && isset($url)) {
+    protected function generateOrValidateCsrfToken($token = null, $url = null, $validate = false) 
+    {
+        if ($validate && isset($token) && isset($url))
+        {
             if (!isset($token) || !validateCsrfToken($token)) $this->redirect($url);
-            else return true;
-        } else {
+            else
+            {
+                $_SESSION['csrf_token'] = generateCsrfToken();
+                return true;
+            }
+        }
+        else
+        {
             if (!isset($_SESSION['csrf_token'])) $_SESSION['csrf_token'] = generateCsrfToken();
             return $_SESSION['csrf_token'];
         }

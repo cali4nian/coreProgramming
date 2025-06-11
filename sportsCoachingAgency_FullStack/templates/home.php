@@ -65,6 +65,7 @@
         <h2>Subscribe to Our Newsletter</h2>
         <p>Stay updated with the latest news and updates.</p>
         <form action="/subscribe" method="POST" class="subscribe-form" id="subscriberForm">
+            <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>" />
             <input type="email" name="email" placeholder="Enter your email" />
             <button type="submit">Subscribe</button>
         </form>

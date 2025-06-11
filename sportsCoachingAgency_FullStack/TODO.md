@@ -4,8 +4,6 @@ This document outlines the remaining tasks for the application. Prioritize by ur
 
 ## Fixes
 
-- [ ] Add meta tags
-
 ## 🔒 Security Audit & Hardening
 
 - [ ] Add CSRF to subscriber form
@@ -22,6 +20,7 @@ This document outlines the remaining tasks for the application. Prioritize by ur
 
 ## Additional Features
 
+- [ ] Add meta tags
 - [ ] CRUD to add coaches
 
 ---

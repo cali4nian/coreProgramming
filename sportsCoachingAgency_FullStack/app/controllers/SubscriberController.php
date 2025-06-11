@@ -59,6 +59,9 @@ class SubscriberController extends BaseController
     // Method to handle subscription requests UPDATE TO ADD CSRF TOKEN
     public function subscribe()
     {
+        // validate CSRF token
+        $this->generateOrValidateCsrfToken($_POST['csrf_token'] ?? '', '/?error=invalid_request', true);
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email'])) {
             $email = $this->sanitizeEmail($_POST['email']);
             $email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);

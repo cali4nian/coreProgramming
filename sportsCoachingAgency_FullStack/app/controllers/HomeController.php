@@ -16,6 +16,12 @@ class HomeController extends BaseController
     // Method to handle the home page request
     public function index()
     {
+        // Start session
+        if (session_status() === PHP_SESSION_NONE) session_start();
+        
+        // Generate CSRF token
+        $_SESSION['csrf_token'] = $this->generateOrValidateCsrfToken();
+
         // Redirect if user is logged in
         $this->isLoggedIn();
         // Fetch settings using the BaseController method
@@ -27,11 +33,9 @@ class HomeController extends BaseController
             'page_css_url' => '/assets/css/index.css',
             'page_js_url' => '/assets/js/index/index.js',
             'header_title' => 'Welcome to ' . $settings['site_name'],
-            'settings' => $settings,
+            'settings' => $settings ?? [],
+            'csrf_token' => $_SESSION['csrf_token'] ?? '',
         ];
-
-        // dump settings for debugging
-        // var_dump($settings);
 
         // Render the template and pass data
         renderTemplate('home.php', $data);

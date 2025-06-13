@@ -1,9 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- Add meta tags here -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Personal athletic training and nutrition coaching in Fresno, CA. Get fit with personalized plans and expert guidance.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://basketball.sorianosoftware.com" />
+    <link rel="alternate" hreflang="en-us" href="https://basketball.sorianosoftware.com">
+    <meta property="og:title" content="Personalized Athletic Training in Fresno, CA">
+    <meta property="og:description" content="Personal athletic training and nutrition coaching in Fresno, CA. Get fit with personalized plans and expert guidance.">
+    <meta property="og:image" content="https://basketball.sorianosoftware.com/image.jpg">
+    <meta property="og:url" content="https://basketball.sorianosoftware.com">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Personalized Athletic Training in Fresno, CA">
+    <meta name="twitter:description" content="Personal athletic training and nutrition coaching in Fresno, CA. Get fit with personalized plans and expert guidance.">
+    <meta name="twitter:image" content="https://basketball.sorianosoftware.com/image.jpg">
     <link rel="shortcut icon" href="/assets/img/default_logo.webp" type="image/x-icon" />
     <link rel="stylesheet" href="/assets/css/front-global.css" />
     <link rel="stylesheet" href="<?php echo $page_css_url ?? ''; ?>" />

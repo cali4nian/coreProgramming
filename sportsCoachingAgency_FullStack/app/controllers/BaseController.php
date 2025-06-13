@@ -24,7 +24,7 @@ class BaseController
             else
             {
                 $_SESSION['csrf_token'] = generateCsrfToken();
-                return true;
+                return $_SESSION['csrf_token'];
             }
         }
         else

@@ -6,8 +6,6 @@ This document outlines the remaining tasks for the application. Prioritize by ur
 
 ## 🔒 Security Audit & Hardening
 
-- [ ] Add CSRF to subscriber form
-
 ---
 
 ## 📈 Nice-to-Haves (Stretch Goals)

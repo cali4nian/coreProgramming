@@ -94,4 +94,5 @@
      <?php endif; ?>
 </section>
 
+<?php require_once __DIR__ . '/flash_messages/users.php'; ?>
 <?php require_once __DIR__ . '/footer.php'; ?>

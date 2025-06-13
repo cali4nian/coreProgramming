@@ -191,7 +191,7 @@ class UserController extends BaseController
         if (!$user) $this->redirect('/admin/users?error=user_not_found');
 
         renderTemplate('back_pages/edit_user.php', [
-            'csrf_token' => $_POST['csrf_token'],
+            'csrf_token' => $_SESSION['csrf_token'],
             'pageName' => 'Edit User',
             'pageDescription' => 'Edit user details and roles.',
             'header_title' => 'Edit User',
@@ -213,7 +213,7 @@ class UserController extends BaseController
         // Validate CSRF token
         $this->generateOrValidateCsrfToken($_POST['csrf_token'], '/admin/users?error=invalid_request', true);
 
-        $id = $_POST['id'] ?? null;
+        $id = strip_tags($_POST['id']) ?? null;
         if (!$id) $this->redirect('/admin/users?error=invalid_request');
 
         $name = $this->sanitizeString($_POST['name']);

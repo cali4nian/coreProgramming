@@ -281,6 +281,8 @@ class TopPlayerController extends BaseController
             }
 
             $updateData['image_url'] = '/uploads/players/' . $fileName;
+        } else {
+            $updateData['image_url'] = $player['image_url'] ?? null;
         }
 
         // Call the model method to update the player
@@ -327,7 +329,7 @@ class TopPlayerController extends BaseController
             $this->topPlayerModel->deleteTopPlayer($playerId);
 
             // Redirect to the player listing page after successful deletion
-            $this->redirect('/admin/top-players?success=top_player_deleted');
+            $this->redirect('/admin/top-players?success=top_player_deleted&player_name=' . urlencode($player['first_name'] . ' ' . $player['last_name']));
 
         } else {
             // Handle error: Player ID is missing

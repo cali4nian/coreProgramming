@@ -94,7 +94,7 @@
             <!-- Player Image -->
             <div class="form-group">
                 <label for="image">Player Image</label>
-                <input type="file" name="image" id="image" accept="image/*" required>
+                <input type="file" name="image" id="image" accept="image/*" />
                 <?= isset($errors['image']) ? '<p class="error">'.$errors['image'].'</p>' : '' ?>
             </div>
 

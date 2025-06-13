@@ -69,10 +69,7 @@ class MessageController extends BaseController
         // Check if user is admin or super admin
         isAdminOrSuper();
 
-        // Validate CSRF token
-        $this->generateOrValidateCsrfToken($_POST['csrf_token'], '/admin/messages?error=invalid_request', true);
-
-        $id = $_GET['id'] ?? null;
+        $id = strip_tags($_GET['id']) ?? null;
 
         // Handle case where ID is not provided
         if (!$id) $this->redirect('/messages?error=invalid_request');

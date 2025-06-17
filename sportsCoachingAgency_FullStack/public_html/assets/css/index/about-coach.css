@@ -1,7 +1,8 @@
 /* About the Coach Section */
 .about-coach {
   display: flex;
-  width: 100%;
+  width: 80%;
+  margin: 0 auto;
   min-height: fit-content;
   background-color: #f8f9fa;
 }

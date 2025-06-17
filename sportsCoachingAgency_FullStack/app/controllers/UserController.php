@@ -64,10 +64,10 @@ class UserController extends BaseController
         isAdminOrSuper();
 
         // Validate CSRF token
-        $this->generateOrValidateCsrfToken($_POST['csrf_token'], '/admin/users?error=invalid_request', true);
+        $this->generateOrValidateCsrfToken($_POST['csrf_token'], '/admin/users?error=invalid_request_csrf', true);
 
         $id = $_POST['id'] ?? null;
-        if (!$id) $this->redirect('/admin/users?error=invalid_request');
+        if (!$id) $this->redirect('/admin/users?error=invalid_request_id');
         if ($this->userModel->deleteUser($id)) $this->redirect('/admin/users?success=user_deleted');
         else $this->redirect('/admin/users?error=cannot_delete_admin');
     }

@@ -30,7 +30,7 @@
         </ul>
       </div>
       <nav class="footer-links">
-        <span>&copy; 2025 <?= htmlspecialchars($settings['site_name'] ?? 'Welcome to Our Website') ?></span> | <a href="/about">About</a> | <a href="/contact">Contact</a> | <a href="/terms-of-use">Terms of Use</a> |
+        <span>&copy; 2025 <?= htmlspecialchars($settings['site_name'] ?? 'Welcome to Our Website') ?></span> | <a href="/">Home</a> | <a href="/about">About</a> | <a href="/contact">Contact</a> | <a href="/terms-of-use">Terms of Use</a> |
         <a href="/privacy-policy">Privacy Policy</a>
       </nav>
     </footer>

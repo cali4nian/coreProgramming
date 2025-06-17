@@ -6,6 +6,7 @@
         <thead>
             <tr>
                 <th>Name</th>
+                <th>Role</th>
                 <th>Email</th>
                 <th>Confirmed</th>
                 <th>Active</th>
@@ -17,6 +18,7 @@
                 <tr>
                     <td><?php echo htmlspecialchars($user['name']); ?></td>
                     <td><?php echo htmlspecialchars($user['email']); ?></td>
+                    <td><?php echo htmlspecialchars($user['current_role']); ?></td>
                     <td><?php echo $user['is_verified'] ? 'Yes' : 'No'; ?></td>
                     <td><?php echo $user['is_active'] ? 'Yes' : 'No'; ?></td>
                     <td>

@@ -171,19 +171,19 @@ class SubscriberController extends BaseController
     {
         // Check if the user is logged in and has admin privileges
         $this->isSessionOrStart();
-        $this->isLoggedIn();
+        $this->isNotLoggedIn();
         requireAdmin();
 
         // Validate the CSRF token
-        $this->generateOrValidateCsrfToken($_POST['csrf_token'], '/subscribers?error=invalid_request', true);
+        $this->generateOrValidateCsrfToken($_POST['csrf_token'], '/admin/subscribers?error=invalid_request', true);
 
-        if (!isset($_POST['id']) || !is_numeric($_POST['id']) || !isset($_POST['csrf_token'])) $this->redirect('/subscribers?error=invalid_request');
+        if (!isset($_POST['id']) || !is_numeric($_POST['id']) || !isset($_POST['csrf_token'])) $this->redirect('/admin/subscribers?error=invalid_request');
 
         // Delete the subscriber from the database
         $this->subscriberModel->deleteSubscriber($_POST['id']);
 
         // Redirect to the subscriber list with a success message
-        $this->redirect('/subscribers?success=subscriber_deleted');
+        $this->redirect('/admin/subscribers?success=subscriber_deleted');
     }
 
     // Download All Subscribers
@@ -191,7 +191,7 @@ class SubscriberController extends BaseController
     {
         // Check if the user is logged in and has admin privileges
         $this->isSessionOrStart();
-        $this->isLoggedIn();
+        $this->isNotLoggedIn();
         requireAdminOrSuper();
 
         $subscribers = $this->subscriberModel->getAllSubscribers();
@@ -221,7 +221,7 @@ class SubscriberController extends BaseController
     {
         // Check if the user is logged in and has admin privileges
         $this->isSessionOrStart();
-        $this->isLoggedIn();
+        $this->isNotLoggedIn();
         requireAdminOrSuper();
 
         $subscribers = $this->subscriberModel->getAllConfirmedSubscribers();
@@ -251,7 +251,7 @@ class SubscriberController extends BaseController
     {
         // Check if the user is logged in and has admin privileges
         $this->isSessionOrStart();
-        $this->isLoggedIn();
+        $this->isNotLoggedIn();
         requireAdminOrSuper();
         
         $subscribers = $this->subscriberModel->getAllUnconfirmedSubscribers();

@@ -5,6 +5,8 @@
   color: white;
   font-family: "Lato", sans-serif;
   text-align: center;
+  width: 80%;
+  margin: 0 auto;
 }
 
 .player-profiles .hero h1 {

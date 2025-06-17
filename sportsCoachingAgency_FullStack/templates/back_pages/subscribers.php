@@ -51,5 +51,5 @@
     <?php endif; ?>
 </aside>
 
-<?php require_once __DIR__ . '/../back_pages/flash_messages/subscribers.php'; ?>
+<?php require_once __DIR__ . '/flash_messages/subscribers.php'; ?>
 <?php require_once __DIR__ . '/footer.php'; ?>

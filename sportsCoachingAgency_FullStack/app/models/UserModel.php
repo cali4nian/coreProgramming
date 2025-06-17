@@ -20,7 +20,7 @@ class UserModel extends BaseModel
     
     public function getAllUsers(int $limit, int $offset): array
     {
-        $stmt = $this->db->prepare("SELECT id, name, email, is_verified, is_active FROM {$this->table} LIMIT :limit OFFSET :offset");
+        $stmt = $this->db->prepare("SELECT id, name, email, current_role, is_verified, is_active FROM {$this->table} LIMIT :limit OFFSET :offset");
         $stmt->bindValue(':limit', $limit, \PDO::PARAM_INT);
         $stmt->bindValue(':offset', $offset, \PDO::PARAM_INT);
         $stmt->execute();
@@ -81,9 +81,7 @@ class UserModel extends BaseModel
         $stmt->execute(['id' => $id]);
         $user = $stmt->fetch();
 
-        if ($user && $user['current_role'] === 'admin') {
-            return false;
-        }
+        if ($user && $user['current_role'] === 'admin') return false;
 
         $stmt = $this->db->prepare("UPDATE {$this->table} SET is_active = :is_active WHERE id = :id");
         return $stmt->execute([

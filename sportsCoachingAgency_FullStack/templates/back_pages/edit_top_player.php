@@ -7,6 +7,7 @@
         <h1>Editing <?php echo $player['first_name'] . "'s"; ?> Stat Card</h1>
         <form action="/admin/top-players/update" method="POST" enctype="multipart/form-data" class="player-form">
             <input type="hidden" name="id" value="<?= htmlspecialchars($player['id'] ?? '') ?>">
+            <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>">
             <!-- First Name -->
             <div class="form-group">
                 <label for="first_name">First Name</label>

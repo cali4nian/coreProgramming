@@ -6,6 +6,8 @@
   min-height: fit-content;
   background-color: #ff0000;
   padding: 3.4rem;
+  width: 80%;
+  margin: 0 auto;
 }
 
 .youtube-section .content {

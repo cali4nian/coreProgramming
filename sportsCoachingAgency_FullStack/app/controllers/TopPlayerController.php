@@ -168,6 +168,7 @@ class TopPlayerController extends BaseController
             if ($player) {
                 // Render the edit form with player data
                 $data = [
+                    'csrf_token' => $_SESSION['csrf_token'],
                     'player' => $player,
                     'header_title' => 'Edit Top Player',
                     'page_css_url' => '/assets/css/top-players.css',

@@ -38,7 +38,6 @@ html,
 body {
   background: url("../img/default_main_background.jpg") no-repeat center center fixed;
   background-size: cover;
-  margin: 0 auto;
   min-height: 100vh;
   width: 100%;
   margin: 0 auto;

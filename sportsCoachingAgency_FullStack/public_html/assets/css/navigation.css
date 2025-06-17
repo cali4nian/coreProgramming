@@ -4,11 +4,9 @@
 /* Navigation */
 .mainNavigation {
   display: flex;
-  flex-flow: column nowrap;
   align-items: center;
   justify-content: space-between;
   padding: 0.9rem 0;
-  width: 100%;
   z-index: 1000;
   background-color: #333;
 }

@@ -1,8 +1,4 @@
 @media screen and (min-width: 1000px) {
-  html,
-  body {
-    width: 80%;
-  }
   iframe {
     height: 20rem;
   }

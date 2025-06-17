@@ -1,6 +1,6 @@
 <!-- ################### SUCCESS ################### -->
 <!-- subscriber_deleted -->
-<?php if (isset($_GET['deleted']) && $_GET['deleted'] == 'subscriber_deleted'): ?>
+<?php if (isset($_GET['success']) && $_GET['success'] == 'subscriber_deleted'): ?>
     <div class="alert alert-success">
         <p>✅ Subscriber deleted successfully.</p>
     </div>

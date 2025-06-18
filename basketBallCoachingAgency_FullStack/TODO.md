@@ -22,7 +22,7 @@ This document outlines the remaining tasks for the application. Prioritize by ur
 - [ ] CRUD to add coaches
 - [ ] CRUD Practice time/location
 - [ ] CRUD Game day schedule
-- [ ] Practice notifications email/sms
+- [ ] Practice/Game day notifications email/sms
 - [ ] SEO settings
 - [ ] Player login
 - [ ] Role based access

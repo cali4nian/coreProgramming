@@ -1,7 +1,7 @@
 <?php require_once __DIR__ . '/header.php'; ?>
 
 <section class="privacy-policy-agreement-container">
-  <div class="privacy-policy">
+  <aside class="privacy-policy">
     <h2>Privacy Policy</h2>
     <p><strong>Effective Date:</strong> [Insert Date]</p>
 
@@ -43,7 +43,7 @@
     <p>[Your Contact Email]</p>
     <p>[Your Business Address]</p>
     <a href="tel:<?= htmlspecialchars($settings['business_phone'] ?? '559-777-9705') ?>" class="hero-button">CALL</a>
-  </div>
+  </aside>
 </section>
 
 <?php require_once __DIR__ . '/footer.php'; ?>

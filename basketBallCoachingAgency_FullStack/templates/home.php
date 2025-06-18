@@ -34,28 +34,27 @@
 
 <!-- Player Profiles Section -->
 <section class="player-profiles">
-    <div class="hero">
+    <aside class="hero">
         <h1>Meet Our Top Players</h1>
         <p>Explore the stats and achievements of our elite players.</p>
-    </div>
-    <div class="profiles-container" style="display: flex; flex-wrap: wrap; gap: 1.5rem;">
-            <?php foreach ($players as $player): ?>
-                <div class="player-card" style="width: 250px; border: 1px solid #ddd; border-radius: 8px; padding: 1rem; background-color: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                    <img 
-                    src="<?= !empty($player['image_url']) ? htmlspecialchars($player['image_url']) : '/assets/img/default_athlete_image.jpg' ?>" 
-                    alt="<?= htmlspecialchars((string)($player['first_name'] ?? '') . ' ' . ($player['last_name'] ?? '')) ?>" 
-                    style="width: 100%; height: auto; border-radius: 6px;" 
-                    />
-                    <h2><?= htmlspecialchars((string)($player['first_name'] ?? '') . ' ' . ($player['last_name'] ?? '')) ?></h2>
-                    <p><strong><?= htmlspecialchars((string)($player['position'] ?? '')) ?></strong> — <?= htmlspecialchars((string)($player['team'] ?? '')) ?></p>
-                    <p>🏀 <strong><?= $player['points_per_game'] ?></strong> PPG</p>
-                    <p>🎯 FG%: <?= $player['field_goal_percentage'] ?>%</p>
-                    <p>🎯 3P%: <?= $player['three_point_percentage'] ?>%</p>
-                    <p>💪 REB: <?= $player['rebounds_per_game'] ?> | 🎯 AST: <?= $player['assists_per_game'] ?></p>
-                </div>
-            <?php endforeach; ?>
-        </div>
-    </div>
+    </aside>
+    <aside class="profiles-container" style="display: flex; flex-wrap: wrap; gap: 1.5rem;">
+        <?php foreach ($players as $player): ?>
+            <div class="player-card" style="width: 250px; border: 1px solid #ddd; border-radius: 8px; padding: 1rem; background-color: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                <img 
+                src="<?= !empty($player['image_url']) ? htmlspecialchars($player['image_url']) : '/assets/img/default_athlete_image.jpg' ?>" 
+                alt="<?= htmlspecialchars((string)($player['first_name'] ?? '') . ' ' . ($player['last_name'] ?? '')) ?>" 
+                style="width: 100%; height: auto; border-radius: 6px;" 
+                />
+                <h2><?= htmlspecialchars((string)($player['first_name'] ?? '') . ' ' . ($player['last_name'] ?? '')) ?></h2>
+                <p><strong><?= htmlspecialchars((string)($player['position'] ?? '')) ?></strong> — <?= htmlspecialchars((string)($player['team'] ?? '')) ?></p>
+                <p>🏀 <strong><?= $player['points_per_game'] ?></strong> PPG</p>
+                <p>🎯 FG%: <?= $player['field_goal_percentage'] ?>%</p>
+                <p>🎯 3P%: <?= $player['three_point_percentage'] ?>%</p>
+                <p>💪 REB: <?= $player['rebounds_per_game'] ?> | 🎯 AST: <?= $player['assists_per_game'] ?></p>
+            </div>
+        <?php endforeach; ?>
+    </aside>
 </section>
 <!-- END Player Profiles Section -->
 
@@ -90,14 +89,14 @@
 <!-- YouTube Section -->
 <section class="youtube-section">
     <div class="content">
-        <div class="video-container">
+        <aside class="video-container">
             <iframe width="90%" src="<?= htmlspecialchars($settings['main_youtube_video'] ?? 'https://www.youtube.com/embed/oyjYgmsM00Q?si=hAyWSswVvDuyRZrl') ?>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-        <div class="text">
+        </aside>
+        <aside class="text">
             <h2>Check Out Our YouTube Channel</h2>
             <p>We offer training videos designed for athletes of all ages and skill levels. Whether you're just starting or you're looking to improve your game, we have the resources you need to succeed!</p>
             <a href="<?= htmlspecialchars($settings['youtube_url'] ?? 'https://www.youtube.com') ?>" class="btn" target="_blank">Go to YouTube</a>
-        </div>
+        </aside>
     </div>
 </section>
 <!-- End YouTube Section -->
@@ -105,14 +104,14 @@
 <!-- Instagram Section -->
 <section class="instagram-section">
     <div class="content">
-        <div class="text">
+        <aside class="text">
             <h2>Stay Inspired on Instagram</h2>
             <p>Follow us for exclusive training tips, behind-the-scenes content, and motivational stories to help you elevate your sports journey!</p>
             <a href="<?= htmlspecialchars($settings['instagram_url'] ?? 'https://www.instagram.com') ?>" class="btn" target="_blank">Follow on Instagram</a>
-        </div>
-        <div class="image-container">
+        </aside>
+        <aside class="image-container">
             <img src="<?= htmlspecialchars($settings['main_instagram_photo'] ?? '/assets/img/default_instagram.jpg') ?>" alt="Instagram Sports Highlights" class="instagram-image" />
-        </div>
+        </aside>
     </div>
 </section>
 <!-- END Instagram Section -->
@@ -120,14 +119,14 @@
 <!-- Facebook Section -->
 <section class="facebook-section">
     <div class="content">
-        <div class="image-container">
+        <aside class="image-container">
             <img src="<?= htmlspecialchars($settings['main_facebook_photo'] ?? '/assets/img/default_facebook.jpg') ?>" alt="Facebook Community" class="facebook-image" />
-        </div>
-        <div class="text">
+        </aside>
+        <aside class="text">
             <h2>Join Our Community on Facebook</h2>
             <p>Be part of our growing sports community! Get updates, share your progress, and connect with fellow athletes on Facebook.</p>
             <a href="<?= htmlspecialchars($settings['facebook_url'] ?? 'https://www.facebook.com') ?>" class="btn" target="_blank">Like & Follow on Facebook</a>
-        </div>
+        </aside>
     </div>
 </section>
 <!-- END Facebook Section -->

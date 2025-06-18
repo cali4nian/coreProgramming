@@ -18,6 +18,8 @@ This document outlines the remaining tasks for the application. Prioritize by ur
 ## Additional Features
 
 - [ ] CRUD to add coaches
+- [ ] CRUD Practice time/location
+- [ ] Practice notifications email/sms
 
 ---
 

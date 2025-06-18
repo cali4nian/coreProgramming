@@ -1,0 +1,60 @@
+/* About the Coach Section */
+.about-coach {
+  display: flex;
+  width: 80%;
+  margin: 0 auto;
+  min-height: fit-content;
+  background-color: #f8f9fa;
+}
+
+.about-coach .content {
+  display: flex;
+  flex-flow: column nowrap;
+  width: 100%;
+  padding: 3rem 1rem;
+  justify-content: center;
+}
+
+.about-coach h2 {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 3rem;
+  text-transform: uppercase;
+  color: #333;
+  margin-bottom: 1.2rem;
+}
+
+.about-coach p {
+  font-family: "Lato", sans-serif;
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+}
+
+.about-coach .qualities {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+}
+
+.about-coach .qualities li {
+  font-family: "Lato", sans-serif;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #007bff;
+  padding: 0.9rem 1.1rem;
+  border-radius: 0.5rem;
+  text-align: center;
+}
+
+.about-coach .image-container {
+  width: 25rem;
+  margin: 1rem 0;
+}
+
+.about-coach .image-container .coach-image {
+  width: 100%;
+}
+
+/* END About the Coach Section */

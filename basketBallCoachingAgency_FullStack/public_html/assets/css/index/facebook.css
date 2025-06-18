@@ -1,0 +1,71 @@
+/* FaceBook Section */
+.facebook-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5rem;
+  min-height: fit-content;
+  background-color: #1877f2;
+  color: #fff;
+  text-align: center;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.facebook-section .content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 2.4rem;
+  max-width: 65rem;
+  width: 100%;
+}
+
+.facebook-section .image-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.facebook-section .facebook-image {
+  width: 100%;
+  max-width: 42rem;
+  border-radius: 1.4rem;
+  box-shadow: 0 0.3rem 0.8rem rgba(0, 0, 0, 0.2);
+}
+
+.facebook-section .text {
+  max-width: 50rem;
+}
+
+.facebook-section h2 {
+  font-size: 2.6rem;
+  font-weight: bold;
+  margin-bottom: 1.4rem;
+}
+
+.facebook-section p {
+  font-size: 1.3rem;
+  margin-bottom: 1.8rem;
+  line-height: 1.5;
+}
+
+.facebook-section .btn {
+  font-size: 1.7rem;
+  letter-spacing: 0.3rem;
+  display: inline-block;
+  padding: 1rem 2.4rem;
+  background-color: #145dbb;
+  color: #fff;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 4rem;
+  transition: all 0.3s ease-in-out;
+}
+
+.facebook-section .btn:hover {
+  background-color: #054496;
+  color: #fff;
+}
+/* END FaceBook Section */

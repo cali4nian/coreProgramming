@@ -1,0 +1,146 @@
+/* General container styling */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  margin-top: 20px;
+  text-align: left;
+  font-family: "Arial", sans-serif;
+}
+
+/* Headings */
+h1,
+h2 {
+  color: #333;
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+  text-align: left;
+  padding-bottom: 5px;
+}
+
+/* Form styling */
+form {
+  max-width: 600px;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #555;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="file"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  box-sizing: border-box;
+  resize: vertical;
+}
+
+/* Buttons */
+form button {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+form button:hover {
+  background-color: #0056b3;
+}
+
+form button[type="submit"] {
+  margin-top: 10px;
+}
+
+form button[style="background-color: red; color: white;"] {
+  background-color: #dc3545;
+  color: #ffffff;
+}
+
+form button[style="background-color: red; color: white;"]:hover {
+  background-color: #c82333;
+}
+
+/* Success and error messages */
+p[style="color: green;"] {
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
+  color: #155724;
+  padding: 10px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+p[style="color: red;"] {
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  color: #721c24;
+  padding: 10px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+/* Profile image styling */
+img {
+  max-width: 150px;
+  max-height: 150px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+  border: 2px solid #007bff;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .container {
+    padding: 15px;
+  }
+
+  h1,
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  form button {
+    font-size: 0.9rem;
+    padding: 10px;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  textarea {
+    font-size: 0.9rem;
+  }
+}

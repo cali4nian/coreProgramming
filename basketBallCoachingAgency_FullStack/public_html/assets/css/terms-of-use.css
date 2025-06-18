@@ -1,0 +1,66 @@
+/* Frontend Global styles */
+@import url("front-global.css");
+
+.terms-of-use-container {
+  max-width: 66.6rem;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #fff;
+  box-shadow: 0 0.3rem 0.6rem rgba(0, 0, 0, 0.1);
+  border-radius: 0.6rem;
+  font-family: Arial, sans-serif;
+}
+
+.terms-of-use h2 {
+  text-align: center;
+  color: #222;
+  font-size: 2.2rem;
+  margin-bottom: 0.8rem;
+}
+
+.terms-of-use h3 {
+  color: #ff6600;
+  font-size: 2rem;
+  margin-top: 1.25rem;
+}
+
+.terms-of-use p,
+.terms-of-use ul {
+  font-size: 1.3rem;
+  color: #444;
+  line-height: 1.5;
+}
+
+.terms-of-use ul {
+  padding-left: 2rem;
+}
+
+.terms-of-use ul li {
+  margin-bottom: 0.4rem;
+}
+
+.terms-of-use strong {
+  color: #000;
+}
+
+.terms-of-use-container p:last-child {
+  margin-bottom: 0;
+  text-align: center;
+}
+
+.hero-button {
+  display: inline-block;
+  padding: 0.8rem 1.8rem;
+  font-size: 1.5rem;
+  color: white;
+  background: #ff6600;
+  border: none;
+  border-radius: 0.4rem;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+.hero-button:hover {
+  background: #cc5200;
+}

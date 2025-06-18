@@ -1,0 +1,60 @@
+/* Subscribe Section */
+.subscribe-section {
+  display: flex;
+  flex-flow: column nowrap;
+  text-align: center;
+  background-color: #f9f9f9;
+  padding: 3.4rem;
+  box-shadow: 0.25rem 0.25rem 0.8rem rgba(0, 0, 0, 0.2);
+  font-family: "Poppins", sans-serif;
+  width: 80%;
+  margin: 0 auto;
+}
+.subscribe-section .subscribe-section-inner-wrapper {
+  padding: 1.8rem;
+  background: #f5f5dc;
+  box-shadow: 0 0.3rem 0.8rem rgba(0, 0, 0, 0.1);
+}
+
+.subscribe-section h2 {
+  font-size: 2.3rem;
+  margin-bottom: 0.8rem;
+  font-weight: 600;
+}
+
+.subscribe-section p {
+  font-size: 1.3rem;
+  margin-bottom: 1.8rem;
+  color: #555;
+}
+
+.subscribe-section .subscribe-form {
+  display: flex;
+  justify-content: center;
+  gap: 0.8rem;
+}
+
+.subscribe-section .subscribe-form input {
+  width: 65%;
+  padding: 0.8rem;
+  font-size: 1.3rem;
+  border: 0.1rem solid #ccc;
+  border-radius: 0.4rem;
+  outline: none;
+}
+
+.subscribe-section .subscribe-form button {
+  padding: 0.8rem 1.4rem;
+  font-size: 1.3rem;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 0.4rem;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+.subscribe-section .subscribe-form button:hover {
+  background-color: #0056b3;
+}
+/* END Subscribe Section */

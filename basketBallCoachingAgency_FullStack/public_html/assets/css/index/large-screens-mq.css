@@ -1,0 +1,8 @@
+@media screen and (min-width: 1000px) {
+  iframe {
+    height: 20rem;
+  }
+  .about-coach p {
+    font-size: 1.7rem;
+  }
+}

@@ -1,8 +1,0 @@
-/* Frontend Global Fonts */
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
-
-/* Frontend Global Styles */
-@import url("back-reset.css");
-@import url("sidebar.css");
-@import url("main-content.css");
-@import url("confirmation-messages.css");

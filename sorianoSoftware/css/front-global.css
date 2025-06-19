@@ -1,92 +1,10 @@
+/* Font imports */
 @import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap");
 
-html {
-  font-size: 12px;
-}
-
-/* RESET */
-* {
-  padding: 0;
-  margin: 0;
-  border: none;
-  font-family: "Ubuntu";
-  text-decoration: none;
-  list-style: none;
-  box-sizing: border-box;
-}
-
-body {
-  background-color: #1f2937;
-}
-
-/* Navigation */
-header {
-  padding: 2rem 4rem;
-}
-
-nav {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  margin-right: 1rem;
-  flex-direction: row;
-  gap: 1rem;
-  line-height: 2rem;
-}
-header nav img {
-  width: 4rem;
-  margin-right: 2rem;
-}
-header nav button,
-footer section button {
-  color: #f97316;
-  text-decoration: none;
-  background-color: #1f2937;
-  font-size: 2rem;
-}
-
-header nav button:hover,
-footer section button:hover {
-  color: #d1d5db;
-  cursor: pointer;
-}
-/* END Navigation */
-
-/* Footer */
-footer {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  background-color: #1f2937;
-  padding: 2rem 4rem;
-  min-height: 10rem;
-}
-
-footer section:nth-of-type(1) {
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-}
-
-footer section:nth-of-type(1) button {
-  margin: 0.5rem 0;
-}
-
-footer section:nth-of-type(2) {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  justify-content: flex-end;
-}
-
-footer section:nth-of-type(2) p,
-footer section:nth-of-type(2) a {
-  font-size: 1.5rem;
-  color: #d1d5db;
-  margin: 0.5rem 0;
-}
-/* END Footer */
+/* Front end global styles */
+@import url("./reset.css");
+@import url("./navigation.css");
+@import url("./footer.css");
 
 /* Responsive Styles */
 /* Extra Small */

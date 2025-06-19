@@ -1,3 +1,5 @@
+@import url("./front-global.css");
+
 main {
   color: #d1d5db;
   padding: 2rem 4rem;
@@ -7,6 +9,7 @@ main {
 main section {
   display: flex;
   flex-direction: column;
+  margin-bottom: 10rem;
 }
 
 main section > *:not(:last-child) {
@@ -15,6 +18,13 @@ main section > *:not(:last-child) {
 main section h1 {
   font-size: 4rem;
   color: #fbbf24;
+  font-weight: bold;
+  letter-spacing: normal;
+}
+
+main section h2 {
+  font-size: 3rem;
+  color: #dfc071;
   font-weight: bold;
   letter-spacing: normal;
 }

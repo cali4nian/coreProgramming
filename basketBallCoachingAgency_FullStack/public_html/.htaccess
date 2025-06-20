@@ -28,3 +28,11 @@ RewriteRule ^([^\.]+)$ $1.php [NC,L]
     RewriteRule ^config/ - [F,L]
     RewriteRule ^functions/ - [F,L]
 </IfModule>
+
+
+# Enable Rewrite Engine
+# RewriteEngine On
+
+# Redirect HTTP to HTTPS
+# RewriteCond %{HTTPS} !=on
+# RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]

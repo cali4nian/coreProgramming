@@ -4,6 +4,7 @@ This document outlines the remaining tasks for the application. Prioritize by ur
 
 ## Fixes
 
+- [ ] Autoload error on production server
 - [ ] Player stats across site
 
 ## 🔒 Security Audit & Hardening

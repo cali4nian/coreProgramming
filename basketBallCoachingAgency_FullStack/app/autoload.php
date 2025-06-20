@@ -1,18 +1,22 @@
 <?php
 spl_autoload_register(function ($class) {
-    // Convert namespace to file path
-    $class = str_replace('App\\', '', $class); // Remove 'App\' namespace
-    $class = str_replace('\\', '/', $class);   // Convert namespace separators to directory slashes
+    // Remove 'App\' namespace prefix if present
+    $class = str_replace('App\\', '', $class);
 
-    // Define the base directory
-    $baseDir = __DIR__ . '/';
+    // Convert namespace to path
+    $class = str_replace('\\', '/', $class);
 
-    // Full path to the class file
-    $file = $baseDir . $class . '.php';
+    // Lowercase only 'Controllers' part of the path
+    // $class = preg_replace_callback('/(^|\/)(Controllers|Models|Config|Database)(\/|$)/', function ($matches) {
+    //     return $matches[1] . strtolower($matches[2]) . $matches[3];
+    // }, $class);
+
+    // Full file path
+    $file = __DIR__ . '/' . $class . '.php';
 
     if (file_exists($file)) {
         require_once $file;
     } else {
-        die("Autoload error: Class '$class' not found in expected directories.");
+        die("Autoload error: Class '$class' not found at '$file'");
     }
 });
